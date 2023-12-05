@@ -20,7 +20,7 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__item">
-                <a href="home.html" class="navbar__links">Home</a>
+                <a href="home.html" class="navbar__links">Hom</a>
             </li>
             <li class="navbar__item">
                 <a href="Product.html" class="navbar__links">Product</a>
