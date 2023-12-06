@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gains</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script src="{{asset('js/app.js')}}" defer></script>
+    <title>Log in</title>
 </head>
 <body>
-    <section>
+<section>
         <header>
     <nav class="navbar">
         <div class="navbar__container">
@@ -23,7 +21,7 @@
                 <a href="{{ route('home') }}" class="navbar__links">Home</a>
             </li>
             <li class="navbar__item">
-                <a href="Product.html" class="navbar__links">Product</a>
+                <a href="/" class="navbar__links">Product</a>
             </li>
             <li class="navbar__item">
                 <a href="About.html" class="navbar__links">About Us</a>
@@ -43,22 +41,31 @@
 </header>
 </section>
 
-<hr class="solid">
+    <div class="signup-container">
+        <form id="signup-form">
+            <h1>Create an Account</h1>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-<section class="hero">
-        <div class="hero-content">
-            <img src="images/hero.png" alt="hero__img">
-            <h1>Gains</h1>
-            <p>Discover Amazing Products</p>
-        </div>
-    </section>
+            <label for="password">Confirm Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="button" onclick="signup()">Sign Up</button>
+        </form>
+    </div>
+
+    <script src="{{ asset('js/scripts.js') }}"></script>
 
     <div class="footer">
-    <footer>
         <br>
         <p>Team 44 | socials | email </p>
         <br>
-    </footer>
 </div>
 </body>
 </html>
