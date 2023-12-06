@@ -20,3 +20,7 @@ Route::get('/AboutUs', function () {
 Route::get('/Equipment', function () {
     return view('Equipment');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
