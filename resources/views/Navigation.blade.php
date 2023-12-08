@@ -48,6 +48,7 @@
             <a href="{{ route('home') }}">Home</a>
             <a href="AboutUs">About Us</a>
             <a href="contact.html">Contact Us</a>
+            <a href="Contact">Contact Us</a>
             <a href="products.html">Products</a>
             <a href="orders.html">Previous Orders</a>
         </div>
