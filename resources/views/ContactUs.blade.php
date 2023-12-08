@@ -1,5 +1,6 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
-            color: #333;
+            color: black; 
             margin: 20px;
         }
+
         .contact-container {
             max-width: 800px;
             margin: 0 auto;
@@ -21,66 +23,78 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
         .section-container {
-            border: 2px solid #007bff;
+            border: 2px solid black; 
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
             overflow: hidden;
-            background-color: #f8f9fa; /* Light gray background */
+            background-color: #f8f9fa;
         }
+
         .contact-details,
         .user-input {
             width: 100%;
             margin-bottom: 20px;
+            color: black; 
         }
+
         .contact-details,
         .user-input {
             text-align: left;
         }
+
         .contact-details h2,
         .user-input h2 {
-            color: #007bff;
+            color: black; 
             margin-bottom: 10px;
         }
+
         .contact-details p {
             color: #555;
             margin: 5px 0;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         .btn-submit {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #007bff;
+            color: black; 
             padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+
         .btn-submit:hover {
-            background-color: #45a049;
+            background-color: #007bff;
         }
+
         .form-control {
             border-radius: 5px;
+            color: black; 
         }
+
         h1 {
-            color: #007bff;
+            color: black; 
             margin-bottom: 10px;
         }
+
         p {
             margin: 10px 0;
         }
     </style>
 </head>
+
 <body>
-@include('Navigation')
+    @include('Navigation')
     <div class="contact-container">
         <h1>Contact Us</h1>
-        <p>We are here to assist you. Reach out to us with your inquiries and feedback.</p>
 
         <div class="section-container contact-details">
-            <h2>Contact Details:</h2>
             <p>Email: gains@gmail.com</p>
             <p>Phone: 01332 345475</p>
             <p>Address: 64 Striker Lane, Kensington, London, W8 4AB</p>
@@ -113,4 +127,5 @@
     </script>
 
 </body>
+
 </html>

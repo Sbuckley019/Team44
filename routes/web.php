@@ -19,7 +19,7 @@ Route::get("/", function () {
 
 Route::get("/Contact", function () {
     return view("ContactUs");
-});
+})->name('contact');
 
 Route::get('/AboutUs', function () {
     return view('AboutUs');
