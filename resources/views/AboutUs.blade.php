@@ -69,7 +69,6 @@
     }
 </style>
 </head>
-/* Website */
 <body>
 @include('Navigation')
 

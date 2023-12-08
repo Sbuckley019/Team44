@@ -9,39 +9,16 @@
     <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 <body>
-    <section>
-        <header>
-    <nav class="navbar">
-        <div class="navbar__container">
-        <img src="Images/Logo.png" alt="navbar__logo"></div>
-        <div class="navbar__toggle" id="mobile-menu">
-            <span class="bar"></span> <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <ul class="navbar__menu">
-            <li class="navbar__item">
-                <a href="home.html" class="navbar__links">Hom</a>
-            </li>
-            <li class="navbar__item">
-                <a href="Product.html" class="navbar__links">Product</a>
-            </li>
-            <li class="navbar__item">
-                <a href="About.html" class="navbar__links">About Us</a>
-            </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-</section>
 
-<hr class="solid">
+@include('Navigation')
 
-<section>
-    <div class="Featured">
-    <h1>Featured</h1>
-    <p>insert list of featured items</p>
-    <br>
-</section>
+<section class="hero">
+        <div class="hero-content">
+            <img src="images/hero.png" alt="hero__img">
+            <h1>Gains</h1>
+            <p>Discover Amazing Products</p>
+        </div>
+    </section>
 
     <div class="footer">
     <footer>

@@ -17,6 +17,11 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
+
+Route::get("/Contact", function () {
+    return view("ContactUs");
+})->name('contact');
+
 Route::get('/AboutUs', function () {
     return view('AboutUs');
 });
@@ -25,9 +30,18 @@ Route::get('/Equipment', function () {
     return view('Equipment');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+
+Route::get('/Signup', function () {
+    return view('signup');
+})->name('signup');
+
+Route::get('/Login', function () {
+    return view('login');
+})->name('login');
 
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
