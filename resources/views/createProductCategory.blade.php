@@ -1,4 +1,4 @@
-@include('Navigation')
+@include('includes.navigation')
 <div class="container">
     <h2>Create Product Category</h2>
 

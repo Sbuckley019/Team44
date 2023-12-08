@@ -19,15 +19,15 @@ use App\Http\Controllers\ProductCategoryController;
 
 
 Route::get("/Contact", function () {
-    return view("ContactUs");
+    return view("contactUs");
 })->name('contact');
 
 Route::get('/AboutUs', function () {
-    return view('AboutUs');
-});
+    return view('aboutUs');
+})->name('aboutUs');
 
 Route::get('/Equipment', function () {
-    return view('Equipment');
+    return view('equipment');
 });
 
 Route::get('/', function () {
