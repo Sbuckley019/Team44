@@ -14,7 +14,14 @@
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('aboutUs') }}">About Us</a>
             <a href="{{ route('contact') }}">Contact Us</a>
-            <a href="products.html">Products</a>
+            <div class="dropdown">
+                <a href="Products" class='dropdown-item'>Products</a> 
+                <div class="dropdown-content">
+                    <a href="Equipment">Gym Equipment</a>
+                    <a href="WomensClothes">Womens Clothes</a>
+                    <a href="GymAccessories">Gym Accessories</a>
+                </div>
+            </div>
             <a href="orders.html">Previous Orders</a>
         </div>
         <div class="navbar-right">
