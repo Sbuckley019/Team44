@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\ProductCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +28,12 @@ Route::get('/Equipment', function () {
 Route::get('/home', function () {
     return view('home');
 });
+
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
+Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');
+Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('productcategories.store');
