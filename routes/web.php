@@ -29,6 +29,14 @@ Route::get('/Equipment', function () {
     return view('Equipment');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+Route::get('/Signup', function () {
+    return view('signup');
+})->name('signup');
+
+Route::get('/Login', function () {
+    return view('login');
+})->name('login');
