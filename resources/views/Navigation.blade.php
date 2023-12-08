@@ -44,7 +44,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <img src="images/logo.png" height="50"> <!-- Replace with your logo -->
+            <img src="images/logo.png" height="80"> <!-- Replace with your logo -->
             <a href="{{ route('home') }}">Home</a>
             <a href="AboutUs">About Us</a>
             <a href="contact.html">Contact Us</a>

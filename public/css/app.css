@@ -13,19 +13,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-top: 10px;*/
+    margin-top: 10px;
 }
 
 
 
 .hero-content{
-    width: 95%;
-    height: 70%;
+    width: 90%;
+    height: 60%;
 }
 
 .hero-content img {
-    width: 95%;
-    height: 70%;
+    width: 90%;
+    height: 60%;
 }
 
 .hero h1 {
