@@ -21,6 +21,14 @@ Route::get("/Contact", function () {
     return view("ContactUs");
 })->name('contact');
 
+Route::get("/Womens", function () {
+    return view("WomensClothes");
+})->name('womens');
+
+Route::get("/Accessories", function () {
+    return view("GymAccessories");
+})->name('accessories');
+
 Route::get('/AboutUs', function () {
     return view('AboutUs');
 });
