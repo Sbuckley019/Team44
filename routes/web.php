@@ -21,7 +21,7 @@ Route::get('/Equipment', function () {
     return view('Equipment');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 })->name('home');
 

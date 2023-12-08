@@ -9,41 +9,8 @@
     <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 <body>
-    <section>
-        <header>
-    <nav class="navbar">
-        <div class="navbar__container">
-        <img src="images/Logo.png" alt="navbar__logo"></div>
-        <div class="navbar__toggle" id="mobile-menu">
-            <span class="bar"></span> <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <ul class="navbar__menu">
-            <li class="navbar__item">
-                <a href="{{ route('home') }}" class="navbar__links">Home</a>
-            </li>
-            <li class="navbar__item">
-                <a href="Product.html" class="navbar__links">Product</a>
-            </li>
-            <li class="navbar__item">
-                <a href="About.html" class="navbar__links">About Us</a>
-            </li>
-            <li class="navbar__item">
-                <a href="{{ route('signup') }}" class="navbar__links">Sign Up</a>
-            </li>
-            <li class="navbar__item">
-                <a href="{{ route('login') }}" class="navbar__links">Log in</a>
-            </li>
-            <li class="navbar__item">
-                <a href="Basket.html" class="navbar__links">Basket</a>
-            </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-</section>
 
-<hr class="solid">
+@include('Navigation')
 
 <section class="hero">
         <div class="hero-content">

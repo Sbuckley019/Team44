@@ -4,56 +4,6 @@ body {
     margin: 0;
 }
 
-.navbar {
-    background: #fffbf4;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.navbar__container {
-    display: flex;
-    justify-content: space-between;
-    height: 80px;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 auto;
-}
-
-.navbar__menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    text-align: center;
-}
-
-.navbar__item {
-    height: 80px;
-}
-
-.navbar__links {
-    color: #c6c7b6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-}
-
-.navbar__links:hover {
-    color: #c6c7b6;
-    transition: all 0.3 ease;
-}
-
 /* hero */
 
 .hero {
@@ -63,19 +13,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 
 
 .hero-content{
-    width: 100%;
-    height: 80%;
+    width: 95%;
+    height: 70%;
 }
 
 .hero-content img {
-    width: 100%;
-    height: 80%;
+    width: 95%;
+    height: 70%;
 }
 
 .hero h1 {
