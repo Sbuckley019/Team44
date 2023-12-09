@@ -2,6 +2,7 @@
 <body>
     <div class="product-form-container">
         <form action="/products" method="post" class="product-form">
+            @csrf
             <h2>Add New Product</h2>
 
             <div class="form-group">
@@ -20,8 +21,12 @@
             </div>
 
             <div class="form-group">
-                <label for="category_id">Category ID:</label>
-                <input type="number" id="category_id" name="category_id" required>
+                <label for="category_id">Category:</label>
+                <select id="category_id" name="category_id" required>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">

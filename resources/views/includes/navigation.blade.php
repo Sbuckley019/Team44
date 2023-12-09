@@ -10,12 +10,12 @@
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <img src="images/logo.png" height="50"> <!-- Replace with your logo -->
+            <img src="{{ asset('images/Logo.png') }}" height="50"> <!-- Replace with your logo -->
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('aboutUs') }}">About Us</a>
             <a href="{{ route('contact') }}">Contact Us</a>
             <div class="dropdown">
-                <a href="Products" class='dropdown-item'>Products</a> 
+                <a href="{{ route('products.create')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
                     <a href="Equipment">Gym Equipment</a>
                     <a href="WomensClothes">Womens Clothes</a>
@@ -25,9 +25,8 @@
             <a href="orders.html">Previous Orders</a>
         </div>
         <div class="navbar-right">
-            <a href="{{ route('signup') }}">Sign Up</a>
-            <a href="{{ route('login') }}">Log In</a>
-            <a href="basket.html">Current Basket</a>
+            <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
+            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
         </div>
     </div>
 </body>
