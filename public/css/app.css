@@ -6,8 +6,8 @@
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background: #fffbf4;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -82,17 +82,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-top: 10px;*/
+    margin-top: 10px;
 }
 
-.hero-content {
+
+
+.hero-content{
     width: 95%;
     height: 70%;
 }
 
 .hero-content img {
-    width: 95%;
-    height: 70%;
+    width: 90%;
+    height: 60%;
 }
 
 .hero h1 {
@@ -135,36 +137,109 @@ body {
     background: #e2e2e2;
 }
 
-/* signup */
 
-.signup-container {
-    background-color: #fffbf4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* register */
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
 }
-
-form {
+.back{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('register_background1.jpg');
+    background-position: center;
+    position: absolute;
     display: flex;
-    flex-direction: column;
 }
 
-label {
-    margin-top: 10px;
+.form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background-color: #fff;
+    padding: 5px;
+    overflow: hidden;
 }
 
-input {
-    padding: 10px;
-    margin-bottom: 20px;
+.button-box{
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    border-radius: 30px;
 }
 
-button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
+.toggle-btn{
+    padding: 10px 30px;
     cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+#btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to left, #09F4FF, #091CFF);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.input-group{
+    top: 120px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.input-field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to left, #09F4FF, #091CFF);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.check-box{
+    margin: 30px 10px 30px 0;
+}
+
+span{
+    color: #777;
+    font-size: 12px;
+    bottom: 68px;
+    position: absolute;
+}
+
+#login {
+    left: 50px;
+}
+
+#signup {
+    left: 450px;
 }
 /* product creation form */
 

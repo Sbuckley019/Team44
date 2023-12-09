@@ -17,18 +17,13 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
+Route::get("/", function () {
+    return view("welcome");
+});
 
 Route::get("/Contact", function () {
-    return view("contactUs");
+    return view("ContactUs");
 })->name('contact');
-
-Route::get("/Womens", function () {
-    return view("womensClothes");
-})->name('womens');
-
-Route::get("/Accessories", function () {
-    return view("gymAccessories");
-})->name('accessories');
 
 Route::get('/AboutUs', function () {
     return view('aboutUs');
@@ -50,12 +45,3 @@ Route::get('/Signup', function () {
 Route::get('/Login', function () {
     return view('login');
 })->name('login');
-
-
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-
-Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
-Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');
-Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('productcategories.store');
