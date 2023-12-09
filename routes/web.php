@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function () {
-    return view("welcome");
-});
-
-Route::get("/Contact", function () {
-    return view("ContactUs");
-})->name('contact');
-
 Route::get('/AboutUs', function () {
     return view('AboutUs');
 });
@@ -40,3 +32,8 @@ Route::get('/Signup', function () {
 Route::get('/Login', function () {
     return view('login');
 })->name('login');
+
+Route::get('/Register', function () {
+    return view('Register');
+})->name('Register');
+
