@@ -1,36 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{{asset('css/register.css')}}">
-    <script src="{{asset('js/app.js')}}" defer></script>
-</head>
 <body>
-    @include('includes.navigation')
-<div class="register-container">
+    @include("includes.navigation")
+    <div class="register-container">
 <div class="back">
-    <div class="form-box">
-        <div class="button-box">
-            <div id="btn"></div>
-            <button type="button" class="toggle-btn" onclick="login()">Log in</button>
-            <button type="button" class="toggle-btn" onclick="signup()">Sign up</button>
+    <div class="register-form-box">
+        <div class="register-button-box">
+            <div id="register-btn"></div>
+            <button type="button" class="register-toggle-btn" onclick="login()">Log in</button>
+            <button type="button" class="register-toggle-btn" onclick="signup()">Sign up</button>
         </div>
 
-        <form id="login" class="input-group">
-            <input type="text" class="input-field" placeholder="Username" required>
-            <input type="text" class="input-field" placeholder="Password" required>
-            <input type="checkbox" class="check-box"><span>Remember me</span>
-            <button type="submit" class="submit-btn">Log in</button>
+        <form action="/loguser" method="post" id="login" class="register-input-group">
+            @csrf
+            <input type="text" class="register-input-field" placeholder="Username" name="username" required>
+            <input type="text" class="register-input-field" placeholder="Password" name="password" required>
+            <input type="checkbox" class="register-check-box"><span>Remember me</span>
+            <button type="submit" class="register-submit-btn">Log in</button>
         </form>
-        <form id="signup" class="input-group">
-            <input type="text" class="input-field" placeholder="Username" required>
-            <input type="email" class="input-field" placeholder="Email" required>
-            <input type="text" class="input-field" placeholder="Password" required>
-            <input type="text" class="input-field" placeholder="Confirm Password" required>
-            <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
-            <button type="submit" class="submit-btn">Sign up</button>
+        <form action="/createuser" method="post" id="signup" class="register-input-group">
+           @csrf 
+            <input type="text" class="register-input-field" placeholder="Username" name="username" required>
+            <input type="email" class="register-input-field" placeholder="Email" name="email" required>
+            <input type="text" class="register-input-field" placeholder="Password" name="password" required>
+            <input type="text" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
+            <button type="submit" class="register-submit-btn">Sign up</button>
         </form>
     </div>
         </div>
@@ -39,7 +31,7 @@
         <script>
         var x = document.getElementById("login");
         var y = document.getElementById("signup");
-        var z = document.getElementById("btn");
+        var z = document.getElementById("register-btn");
 
         function signup() {
             x.style.left = "-400px";
@@ -55,4 +47,3 @@
         </script>
 
 </body>
-</html>
