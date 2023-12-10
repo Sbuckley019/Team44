@@ -9,7 +9,7 @@ use App\Http\Controllers\ProductCategoryController;
 
 use App\Http\Controllers\UserController;
 
-
+use App\Http\Controllers\BasketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +72,12 @@ Route::get('/Basket', function () {
 Route::get('/remove', function () {
     return view('home');
 })->name('remove');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('checkout')->group(function () {
+        Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+        Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('basket.add');
+        Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('basket.remove');
+        Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('basket.editQuantity');
+    });
+});

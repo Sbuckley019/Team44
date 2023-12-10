@@ -459,6 +459,29 @@ p {
     margin: 10px 0;
 }
 
+.rating-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.rating-container input {
+    display: none;
+}
+
+.rating-container label {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-image: url('images/star.png'); /* Add your star icon image */
+    background-size: cover;
+    margin: 0 5px;
+}
+
+.rating-container input:checked + label {
+    background-image: url('images/star.png'); /* Add your filled star icon image */
+}
+
 /* equipment page */
 body {
     font-family: Arial, sans-serif;
