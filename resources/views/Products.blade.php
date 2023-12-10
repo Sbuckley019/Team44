@@ -2,6 +2,7 @@
 
 @include('includes.navigation')
 <body>
+    <div>
     @foreach ($products as $product)
     <div class="product-card">
         <img class="product-image" src="{{$product->image_url}}" alt="Product Image">
@@ -17,6 +18,6 @@
         </div>
     </div>
 @endforeach
-
+</div>
 @include('includes.footer');
 </body>

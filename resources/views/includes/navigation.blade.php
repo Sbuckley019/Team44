@@ -33,13 +33,14 @@
                     <a href="Equipment">My Orders</a>
                     <a href="WomensClothes">Change Password</a>
                     <a href="GymAccessories">Update Account Details</a>
+                    <a href="#">Log Out</a>
                 </div>
             </div>
+            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @else
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
             <a href="{{ route('register') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @endif
-            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
         </div>
     </div>
 </body>

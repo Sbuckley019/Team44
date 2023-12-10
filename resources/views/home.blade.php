@@ -8,6 +8,11 @@
 @include('includes.navigation')
 <body>
     <div class="hero-container">
+        @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
         <a href="#" class="hero-column" id="hero-img1">
             <div class="overlay-link">Mens</div>
         </a>
