@@ -41,3 +41,11 @@ Route::get('/', function () {
 Route::get('/Register', function () {
     return view('register');
 })->name('register');
+
+Route::get('/Basket', function () {
+    return view('basket');
+})->name('basket');
+
+Route::get('/remove', function () {
+    return view('home');
+})->name('remove');

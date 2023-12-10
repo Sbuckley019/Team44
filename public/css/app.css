@@ -73,30 +73,10 @@ body {
     background-color: #ddd;
 }
 
-/*home page
-
-.row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.col-2{
-    flex-basis: 50%;
-    min-width: 300px;
-}
-
-.col-2 img{
-    max-width: 100%;
-    padding: 50px 0;
-}
-
-*/
-
 /* hero */
 
 .hero {
+    background: #000;
     position: relative;
     color: #000;
     text-align: center;
@@ -117,14 +97,14 @@ body {
 
 .text-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    top: 30%;
+    left: 80px; /* Set left to 0 to align with the left edge of the screen */
+    transform: translateY(-50%);
+    text-align: left; /* Align text to the left */
     color: white; /* Change text color as needed */
 }
 
-.hero-text {
+.text-overlay #hero-text {
     font-size: 2em;
     margin: 10px;
     color: #fff;
@@ -132,7 +112,7 @@ body {
 
 .text-overlay p {
     font-size: 1.2em;
-    margin: 0;
+    margin: 10px;
 }
 
 
@@ -140,7 +120,7 @@ body {
 /* footer */
 
 .footer {
-    background-color: #181818;
+    background-color: #000;
     color: #fff;
     left: 0;
     bottom: 0;
@@ -402,4 +382,106 @@ nav a {
     padding: 0.5em 1em;
     display: inline-block;
     margin-top: 1em;
+}
+
+/* basket page */
+
+.basket-page{
+    margin:80px auto;
+    display: flex;
+    justify-content: center;
+}
+table{
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.basket-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-details {
+    flex-grow: 1; 
+}
+
+.remove-link {
+    margin-top: 10px;
+}
+th{
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #000;
+    font-weight: normal;
+}
+
+td{
+    padding: 10px 5px;
+}
+
+td input{
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}
+
+td a{
+    color: #000;
+    font-size: 12px;
+}
+td img{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.total-price{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.total-price table{
+    border-top: 3px solid #000;
+    width: 100%;
+    max-width: 400px;
+}
+
+td:last-child{
+    text-align: right;
+}
+th:last-child{
+    text-align: right;
+}
+
+.checkout-button {
+    background-color: #555;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #333;
+}
+
+/* Summary Section Styles */
+#summary {
+    width: 40%;
+    float: right;
+}
+
+.summary-details {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+#total-items,
+#subtotal,
+#shipping,
+#total {
+    font-weight: bold;
+    margin: 0;
 }
