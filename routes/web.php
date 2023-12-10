@@ -6,8 +6,6 @@ use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ProductCategoryController;
 
-use App\Http\Controllers\OrderController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +16,6 @@ use App\Http\Controllers\OrderController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get("/", function () {
-    return view("welcome");
-});
 
 Route::get("/Contact", function () {
     return view("ContactUs");
@@ -39,18 +33,20 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/Register', function () {
+    return view('Register');
+})->name('register');
 
-Route::get('/Signup', function () {
-    return view('signup');
-})->name('signup');
+Route::get('/Orders', function () {
+    return view('orders');
+})->name('orders');
 
-Route::get('/Login', function () {
-    return view('login');
-})->name('login');
+Route::get('/plist', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
-   
-Route::get('/order/edit', [OrderController::class, 'edit'])->name('order.edit');
-   
-Route::get('/order/show', [OrderController::class, 'show'])->name('order.show');
-   
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
+Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');
+Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('productcategories.store')->middleware('web');
