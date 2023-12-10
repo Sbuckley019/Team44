@@ -20,13 +20,21 @@ class OrderController extends Controller
         return view('order.list', compact('orders'));
     }
 
-
-
-    public function create()
+      // Display the specified order
+    // 'show' view needs to be created
+   
+    public function show(Order $order)
     {
-        // 'create' view needs to be created 
-        return view('order.create');
+        return view('order.show', compact('order'));
     }
+
+
+
+ //   public function create()
+ //   {
+ //   // 'create' view needs to be created 
+ //   return view('order.create');
+ //   }
     
     
         // Check if the authenticated user has permission to create orders
@@ -34,7 +42,7 @@ class OrderController extends Controller
         // Create a new order in the database
         // Redirect with a success message
         
-    public function store(Request $request)
+ /*    public function store(Request $request)
     {
         if (!Auth::user()->can('create', Order::class)) {
             return redirect()->route('order.index')->with('error', 'Unauthorized to create orders');
@@ -58,29 +66,23 @@ class OrderController extends Controller
         return redirect()->route('order.index')->with('success', 'Order created successfully');
     }
 
-    // Display the specified order
-    // 'show' view needs to be created
-   
-    public function show(Order $order)
-    {
-        return view('order.show', compact('order'));
-    }
-
+  */
+ 
+  /*
     // Check if the authenticated user is the owner of the order  
     // Show the form for editing the specified order 
     // 'edit' view needs to be created)
    
     public function edit(Order $order)
     {
-        if (!Auth::user()->can('update', $order)) {
-            return redirect()->route('order.index')->with('error', 'Unauthorized to edit this order');
-        }
+       
     
-        return view('order.edit', compact('order', 'customers'));
+        return view('order.edit', compact('order'));
     }
-
-    // Update the specified order in the database
-
+  */
+  
+  /*
+  // Update the specified order in the database
     public function update(Request $request, Order $order)
 
     {
@@ -108,8 +110,10 @@ class OrderController extends Controller
         // Redirect with a success message
         return redirect()->route('order.index')->with('success', 'Order updated successfully');
     }
-
-    // Remove the specified order from the database
+   */
+   
+ /* 
+   // Remove the specified order from the database
     public function destroy(Order $order)
     {
 
@@ -122,5 +126,7 @@ class OrderController extends Controller
 
         // Redirect with a success message
         return redirect()->route('order.index')->with('success', 'Order deleted successfully');
+  
     }
+*/
 }
