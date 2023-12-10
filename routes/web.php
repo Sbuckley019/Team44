@@ -37,14 +37,6 @@ Route::get('/Register', function () {
     return view('Register');
 })->name('register');
 
-Route::get('/Signup', function () {
-    return view('signup');
-})->name('signup');
-
-Route::get('/Login', function () {
-    return view('login');
-})->name('login');
-
 Route::get('/Orders', function () {
     return view('orders');
 })->name('orders');

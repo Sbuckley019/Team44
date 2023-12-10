@@ -39,8 +39,8 @@
                 <label for="image_url">Image URL:</label>
                 <input type="text" id="image_url" name="image_url" required>
             </div>
-            <button type="button" id="viewCardBtn">View Product Card</button>
-            <button type="submit">Add Product</button>
+            <button type="button" id="viewCardBtn" class="product-button">View Product Card</button>
+            <button type="submit" class="product-button">Add Product</button>
         </form>
         <div id="productCardModal">
             <div id="productCardContainer">
