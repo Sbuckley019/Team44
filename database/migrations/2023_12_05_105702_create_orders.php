@@ -13,13 +13,13 @@ class CreateOrders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamp('order_date')->useCurrent();
             $table->decimal("total_price", 10, 2)->unsigned();
             $table->enum("status", ['pending', 'shipped', 'delivered'])->default('pending');
             $table->timestamps();
 
-            $table->foreign("customer_id")->references("id")->on("customers");
+            $table->foreign("user_id")->references("id")->on("users");
         });
     }
 
