@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ProductCategoryController;
 
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +47,10 @@ Route::get('/Signup', function () {
 Route::get('/Login', function () {
     return view('login');
 })->name('login');
+
+Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+   
+Route::get('/order/edit', [OrderController::class, 'edit'])->name('order.edit');
+   
+Route::get('/order/show', [OrderController::class, 'show'])->name('order.show');
+   

@@ -1,0 +1,5 @@
+@include('includes.navigation') 
+<body> 
+TRIAL FOR order_items.order_status
+@include('includes.footer')
+</body>
