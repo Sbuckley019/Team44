@@ -51,7 +51,7 @@
             <a href="orders.html">Previous Orders</a>
         </div>
         <div class="navbar-right">
-            <a href="{{ route('Register') }}"> <img src="images/profile.png" alt="signup" height="35"></a>
+            <a href="{{ route('register') }}"> <img src="images/profile.png" alt="Register" height="35"></a>
             <a href="basket.html"> <img src="images/Basket.png" alt="basket" height="35"></a>
         </div>
     </div>

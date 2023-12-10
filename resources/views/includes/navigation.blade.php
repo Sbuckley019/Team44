@@ -10,8 +10,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <img src="images/logo.png" height="50"> <!-- Replace with your logo -->
-            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('home') }}"><img src="images/logo.png" height="80"></a>
             <a href="{{ route('aboutUs') }}">About Us</a>
             <a href="{{ route('contact') }}">Contact Us</a>
             <div class="dropdown">
@@ -25,9 +24,8 @@
             <a href="orders.html">Previous Orders</a>
         </div>
         <div class="navbar-right">
-            <a href="{{ route('signup') }}">Sign Up</a>
-            <a href="{{ route('login') }}">Log In</a>
-            <a href="basket.html">Current Basket</a>
+        <a href="{{ route('register') }}"> <img src="images/profile.png" alt="Register" height="35"></a>
+            <a href="basket.html"> <img src="images/Basket.png" alt="basket" height="35"></a>
         </div>
     </div>
 </body>

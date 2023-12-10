@@ -38,10 +38,6 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/Signup', function () {
-    return view('signup');
-})->name('signup');
-
-Route::get('/Login', function () {
-    return view('login');
-})->name('login');
+Route::get('/Register', function () {
+    return view('register');
+})->name('register');

@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #fffbf4;
+    background: #fff;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #000;
     color: white;
     padding: 10px;
     height: 54px;
@@ -73,39 +73,69 @@ body {
     background-color: #ddd;
 }
 
+/*home page
+
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+
+.col-2 img{
+    max-width: 100%;
+    padding: 50px 0;
+}
+
+*/
+
 /* hero */
 
 .hero {
     position: relative;
-    color: #fff;
+    color: #000;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
 }
 
-
-
 .hero-content{
-    width: 95%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
 }
 
 .hero-content img {
-    width: 90%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
 }
 
-.hero h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white; /* Change text color as needed */
 }
 
-.hero p {
-    font-size: 1.5em;
-    margin-bottom: 40px;
+.hero-text {
+    font-size: 2em;
+    margin: 10px;
+    color: #fff;
 }
+
+.text-overlay p {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+
 
 /* footer */
 
@@ -137,110 +167,6 @@ body {
     background: #e2e2e2;
 }
 
-
-/* register */
-
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-}
-.back{
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('register_background1.jpg');
-    background-position: center;
-    position: absolute;
-    display: flex;
-}
-
-.form-box{
-    width: 380px;
-    height: 480px;
-    position: relative;
-    margin: 6% auto;
-    background-color: #fff;
-    padding: 5px;
-    overflow: hidden;
-}
-
-.button-box{
-    width: 220px;
-    margin: 35px auto;
-    position: relative;
-    box-shadow: 0 0 20px 9px #ff61241f;
-    border-radius: 30px;
-}
-
-.toggle-btn{
-    padding: 10px 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
-}
-
-#btn{
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 110px;
-    height: 100%;
-    background: linear-gradient(to left, #09F4FF, #091CFF);
-    border-radius: 30px;
-    transition: .5s;
-}
-
-.input-group{
-    top: 120px;
-    position: absolute;
-    width: 280px;
-    transition: .5s;
-}
-
-.input-field{
-    width: 100%;
-    padding: 10px 0;
-    margin: 5px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
-}
-
-.submit-btn{
-    width: 85%;
-    padding: 10px 30px;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    background: linear-gradient(to left, #09F4FF, #091CFF);
-    border: 0;
-    outline: none;
-    border-radius: 30px;
-}
-
-.check-box{
-    margin: 30px 10px 30px 0;
-}
-
-span{
-    color: #777;
-    font-size: 12px;
-    bottom: 68px;
-    position: absolute;
-}
-
-#login {
-    left: 50px;
-}
-
-#signup {
-    left: 450px;
-}
 /* product creation form */
 
 .product-form-container {

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/register.css')}}">
     <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 <body>
-    @include("Navigation")
+    @include('includes.navigation')
+<div class="register-container">
 <div class="back">
     <div class="form-box">
         <div class="button-box">
@@ -25,13 +26,15 @@
         </form>
         <form id="signup" class="input-group">
             <input type="text" class="input-field" placeholder="Username" required>
-            <input type="text" class="input-field" placeholder="Password" required>
             <input type="email" class="input-field" placeholder="Email" required>
+            <input type="text" class="input-field" placeholder="Password" required>
+            <input type="text" class="input-field" placeholder="Confirm Password" required>
             <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
             <button type="submit" class="submit-btn">Sign up</button>
         </form>
     </div>
         </div>
+</div>
 
         <script>
         var x = document.getElementById("login");
@@ -50,5 +53,6 @@
             z.style.left = "0";
         }
         </script>
+
 </body>
 </html>
