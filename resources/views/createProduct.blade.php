@@ -1,4 +1,5 @@
 @include('includes.navigation')
+
 <body>
     <div class="product-form-container">
         <form action="/products" method="post" class="product-form">
@@ -17,7 +18,7 @@
 
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price" required>
+                <input type="number" id="price" name="price" step="0.01" required>
             </div>
 
             <div class="form-group">
@@ -38,9 +39,16 @@
                 <label for="image_url">Image URL:</label>
                 <input type="text" id="image_url" name="image_url" required>
             </div>
-
+            <button type="button" id="viewCardBtn">View Product Card</button>
             <button type="submit">Add Product</button>
         </form>
+        <div id="productCardModal">
+            <div id="productCardContainer">
+                <!-- This is where you'll dynamically show the product card -->
+                <div id="productCardPreview"></div>
+                <button type="button" onclick="closeProductCard()">Close</button>
+            </div>
+        </div>
     </div>
     
 @include('includes.footer')

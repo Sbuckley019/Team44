@@ -45,6 +45,10 @@ Route::get('/Login', function () {
     return view('login');
 })->name('login');
 
+Route::get('/Orders', function () {
+    return view('orders');
+})->name('orders');
+
 Route::get('/plist', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
