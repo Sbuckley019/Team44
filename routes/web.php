@@ -1,10 +1,15 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ProductCategoryController;
+
+use App\Http\Controllers\UserController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +55,7 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
 Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');
 Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('productcategories.store')->middleware('web');
+
+Route::get('/register', [UserController::class, 'create'])->name('register.create');
+Route::post('/createuser', [UserController::class, 'store'])->name('register.store')->middleware('web');
+Route::post('/loguser', [UserController::class, 'login'])->name('register.login')->middleware('web');

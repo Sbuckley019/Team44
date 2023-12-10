@@ -36,8 +36,7 @@ a {
     text-align: center;
 }
 .navbar a:hover {
-    background-color: #ddd;
-    color: black;
+    color: rgb(253, 93, 0);
 }
 .navbar-left {
     display: flex;
@@ -59,7 +58,7 @@ a {
     display: none;
     flex-direction: column;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #000000;
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -75,9 +74,13 @@ a {
     color: black; /* Change text color to black */
 }
 .dropdown-item:hover {
-    background-color: #ddd;
+    color: #ff6200;
 }
 
+.name {
+    font-weight: 700;
+    cursor: default;
+}
 /*home page
 
 .row{
@@ -780,4 +783,11 @@ span {
 
 #signup {
     left: 450px;
+}
+
+/* order page */
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
 }

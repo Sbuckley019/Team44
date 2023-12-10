@@ -2,21 +2,15 @@
 <body>
         <h1>Orders</h1>
         <div class="container">
-        <div>Order 1</div>
-        <div>Order 2</div>
-        <div>Order 3</div>
-        <div>Order 4</div>
-        <div>Order 5</div>
-        <div>Order 6</div>
-        <div>Order 7</div>
-        <div>Order 8</div>
-        <div>Order 9</div>
-        <div>Order 10</div>
-        <div>Order 8</div>
-        <div>Order 8</div>
-        <div>Order 8</div>
-        <div>Order 8</div>
-        <div>Order 8</div>
+        <div>
+            @foreach($orders as $order)
+            <div class="order-item">
+                <div>{{$order->order_id}}</div>
+                <div>{{$order->order_date}}</div>
+                <div>{{$order->total_price}}</div>
+                <div>{{$order->status}}</div>
+                <a href='#'>Inspect Order</a>
+            </div>
     </div>
 @include('includes.footer')
 </body>
