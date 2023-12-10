@@ -31,9 +31,9 @@
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
                 <div class="dropdown-content">
                     <a href="Equipment">My Orders</a>
-                    <a href="WomensClothes">Change Password</a>
+                    <a href="{{ route('passchange') }}">Change Password</a>
                     <a href="GymAccessories">Update Account Details</a>
-                    <a href="#">Log Out</a>
+                    <a href="logout">Log out</a>
                 </div>
             </div>
             <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
