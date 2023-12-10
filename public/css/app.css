@@ -115,7 +115,7 @@ a {
 }
 
 .hero-content {
-    width: 95%;
+    width: 100%;
     height: 70%;
 }
 
@@ -794,9 +794,35 @@ span {
 }
 
 /* product card creation */
+.title-container {
+    padding: 10px;
+    height: 5rem;
+    font-weight: 600;
+    font-size: 50px;
+}
+.project-page-container {
+    display: flex;
+}
+.filter-container {
+    display: flex;
+    width: 20%;
+    background: white;
+    justify-content: center;
+    align-items: center;
+}
+.products-container {
+    flex: 1;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    padding: 10px;
+    padding-top: 0px;
+}
+
 .product-card {
     position: relative;
-    width: 300px;
+    width: 100%;
     border: 1px solid #ddd;
     margin: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -1071,12 +1097,12 @@ span {
 
 /* basket page */
 
-.basket-page{
-    margin:80px auto;
+.basket-page {
+    margin: 80px auto;
     display: flex;
     justify-content: center;
 }
-table{
+table {
     width: 80%;
     border-collapse: collapse;
 }
@@ -1087,13 +1113,13 @@ table{
 }
 
 .product-details {
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 
 .remove-link {
     margin-top: 10px;
 }
-th{
+th {
     text-align: left;
     padding: 5px;
     color: #fff;
@@ -1101,41 +1127,41 @@ th{
     font-weight: normal;
 }
 
-td{
+td {
     padding: 10px 5px;
 }
 
-td input{
+td input {
     width: 40px;
     height: 30px;
     padding: 5px;
 }
 
-td a{
+td a {
     color: #000;
     font-size: 12px;
 }
-td img{
+td img {
     width: 100px;
     height: 100px;
     margin-right: 10px;
 }
 
-.total-price{
-    display:flex;
+.total-price {
+    display: flex;
     justify-content: flex-end;
 }
 
-.total-price table{
+.total-price table {
     border-top: 3px solid #000;
     width: 100%;
     max-width: 400px;
 }
 
-td:last-child{
+td:last-child {
     text-align: right;
 }
-th:last-child{
+th:last-child {
     text-align: right;
 }
 

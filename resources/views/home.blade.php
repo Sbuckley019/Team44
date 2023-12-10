@@ -7,12 +7,9 @@
 </head>
 @include('includes.navigation')
 <body>
-    <div class="hero-container">
-        @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+    
+
+<div class="hero-container">
         <a href="#" class="hero-column" id="hero-img1">
             <div class="overlay-link">Mens</div>
         </a>
