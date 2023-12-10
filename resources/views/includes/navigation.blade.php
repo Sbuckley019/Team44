@@ -31,15 +31,16 @@
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
                 <div class="dropdown-content">
                     <a href="Equipment">My Orders</a>
-                    <a href="WomensClothes">Change Password</a>
+                    <a href="{{ route('passchange') }}">Change Password</a>
                     <a href="GymAccessories">Update Account Details</a>
+                    <a href="logout">Log out</a>
                 </div>
             </div>
             @else
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
             <a href="{{ route('register') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @endif
-            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
+            <a href="{{ route('basket') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
         </div>
     </div>
 </body>

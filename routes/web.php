@@ -42,6 +42,10 @@ Route::get('/Register', function () {
     return view('Register');
 })->name('register');
 
+Route::get('/Passchange', function () {
+    return view('passchange');
+})->name('passchange');
+
 Route::get('/Orders', function () {
     return view('orders');
 })->name('orders');
@@ -58,7 +62,8 @@ Route::post('/productcategories', [ProductCategoryController::class, 'store'])->
 Route::get('/register', [UserController::class, 'create'])->name('register.create');
 Route::post('/createuser', [UserController::class, 'store'])->name('register.store')->middleware('web');
 Route::post('/loguser', [UserController::class, 'login'])->name('register.login')->middleware('web');
-
+Route::post('/changepass', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('web');
 
 Route::get('/Basket', function () {
     return view('basket');

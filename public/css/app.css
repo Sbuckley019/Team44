@@ -1170,3 +1170,43 @@ th:last-child{
     font-weight: bold;
     margin: 0;
 }
+
+/* password change */
+
+#change-password-heading {
+    text-align: center;
+    color: #333;
+}
+
+#change-password-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.cp-label {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.cp-input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.cp-btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cp-btn:hover {
+    background-color: #2980b9;
+}

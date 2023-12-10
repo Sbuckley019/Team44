@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Database\QueryException;
+
 class UserController extends Controller
 {
     //Gets all the Users, Stores them within the $Users variable
@@ -79,18 +81,24 @@ class UserController extends Controller
 
     public function updatePassword(Request $request, User $user)
     {
-        $request->validate([
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        $hashed_password = bcrypt($request->password);
-
-        $user->update([
-            'password' => $hashed_password,
-        ]);
-
-        return redirect()->route('account')
-            ->with('success', 'Password updated successfully');
+        try{
+            $request->validate([
+                'password' => 'required|min:6|confirmed',
+            ]);
+    
+            $hashed_password = bcrypt($request->password);
+    
+            $user->update([
+                'password' => $hashed_password,
+            ]);
+    
+            return redirect()->route('home')
+                ->with('success', 'Password updated successfully');
+        }catch (QueryException $exception) {
+            // Log the error or handle it in a way that makes sense for your application
+            return redirect()->route('home')->with('error', 'An error occurred while adding the product.');
+        }
+        
     }
 
 
@@ -116,5 +124,11 @@ class UserController extends Controller
             return redirect()->route('home')
                 ->with('success', 'Login successful');
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+
+        return redirect()->route('home')->with('success','Successfully logged out');
     }
 }
