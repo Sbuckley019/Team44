@@ -19,10 +19,24 @@ class BasketController extends Controller
         return view('basket.index', compact('basket'));
     }
 
-    public function addProduct($productId)
+    public function addProduct(Request $request)
     {
+        // validate the request
+        $request->validate([
+            'productId' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        // fetch product and quantity from the request
+        $productId = $request->input('productId');
+        $quantity = $request->input('quantity');
+
+        // get authenticated users basket
         $user = auth()->user();
         $basket = Basket::firstOrCreate(['customer_id' => $user->id]);
+
+        // get the product
+        $product = Product::findOrFail($productId);
 
         // check if the product is already in the basket
         $existingItem = $basket->items()->where('product_id', $productId)->first();
@@ -35,6 +49,8 @@ class BasketController extends Controller
             $basketItem = new BasketItem(['product_id' => $productId, 'quantity' => 1]);
             $basket->items()->save($basketItem);
         }
+        // update total value of basket
+        $basket->update(['total' => $basket->total + ($quantity * $product->price)]);
         return redirect()->route('basket.index');
     }
 

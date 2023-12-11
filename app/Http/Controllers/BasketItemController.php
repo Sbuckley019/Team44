@@ -33,6 +33,6 @@ class BasketItemController extends Controller
         $basketItem = BasketItem::findOrFail($basket_id);
         $basketItem->delete();
 
-        return redirect()->route('based.index');
+        return redirect()->route('basket.index');
     }
 }

@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,10 @@ use App\Http\Controllers\BasketItemController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get("/Checkout", function () {
+    return view("Checkout");
+})->name('checkout');
 
 Route::get("/Contact", function () {
     return view("ContactUs");
@@ -36,9 +42,7 @@ Route::get('/Equipment', function () {
     return view('equipment');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/Register', function () {
     return view('Register');
@@ -66,10 +70,6 @@ Route::post('/createuser', [UserController::class, 'store'])->name('register.sto
 Route::post('/loguser', [UserController::class, 'login'])->name('register.login')->middleware('web');
 Route::post('/changepass', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('web');
-
-Route::get('/Basket', function () {
-    return view('basket');
-})->name('basket');
 
 Route::get('/remove', function () {
     return view('home');
