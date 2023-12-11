@@ -28,55 +28,26 @@
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            @if(isset($basket))
+            @forEach($basket->items as $item)
             <tr>
     <td>
         <div class="basket-info">
-            <img src="images/logo.png" alt="Product Image">
+            <img src="{{$item->product->image_url}}" alt="Product Image">
             <div class="product-details">
-                <p>Red Printed Tshirt</p>
-                <small>Price £50.00</small>
+                <p>{{$item->product->product_name}}</p>
+                <small>Price £{{$item->product->price}}</small>
                 <div class="remove-link">
             <a href="{{ route('home') }}">Remove</a>
         </div>
             </div>
         </div>
-    </td>
-    <td><input type="number" class="quantity" value="1" min="1" onchange="updateTotal()"></td>
-    <td class="subtotal">£50.00</td>
-    <tr>
-    <td>
-        <div class="basket-info">
-            <img src="images/logo.png" alt="Product Image">
-            <div class="product-details">
-                <p>Red Printed Tshirt</p>
-                <small>Price £50.00</small>
-                <div class="remove-link">
-            <a href="">Remove</a>
-        </div>
-            </div>
-        </div>
 
     </td>
-    <td><input type="number" class="quantity" value="1" min="1" onchange="updateTotal()"></td>
-    <td class="subtotal">£50.00</td>
-</tr>
-<tr>
-    <td>
-        <div class="basket-info">
-            <img src="images/logo.png" alt="Product Image">
-            <div class="product-details">
-                <p>Red Printed Tshirt</p>
-                <small>Price £50.00</small>
-                <div class="remove-link">
-            <a href="">Remove</a>
-        </div>
-            </div>
-        </div>
-
-    </td>
-    <td><input type="number" class="quantity" value="1" min="1" onchange="updateTotal()"></td>
-    <td class="subtotal">£50.00</td>
-</tr>
+    <td><input type="Lable" class="quantity" min="1" value="{{$item->quantity}}" onchange="updateTotal()"></td>
+    <td class="subtotal">£{{$item->product->price}}</td>
+    @endforeach
+    @endif
 </tr>
             <tr>
                 <td colspan="2"></td>

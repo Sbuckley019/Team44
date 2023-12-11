@@ -13,36 +13,63 @@ class OrderController extends Controller
     //Gets all the orders, Stores them within the $orders variable
     //Navigates to the 'list' view (list.blade.php needs to be created in order directory in views directory.)
     //When on the page use the $orders variable to display the orders
-                         
+
     public function index()
     {
         $orders = Order::all();
         return view('order.list', compact('orders'));
     }
 
-      // Display the specified order
+    // Display the specified order
     // 'show' view needs to be created
-   
+
     public function show(Order $order)
     {
         return view('order.show', compact('order'));
     }
 
 
+    public function addOrder(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
 
- //   public function create()
- //   {
- //   // 'create' view needs to be created 
- //   return view('order.create');
- //   }
-    
-    
-        // Check if the authenticated user has permission to create orders
-        // Validate the request data
-        // Create a new order in the database
-        // Redirect with a success message
-        
- /*    public function store(Request $request)
+            $order = Order::firstOrCreate(
+                ['user_id' => $user->id],
+                ['user_id' => $user->id]
+            );
+
+            // check if the product is already in the basket
+            $existingItem = $basket->items()->where('product_id', $productId)->first();
+
+            // if the item exists in the basket already, the quantity will be incremented
+            // otherwise the product will be added with quantity 1
+            if ($existingItem) {
+                $existingItem->increment('quantity');
+            } else {
+                $basketItem = new BasketItem(['product_id' => $productId, 'quantity' => 1]);
+                $basket->items()->save($basketItem);
+            }
+            return redirect()->route('basket.index');
+        } else {
+            return redirect()->route('register');
+        }
+    }
+
+
+    //   public function create()
+    //   {
+    //   // 'create' view needs to be created 
+    //   return view('order.create');
+    //   }
+
+
+    // Check if the authenticated user has permission to create orders
+    // Validate the request data
+    // Create a new order in the database
+    // Redirect with a success message
+
+    /*    public function store(Request $request)
     {
         if (!Auth::user()->can('create', Order::class)) {
             return redirect()->route('order.index')->with('error', 'Unauthorized to create orders');
@@ -67,8 +94,8 @@ class OrderController extends Controller
     }
 
   */
- 
-  /*
+
+    /*
     // Check if the authenticated user is the owner of the order  
     // Show the form for editing the specified order 
     // 'edit' view needs to be created)
@@ -80,8 +107,8 @@ class OrderController extends Controller
         return view('order.edit', compact('order'));
     }
   */
-  
-  /*
+
+    /*
   // Update the specified order in the database
     public function update(Request $request, Order $order)
 
@@ -111,8 +138,8 @@ class OrderController extends Controller
         return redirect()->route('order.index')->with('success', 'Order updated successfully');
     }
    */
-   
- /* 
+
+    /* 
    // Remove the specified order from the database
     public function destroy(Order $order)
     {

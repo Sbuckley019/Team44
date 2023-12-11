@@ -2,10 +2,11 @@
 
 @include('includes.navigation')
 <body>
-    <div class="hero-content">
-        <img src="images/hero.jpg" alt="hero__img">
-            <div class="text-overlay">
-            <div class="hero-text">Supplements</div>
+    <div class="title-container">
+        Gym Equipment
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search...">
+            <button class="search-button">Search</button>
         </div>
     </div>
     <div class="project-page-container">
@@ -21,7 +22,10 @@
             <button class="favorite-btn"><i class="fas fa-heart"></i></button>
             <div class="action-buttons">
                 <i class="fas fa-star"> 4.3</i>
-                <a href="" class="add-to-cart-btn">Add to Cart</a>
+                <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
+                    @csrf
+                    <button type="submit" class="add-to-cart-btn">Add to Cart</a>
+                </form>
             </div>
         </div>
     </div>

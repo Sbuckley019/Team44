@@ -11,12 +11,12 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'total_price',
         'status',
     ];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -10,9 +10,9 @@ class FavouriteProduct extends Model
     use HasFactory;
     protected $table = 'favourite_products';
 
-    protected $fillable = ['customer_id', 'product_id'];
+    protected $fillable = ['user_id', 'product_id'];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
