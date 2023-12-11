@@ -56,24 +56,36 @@ Route::get('/Orders', function () {
     return view('orders');
 })->name('orders');
 
+Route::get('/Basket', function () {
+    return view('basket');
+})->name('basket');
+
 Route::get('/plist', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store')->middleware('web');
-
-Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
-Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');
-Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('productcategories.store')->middleware('web');
-Route::get('/register', [UserController::class, 'create'])->name('register.create');
-Route::post('/createuser', [UserController::class, 'store'])->name('register.store')->middleware('web');
-Route::post('/loguser', [UserController::class, 'login'])->name('register.login')->middleware('web');
 Route::post('/changepass', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('web');
 
 Route::get('/remove', function () {
     return view('home');
 })->name('remove');
+
+Route::name('productcategories')->group(function () {
+    Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('.index');
+    Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('.create');
+    Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('.store')->middleware('web');
+});
+
+Route::name('products')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
+});
+
+Route::name('register')->group(function () {
+    Route::get('/register', [UserController::class, 'create'])->name('.create');
+    Route::post('/createuser', [UserController::class, 'store'])->name('.store')->middleware('web');
+    Route::post('/loguser', [UserController::class, 'login'])->name('.login')->middleware('web');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('checkout')->group(function () {

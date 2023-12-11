@@ -8,7 +8,7 @@
 
 body {
     font-family: "Arial", sans-serif;
-    background: #fffbf4;
+    background: #ffffff;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -473,13 +473,13 @@ p {
     cursor: pointer;
     width: 30px;
     height: 30px;
-    background-image: url('images/star.png'); /* Add your star icon image */
+    background-image: url("images/star.png"); /* Add your star icon image */
     background-size: cover;
     margin: 0 5px;
 }
 
 .rating-container input:checked + label {
-    background-image: url('images/star.png'); /* Add your filled star icon image */
+    background-image: url("images/star.png"); /* Add your filled star icon image */
 }
 
 /* equipment page */
@@ -823,6 +823,34 @@ span {
     font-weight: 600;
     font-size: 50px;
 }
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .project-page-container {
     display: flex;
 }
@@ -845,9 +873,9 @@ span {
 
 .product-card {
     position: relative;
-    width: 100%;
+    width: 90%;
     border: 1px solid #ddd;
-    margin: 20px;
+    margin: 0px 20px 20px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     overflow: hidden;
@@ -1155,7 +1183,7 @@ td {
 }
 
 td input {
-    width: 40px;
+    width: 50px;
     height: 30px;
     padding: 5px;
 }

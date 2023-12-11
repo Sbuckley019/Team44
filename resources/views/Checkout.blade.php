@@ -13,9 +13,11 @@
                         <!-- show a summary of the items in the basket -->
                         <h5>Order Summary</h5>
                         <ul>
+                            @if (isset($basketItem))
                             @foreach(auth()->user()->basketItems as $item)
                             <li>{{ $item->product_name }} - Quantity: {{ $item->quantity }} - Price: ${{ $item->product->price * $item->quantity }}</li>
                             @endforeach
+                            @endif
                         </ul>
 
                         <!-- show the total price -->
@@ -53,7 +55,7 @@
                             <button type="submit" class="btn btn-primary">Proceed to Payment</button>
                         </form>
                         @else
-                        <p>You must be logged in to proceed to checkout. <a href="{{ route('register') }}">Login</a></p>
+                        <p>You must be logged in to proceed to checkout. <a href="{{ route('r   egister') }}">Login</a></p>
                         @endauth
                     </div>
                 </div>
