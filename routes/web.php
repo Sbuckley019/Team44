@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\BasketController;
 
+use App\Http\Controllers\BasketItemController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,5 +89,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('basket.add');
         Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('basket.remove');
         Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('basket.editQuantity');
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('item')->group(function () {
+        Route::get('/basketItem/{basket_id}', [BasketItemController::class, 'show'])->name('basketItem.show');
+        Route::post('/basketItem/edit/{basket_id}', [BasketItemController::class, 'editQuantity'])->name('basketItem.editQuantity');
+        Route::post('/basketItem/remove/{basket_id}', [BasketItemController::class, 'removeFromBasket'])->name('basketItem.remove');
     });
 });
