@@ -7,11 +7,12 @@ use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ProductCategoryController;
 
+use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
 
-use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,7 +56,7 @@ Route::get('/plist', [ProductController::class, 'index'])->name('products.index'
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store')->middleware('web');
 
 Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('productcategories.index');
 Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('productcategories.create');

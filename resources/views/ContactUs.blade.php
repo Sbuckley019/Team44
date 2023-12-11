@@ -25,18 +25,23 @@
                     <label for="message">Message:</label>
                     <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="rate">Rate us:</label>
+                    <div class="rating-container">
+                        <input type="radio" id="star5" name="rate" value="5">
+                        <i class="fas fa-star"></i>
+                        <input type="radio" id="star4" name="rate" value="4">
+                        <i class="fas fa-star"></i>
+                        <input type="radio" id="star3" name="rate" value="3">
+                        <i class="fas fa-star"></i>
+                        <input type="radio" id="star2" name="rate" value="2">
+                        <i class="fas fa-star"></i>
+                        <input type="radio" id="star1" name="rate" value="1">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
                 <button type="button" class="btn-submit" onclick="submitForm()">Submit</button>
             </form>
         </div>
     </div>
-
-    <script>
-        function submitForm() {
-            alert('Form submitted!');
-        }
-    </script>
-    
-@include('includes.footer')
-
 </body>
-

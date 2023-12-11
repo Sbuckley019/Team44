@@ -58,7 +58,8 @@ class ProductController extends Controller
             return redirect()->route('products.create')->with('success', 'Product added to database');
         } catch (QueryException $exception) {
             // Log the error or handle it in a way that makes sense for your application
-            return redirect()->route('home')->with('error', 'An error occurred while adding the product.');
+
+            return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
     }
 }

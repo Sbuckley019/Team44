@@ -20,8 +20,8 @@
            @csrf 
             <input type="text" class="register-input-field" placeholder="Username" name="username" required>
             <input type="email" class="register-input-field" placeholder="Email" name="email" required>
-            <input type="text" class="register-input-field" placeholder="Password" name="password" required>
-            <input type="text" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
+            <input type="password" class="register-input-field" placeholder="Password" name="password" required>
+            <input type="password" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
             <button type="submit" class="register-submit-btn">Sign up</button>
         </form>
     </div>

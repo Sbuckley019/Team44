@@ -6,9 +6,13 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Routing\Controller;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\QueryException;
+
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -58,6 +62,7 @@ class UserController extends Controller
     }
 
     //Updates and stores a User
+    /*
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -78,27 +83,28 @@ class UserController extends Controller
         return redirect()->route('account')
             ->with('success', 'Profile updated successfully');
     }
+    */
 
-    public function updatePassword(Request $request, User $user)
+    public function updatePassword(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'password' => 'required|min:6|confirmed',
             ]);
-    
-            $hashed_password = bcrypt($request->password);
-    
+
+            $user = Auth::user();
+
+            /** @var \App\Models\User $user */
             $user->update([
-                'password' => $hashed_password,
+                'password' => bcrypt($request->password),
             ]);
-    
+
             return redirect()->route('home')
                 ->with('success', 'Password updated successfully');
-        }catch (QueryException $exception) {
+        } catch (QueryException $exception) {
             // Log the error or handle it in a way that makes sense for your application
-            return redirect()->route('home')->with('error', 'An error occurred while adding the product.');
+            return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
-        
     }
 
 
@@ -126,9 +132,10 @@ class UserController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
 
-        return redirect()->route('home')->with('success','Successfully logged out');
+        return redirect()->route('home')->with('success', 'Successfully logged out');
     }
 }
