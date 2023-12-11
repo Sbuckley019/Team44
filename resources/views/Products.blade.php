@@ -5,7 +5,7 @@
     <div class="hero-content">
         <img src="images/hero.jpg" alt="hero__img">
             <div class="text-overlay">
-            <div class="hero-text">Mens Clothing</div>
+            <div class="hero-text">Supplements</div>
         </div>
     </div>
     <div class="project-page-container">

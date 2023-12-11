@@ -36,7 +36,7 @@
                     <a href="logout">Log out</a>
                 </div>
             </div>
-            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
+            <a href="Basket"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @else
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
             <a href="{{ route('register') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
