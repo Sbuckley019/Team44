@@ -52,12 +52,6 @@ Route::get('/Orders', function () {
     return view('orders');
 })->name('orders');
 
-Route::get('/Basket', function () {
-    return view('basket');
-})->name('basket');
-
-Route::get('/plist', [ProductController::class, 'index'])->name('products.index');
-
 Route::post('/changepass', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('web');
 
@@ -84,18 +78,18 @@ Route::name('register')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('checkout')->group(function () {
-        Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-        Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('basket.add');
-        Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('basket.remove');
-        Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('basket.editQuantity');
+    Route::name('basket')->group(function () {
+        Route::get('/basket', [BasketController::class, 'index'])->name('.index');
+        Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
+        Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('.remove');
+        Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
     });
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('item')->group(function () {
-        Route::get('/basketItem/{basket_id}', [BasketItemController::class, 'show'])->name('basketItem.show');
-        Route::post('/basketItem/edit/{basket_id}', [BasketItemController::class, 'editQuantity'])->name('basketItem.editQuantity');
-        Route::post('/basketItem/remove/{basket_id}', [BasketItemController::class, 'removeFromBasket'])->name('basketItem.remove');
+    Route::name('basketItem')->group(function () {
+        Route::get('/basketItem/{basket_id}', [BasketItemController::class, 'show'])->name('.show');
+        Route::post('/basketItem/edit/{basket_id}', [BasketItemController::class, 'editQuantity'])->name('.editQuantity');
+        Route::post('/basketItem/remove/{basket_id}', [BasketItemController::class, 'removeFromBasket'])->name('.remove');
     });
 });

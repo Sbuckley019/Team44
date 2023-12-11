@@ -28,6 +28,7 @@
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+
             @forEach($basket->items as $item)
             <tr>
     <td>

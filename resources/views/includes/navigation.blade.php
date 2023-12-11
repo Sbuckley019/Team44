@@ -15,11 +15,11 @@
             <img src="{{ asset('images/Logo.png') }}" height="50"> <!-- Replace with your logo -->
             <a href="{{ route('home') }}">Home</a>
             <div class="dropdown">
-                <a href="{{ route('products.create')}}" class='dropdown-item'>Products</a> 
+                <a href="{{ route('products.index')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
-                    <a href="Equipment">Gym Equipment</a>
-                    <a href="WomensClothes">Womens Clothes</a>
-                    <a href="GymAccessories">Gym Accessories</a>
+                    <a href="{{ route('products.index')}}">Gym Equipment</a>
+                    <a href="{{ route('products.index')}}">Womens Clothes</a>
+                    <a href="{{ route('products.index')}}">Gym Accessories</a>
                 </div>
             </div>
             <a href="{{ route('aboutUs') }}">About Us</a>
@@ -30,13 +30,13 @@
             <div class="dropdown"> 
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
                 <div class="dropdown-content">
-                    <a href="Equipment">My Orders</a>
+                    <!--<a href="{{route('orders')}}">My Orders</a>!-->
                     <a href="{{ route('passchange') }}">Change Password</a>
-                    <a href="GymAccessories">Update Account Details</a>
+                    <!--<a href="GymAccessories">Update Account Details</a>-->
                     <a href="{{route('logout')}}">Log out</a>
                 </div>
             </div>
-            <a href="basket.html"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
+            <a href="{{route('basket.index')}}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @else
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
             <a href="{{ route('register') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>

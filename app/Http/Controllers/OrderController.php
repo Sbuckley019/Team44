@@ -25,7 +25,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return view('order.show', compact('order'));
+        return view('orders', compact('order'));
     }
 
 
@@ -35,22 +35,14 @@ class OrderController extends Controller
             $user = Auth::user();
 
             $order = Order::firstOrCreate(
-                ['user_id' => $user->id],
-                ['user_id' => $user->id]
+                [
+                    'user_id' => $user->id,
+                    'total_price' => $request->total_price,
+                    'status' => 'pending'
+                ],
             );
 
-            // check if the product is already in the basket
-            $existingItem = $basket->items()->where('product_id', $productId)->first();
-
-            // if the item exists in the basket already, the quantity will be incremented
-            // otherwise the product will be added with quantity 1
-            if ($existingItem) {
-                $existingItem->increment('quantity');
-            } else {
-                $basketItem = new BasketItem(['product_id' => $productId, 'quantity' => 1]);
-                $basket->items()->save($basketItem);
-            }
-            return redirect()->route('basket.index');
+            return redirect()->route('order.index');
         } else {
             return redirect()->route('register');
         }

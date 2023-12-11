@@ -822,6 +822,7 @@ span {
     height: 5rem;
     font-weight: 600;
     font-size: 50px;
+    text-align: center;
 }
 .search-container {
     display: flex;
