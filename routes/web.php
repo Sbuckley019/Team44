@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,10 @@ use App\Http\Controllers\BasketItemController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get("/Checkout", function () {
+    return view("Checkout");
+})->name('checkout');
 
 Route::get("/Contact", function () {
     return view("ContactUs");
@@ -36,9 +42,7 @@ Route::get('/Equipment', function () {
     return view('equipment');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/Register', function () {
     return view('Register');

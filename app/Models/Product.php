@@ -29,4 +29,9 @@ class Product extends Model
     {
         return asset($value);
     }
+
+    public function basketItems()
+    {
+        return $this->hasMany(BasketItem::class);
+    }
 }
