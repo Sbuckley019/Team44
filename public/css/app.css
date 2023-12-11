@@ -166,14 +166,6 @@ a {
     margin-top: 20px;
 }
 
-.footer-social a {
-    display: inline-block;
-    margin: 0 15px;
-    color: #fff;
-    font-size: 1.5em;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
 
 .footer-social a:hover {
     color: #e8491d;
