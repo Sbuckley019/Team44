@@ -11,10 +11,10 @@ class Basket extends Model
     protected $table = 'baskets';
 
     protected $fillable = [
-        'customer_id',
+        'user_id',
     ];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
