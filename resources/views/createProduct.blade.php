@@ -44,7 +44,6 @@
         </form>
         <div id="productCardModal">
             <div id="productCardContainer">
-                <!-- This is where you'll dynamically show the product card -->
                 <div id="productCardPreview"></div>
                 <button type="button" onclick="closeProductCard()">Close</button>
             </div>

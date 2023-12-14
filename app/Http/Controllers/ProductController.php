@@ -10,10 +10,21 @@ use Illuminate\Database\QueryException;
 class ProductController extends Controller
 {
     //
-    public function index()
+    public function index($id = null)
     {
-        $products = Product::all();
-        return view("Products", compact("products"));
+        $products = $id
+            ? Product::where('category_id', $id)->get()
+            : Product::all();
+
+        $category = $id
+            ? ProductCategory::where('id', $id)->select('category_name')->first()
+            : null;
+
+
+        $category_name = $category ? $category->category_name : null;
+
+        $categories = ProductCategory::select('category_name')->get();
+        return view("Products", compact("products", "category_name", "categories"));
     }
 
     public function search(Request $request)
@@ -21,11 +32,25 @@ class ProductController extends Controller
 
         $searchTerm = $request->input('search');
 
-        $products = Product::where("product_name", 'LIKE', "%$searchTerm")
-            ->orWhere('category_id', 'LIKE', "%$searchTerm%")
+        $category_name = $request->input("category_name");
+
+        $category = ProductCategory::where('category_name', $category_name)->first();
+
+        $category_id = $category ? $category->id : null;
+
+
+        $products = Product::where("product_name", 'LIKE', "%$searchTerm%")
+            ->where(function ($query) use ($category_id) {
+                if ($category_id !== null) {
+                    $query->where("category_id", $category_id);
+                }
+            })
             ->get();
 
-        return view('Products', compact('products'));
+
+        $categories = ProductCategory::select('category_name')->get();
+
+        return view("Products", compact("products", "category_name", "categories"));
     }
 
     public function create()

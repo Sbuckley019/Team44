@@ -12,9 +12,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,7 +39,9 @@ Route::get('/Equipment', function () {
     return view('equipment');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 Route::get('/Register', function () {
     return view('Register');
@@ -70,9 +69,10 @@ Route::name('productcategories')->group(function () {
 });
 
 Route::name('products')->group(function () {
-    Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
+    Route::get('/products/{id?}', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
+    Route::post('/products/search', [ProductController::class, 'search'])->name('.search')->middleware('web');
 });
 
 Route::name('register')->group(function () {
@@ -81,14 +81,13 @@ Route::name('register')->group(function () {
     Route::post('/loguser', [UserController::class, 'login'])->name('.login')->middleware('web');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::name('basket')->group(function () {
-        Route::get('/basket', [BasketController::class, 'index'])->name('.index');
-        Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
-        Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('.remove');
-        Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
-    });
+Route::name('basket')->group(function () {
+    Route::get('/basket', [BasketController::class, 'index'])->name('.index');
+    Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
+    Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('.remove');
+    Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
 });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::name('basketItem')->group(function () {

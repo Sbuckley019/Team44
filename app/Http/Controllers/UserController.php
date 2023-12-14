@@ -14,6 +14,8 @@ use Illuminate\Database\QueryException;
 
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Controllers\BasketController;
+
 class UserController extends Controller
 {
     //Gets all the Users, Stores them within the $Users variable
@@ -124,6 +126,8 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
+        $basketcontroller = new BasketController();
+        $basketcontroller->updateGuestBasket($basketcontroller->getGuestBasket());
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {

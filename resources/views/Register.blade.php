@@ -3,6 +3,9 @@
     <div class="register-container">
 <div class="back">
     <div class="register-form-box">
+        @if(session('login'))
+            <div class="register-msg">{{session('login')}}</div>
+        @endif
         <div class="register-button-box">
             <div id="register-btn"></div>
             <button type="button" class="register-toggle-btn" onclick="login()">Log in</button>

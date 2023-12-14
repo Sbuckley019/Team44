@@ -31,6 +31,6 @@ class ProductCategoryController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect('/home')->with('success', 'Product added to database');
+        return redirect('/')->with('success', 'Product added to database');
     }
 }

@@ -35,3 +35,32 @@ $(document).ready(function () {
 function closeProductCard() {
     $("#productCardModal").hide();
 }
+
+var products = JSON.parse(
+    document.getElementById("sort").getAttribute("data-items")
+);
+
+function sortProducts() {
+    var selectedOption = document.getElementById("sort").value;
+
+    switch (selectedOption) {
+        case "priceHighToLow":
+            products.sort((a, b) => b.price - a.price);
+            break;
+        case "priceLowToHigh":
+            products.sort((a, b) => a.price - b.price);
+            break;
+        case "rating":
+            products.sort((a, b) => b.rating - a.rating);
+            break;
+        case "newest":
+            products.sort(
+                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+            break;
+        default:
+            products.sort((a, b) => a.id - b.id);
+    }
+
+    console.log(products);
+}

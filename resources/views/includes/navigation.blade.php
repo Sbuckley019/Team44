@@ -17,9 +17,11 @@
             <div class="dropdown">
                 <a href="{{ route('products.index')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
-                    <a href="{{ route('products.index')}}">Gym Equipment</a>
-                    <a href="{{ route('products.index')}}">Womens Clothes</a>
-                    <a href="{{ route('products.index')}}">Gym Accessories</a>
+                    <a href="{{ route('products.index',['id'=>1])}}">Mens Clothing</a>
+                    <a href="{{ route('products.index',['id'=>2])}}">Womens Clothing</a>
+                    <a href="{{ route('products.index',['id'=>3])}}">Shoes</a>
+                    <a href="{{ route('products.index',['id'=>4])}}">Accessories</a>
+                    <a href="{{ route('products.index',['id'=>5])}}">Supplements</a>
                 </div>
             </div>
             <a href="{{ route('aboutUs') }}">About Us</a>
@@ -36,11 +38,10 @@
                     <a href="{{route('logout')}}">Log out</a>
                 </div>
             </div>
-            <a href="{{route('basket.index')}}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @else
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
-            <a href="{{ route('register') }}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
             @endif
+            <a href="{{route('basket.index')}}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
         </div>
     </div>
 </body>

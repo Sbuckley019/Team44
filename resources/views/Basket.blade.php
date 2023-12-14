@@ -46,8 +46,9 @@
                     </div>
 
     </td>
-    <td><input type="Label" class="quantity" min="1" value="{{$item->quantity}}" onchange="updateTotal()"></td>
-    <td class="subtotal">£{{$item->product->price}}</td>
+    <!--<td><input type="Label" class="quantity" min="1" value="{{$item->quantity}}" onchange="updateTotal()"></td>-->
+    <td><label class="quantity">{{$item->quantity}}</label>
+    <td class="subtotal">£{{($item->product->price)*$item->quantity}}</td>
     @endforeach
     @endif
 </tr>
