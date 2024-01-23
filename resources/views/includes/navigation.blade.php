@@ -23,6 +23,7 @@
                     <a href="{{ route('products.index',['id'=>3])}}">Shoes</a>
                     <a href="{{ route('products.index',['id'=>4])}}">Accessories</a>
                     <a href="{{ route('products.index',['id'=>5])}}">Supplements</a>
+                    <a href="{{ route('products.index',['id'=>6])}}">Equipment</a>
                 </div>
             </div>
             <a href="{{ route('aboutUs') }}">About Us</a>
