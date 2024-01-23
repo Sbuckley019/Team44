@@ -43,11 +43,11 @@
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <img src="your-logo.png" alt="Logo" height="50"> <!-- Replace with your logo -->
+            <img src="your-logo.png" alt="Logo" height="50"> 
             <a href="home.html">Home</a>
             <a href="AboutUs">About Us</a>
             <a href="contact.html">Contact Us</a>
-            <a href="products.html">Products</a>
+            <a href="Product">Products</a>
             <a href="orders.html">Previous Orders</a>
         </div>
         <div class="navbar-right">
