@@ -29,19 +29,51 @@
                     <label for="rate">Rate us:</label>
                     <div class="rating-container">
                         <input type="radio" id="star5" name="rate" value="5">
-                        <i class="fas fa-star"></i>
+                        <label for="star5"><i class="fas fa-star"></i></label>
                         <input type="radio" id="star4" name="rate" value="4">
-                        <i class="fas fa-star"></i>
+                        <label for="star4"><i class="fas fa-star"></i></label>
                         <input type="radio" id="star3" name="rate" value="3">
-                        <i class="fas fa-star"></i>
+                        <label for="star3"><i class="fas fa-star"></i></label>
                         <input type="radio" id="star2" name="rate" value="2">
-                        <i class="fas fa-star"></i>
+                        <label for="star2"><i class="fas fa-star"></i></label>
                         <input type="radio" id="star1" name="rate" value="1">
-                        <i class="fas fa-star"></i>
+                        <label for="star1"><i class="fas fa-star"></i></label>
                     </div>
                 </div>
                 <button type="button" class="btn-submit" onclick="submitForm()">Submit</button>
             </form>
         </div>
     </div>
+
+    <script>
+        function submitForm() {
+            // Get the selected rating value
+            var rating = document.querySelector('input[name="rate"]:checked');
+            
+            // Check if a rating is selected
+            if (!rating) {
+                alert('Please select a rating');
+                return;
+            }
+
+            // Get form data
+            var formData = new FormData(document.getElementById('contactForm'));
+
+            // Append the rating to the form data
+            formData.append('rating', rating.value);
+
+            // Perform your AJAX submission or any other logic here
+            // Example using fetch API:
+            fetch('/submit-form', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response as needed
+                console.log(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
