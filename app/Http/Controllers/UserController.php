@@ -126,11 +126,13 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        $basketcontroller = new BasketController();
-        $basketcontroller->updateGuestBasket($basketcontroller->getGuestBasket());
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
+
+            $basketcontroller = new BasketController();
+            $basketcontroller->guestToUser();
+
             return redirect()->route('home')
                 ->with('success', 'Login successful');
         }

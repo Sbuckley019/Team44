@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
+use App\Http\Controllers\CookieController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,9 +41,7 @@ Route::get('/Equipment', function () {
     return view('equipment');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [CookieController::class, 'index'])->name('home');
 
 Route::get('/Register', function () {
     return view('Register');

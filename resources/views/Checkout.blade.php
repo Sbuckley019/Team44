@@ -55,7 +55,7 @@
                             <button type="submit" class="btn btn-primary">Proceed to Payment</button>
                         </form>
                         @else
-                        <p>You must be logged in to proceed to checkout. <a href="{{ route('r   egister') }}">Login</a></p>
+                        <p>You must be logged in to proceed to checkout. <a href="{{ route('register') }}">Login</a></p>
                         @endauth
                     </div>
                 </div>

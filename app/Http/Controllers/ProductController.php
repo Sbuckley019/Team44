@@ -87,4 +87,29 @@ class ProductController extends Controller
             return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
     }
+    /*
+    public function filter($category_id = null, $low_price = null, $high_price = null)
+    {
+        $products = Product::where(function ($query) use ($category_id) {
+            if ($category_id !== null) {
+                $query->where("category_id", $category_id);
+            }
+        })->where(function ($query) use ($low_price) {
+            if ($low_price !== null) {
+                $query->where("category_id", $low_price);
+            }
+        })->where(function ($query) use ($category_id) {
+            if ($category_id !== null) {
+                $query->where("category_id", $category_id);
+            }
+        })->get();
+
+
+
+        $category_name = $category ? $category->category_name : null;
+
+        $categories = ProductCategory::select('category_name')->get();
+        return view("Products", compact("products", "category_name", "categories"));
+    }
+    */
 }

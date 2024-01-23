@@ -10,6 +10,7 @@
         @endif
     </div>
     <div class="project-page-container">
+        <!--
     <div class="filter-container">
         <div class="filter-menu">
             <h1>Filter</h1>
@@ -29,7 +30,7 @@
                     <input type="range" name="priceRange" id="priceRange" min="0">
                     <input type="range" name="priceRange" id="priceRange" max="999">
                 </div>
-        <!--
+
                 <div class="filter-group">
                     <label for="rating">Rating:</label>
                     <select name="rating" id="rating">
@@ -40,10 +41,11 @@
                         <option value="5">5 stars</option>
                     </select>
                 </div>
-            -->
                 <button type="button" class="apply-button" onclick="applyFilters()">Apply Filters</button>
             </form>
         </div>
+                    -->
+    
     </div>
     <div>
         <div class="search-container">

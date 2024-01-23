@@ -7,6 +7,7 @@ use App\Models\Basket;
 use App\Models\BasketItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
@@ -19,22 +20,11 @@ class BasketController extends Controller
             // retrieves basket for the current user
             $basket = Basket::where('user_id', $user->id)->with('items.product')->first();
         } else {
-            $guestBasket = $this->getGuestBasket();
-            $basket = (object)[
-                'user_id' => null,
-                'items' => collect($guestBasket->items)->map(function ($item) {
-                    // Assuming you have a Product model
-                    $product = Product::find($item->product_id);
-                    return (object)[
-                        'product' => $product,
-                        'quantity' => $item->quantity,
-                    ];
-                })->toArray(),
-            ];
+            $basket = Basket::where('guest_id', Cookie::get('guest_id'))->with('items.product')->first();
         }
-
         return view('Basket', compact('basket'));
     }
+
 
     public function addProduct($productId)
     {
@@ -42,25 +32,19 @@ class BasketController extends Controller
             $user = Auth::user();
             $basket = Basket::firstOrCreate(['user_id' => $user->id], ['user_id' => $user->id]);
         } else {
-            $basket = $this->getOrCreateGuestBasket();
+            $guest_id = Cookie::get('guest_id');
+            $basket = Basket::firstOrCreate(['guest_id' => $guest_id], ['guest_id' => $guest_id]);
         }
-
         // Check if the product is already in the basket
-        $existingItem = collect($basket->items)->first(function ($item) use ($productId) {
-            return $item->product_id === $productId;
-        });
+        $existingItem = $basket->items()->where('product_id', $productId)->first();
 
         // If the item exists in the basket already, increment the quantity
         // Otherwise, add the product with quantity 1
         if ($existingItem) {
-            $existingItem->quantity++;
+            $existingItem->increment('quantity');
         } else {
-            $basket->items[] = (object)['product_id' => $productId, 'quantity' => 1];
-        }
-
-        // Update the guest basket if applicable
-        if (!Auth::check()) {
-            $this->updateGuestBasket($basket);
+            $basketItem = new BasketItem(['product_id' => $productId, 'quantity' => 1]);
+            $basket->items()->save($basketItem);
         }
 
         return redirect()->route('basket.index');
@@ -90,59 +74,12 @@ class BasketController extends Controller
         }
     }
 
-    public function getGuestBasket()
+    public function guestToUser()
     {
-        return session('basket', (object)['user_id' => null, 'items' => []]);
-    }
+        $user = auth()->user();
 
-    public function getOrCreateGuestBasket()
-    {
-        $guestBasket = $this->getGuestBasket();
-
-        // If guest basket does not exist, create it
-        if (empty($guestBasket->user_id)) {
-            $guestBasket = (object)[
-                'user_id' => null,
-                'items' => [],
-            ];
-
-            $this->updateGuestBasket($guestBasket);
-        }
-
-        return $guestBasket;
-    }
-
-    public function updateGuestBasket($basket)
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            $existingBasket = Basket::firstOrCreate(['user_id' => $user->id], ['user_id' => $user->id]);
-        } else {
-            $existingBasket = $this->getGuestBasket();
-        }
-
-        if (!isset($existingBasket->items)) {
-            $existingBasket->items = [];
-        }
-
-        foreach ($basket->items as $item) {
-            $existingItemIndex = collect($existingBasket->items)->search(function ($existingItem) use ($item) {
-                return $existingItem->product_id === $item->product_id;
-            });
-
-            if ($existingItemIndex !== false) {
-                $existingBasket->items[$existingItemIndex]->quantity += $item->quantity;
-            } else {
-                $existingBasket->items[] = $item;
-            }
-        }
-
-        if (Auth::check()) {
-            // If the user is authenticated, clear the guest basket
-            $this->updateGuestBasket((object)['user_id' => null, 'items' => []]);
-        } else {
-            // If the user is not authenticated, update the guest basket
-            session(['basket' => $existingBasket]);
-        }
+        $guest_id = Cookie::get('guest_id');
+        $basket = Basket::where(['guest_id' => $guest_id])->first();
+        $basket->update(['user_id' => $user->id, 'guest_id' => Null]);
     }
 }

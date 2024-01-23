@@ -12,6 +12,7 @@ class Basket extends Model
 
     protected $fillable = [
         'user_id',
+        'guest_id',
     ];
 
     public function user()
