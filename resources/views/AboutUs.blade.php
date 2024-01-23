@@ -1,78 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us - Gains</title>
-<style>
-    /* CSS */
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
-    }
-    header {
-        background: #333;
-        color: #fff;
-        padding-top: 30px;
-        min-height: 70px;
-        border-bottom: #bbb 1px solid;
-    }
-    header a {
-        color: #fff;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-size: 16px;
-    }
-    header ul {
-        padding: 0;
-        list-style: none;
-    }
-    header ul li {
-        display: inline;
-        padding: 0 20px 0 20px;
-    }
-    header #branding {
-        float: left;
-    }
-    header #branding h1 {
-        margin: 0;
-    }
-    header nav {
-        float: right;
-        margin-top: 10px;
-    }
-    header .highlight, header .current a {
-        color: #e8491d;
-        font-weight: bold;
-    }
-    header a:hover {
-        color: #ffffff;
-        font-weight: bold;
-    }
-    .about-section {
-        padding: 50px 0;
-        background: #f4f4f4;
-    }
-    .mission {
-        padding: 50px 0;
-    }
-    .offer {
-        padding: 50px 0;
-        background: #e2e2e2;
-    }
-</style>
-</head>
-
+@include('includes.navigation')
 <body>
-@include('Navigation')
-
     <section class="about-section">
         <div class="container">
             <h1>About Gains</h1>
@@ -99,9 +26,5 @@
             </p>
         </div>
     </section>
-
-    <footer>
-        <p>Gains &copy; 2023</p>
-    </footer>
+@include('includes.footer')
 </body>
-</html>
