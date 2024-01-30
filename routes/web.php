@@ -84,7 +84,7 @@ Route::name('register')->group(function () {
 Route::name('basket')->group(function () {
     Route::get('/basket', [BasketController::class, 'index'])->name('.index');
     Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
-    Route::post('/basket/remove/{productId}', [BasketController::class, 'addProduct'])->name('.remove');
+    Route::post('/basket/remove/{productId}', [BasketController::class, 'removeProduct'])->name('.remove');
     Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
 });
 

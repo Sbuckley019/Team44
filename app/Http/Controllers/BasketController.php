@@ -52,9 +52,13 @@ class BasketController extends Controller
 
     public function removeProduct($productId)
     {
-        $user = auth()->user();
-        $basket = Basket::where('user_id', $user->id)->first();
-
+        if (Auth::check()) {
+            $user = auth()->user()->id;
+            $basket = Basket::where('user_id', $user)->first();
+        } else {
+            $guest = Cookie::get('guest_id');
+            $basket = Basket::where('guest_id', $guest)->first();
+        }
         // remove a product from the basket
         if ($basket) {
             $basket->items()->where('product_id', $productId)->delete();
@@ -64,14 +68,28 @@ class BasketController extends Controller
 
     public function editQuantity($productId, Request $request)
     {
-        $user = auth()->user();
-        $basket = Basket::where('user_id', $user->id)->first();
+        if (Auth::check()) {
+            $user = auth()->user()->id;
+            $basket = Basket::where('user_id', $user)->first();
+        } else {
+            $guest = Cookie::get('guest_id');
+            $basket = Basket::where('guest_id', $guest)->first();
+        }
+
+        $plusOrMinus = $request->input('action');
 
         // update the quantity of a product in the basket
         if ($basket) {
-            $quantity = $request->input('quantity');
-            $basket->items()->where('product_id', $productId)->update(['quantity' => $quantity]);
+            $quantity = $basket->items()->where('product_id', $productId)->value('quantity');
+            if ($plusOrMinus) {
+                $basket->items()->where('product_id', $productId)->increment('quantity', 1);
+            } else if ($quantity > 1) {
+                $basket->items()->where('product_id', $productId)->decrement('quantity', 1);
+            } else {
+                $this->removeProduct($productId);
+            }
         }
+        return redirect()->route('basket.index');
     }
 
     public function guestToUser()
@@ -80,6 +98,8 @@ class BasketController extends Controller
 
         $guest_id = Cookie::get('guest_id');
         $basket = Basket::where(['guest_id' => $guest_id])->first();
-        $basket->update(['user_id' => $user->id, 'guest_id' => Null]);
+        if ($basket) {
+            $basket->update(['user_id' => $user->id, 'guest_id' => Null]);
+        }
     }
 }
