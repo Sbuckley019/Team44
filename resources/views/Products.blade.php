@@ -1,6 +1,5 @@
-
-
 @include('includes.navigation')
+
 <body>
     <div class="title-container">
         @if(isset($category_name))
@@ -45,7 +44,7 @@
             </form>
         </div>
                     -->
-    
+
     </div>
     <div>
         <div class="search-container">
@@ -73,30 +72,30 @@
         <div class="register-msg">There are no Products that match the search criteria</div>
         @else
         <div class="products-container">
-        @foreach ($products as $product)
-    <div class="product-card">
-        <img class="product-image" src="{{$product->image_url}}" alt="Product Image">
-        <div class="product-details">
-            <div class="product-name">{{$product->product_name}}</div>
-            <div class="product-description">{{$product->description}}</div>
-            <div class="product-price">£{{$product->price}}</div>
-            @if(auth()->check())
-            <button class="favorite-btn"><i class="fas fa-heart"></i></button>
-            @endif
-            <div class="action-buttons">
-                <i class="fas fa-star"> 4.3</i>
-                <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
-                    @csrf
-                    <button type="submit" class="add-to-cart-btn">Add to Cart</a>
-                </form>
+            @foreach ($products as $product)
+            <div class="product-card">
+                <img class="product-image" src="{{$product->image_url}}" alt="Product Image">
+                <div class="product-details">
+                    <div class="product-name">{{$product->product_name}}</div>
+                    <div class="product-description">{{$product->description}}</div>
+                    <div class="product-price">£{{$product->price}}</div>
+                    @if(auth()->check())
+                    <button class="favorite-btn"><i class="fas fa-heart"></i></button>
+                    @endif
+                    <div class="action-buttons">
+                        <i class="fas fa-star"> 4.3</i>
+                        <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="add-to-cart-btn">Add to Cart</a>
+                        </form>
+                    </div>
+                </div>
             </div>
+            @endforeach
         </div>
-    </div>
-@endforeach
-</div>
         @endif
-</div>
-</div>
-</div>
-@include('includes.footer')
+    </div>
+    </div>
+    </div>
+    @include('includes.footer')
 </body>
