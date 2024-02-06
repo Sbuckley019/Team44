@@ -1,5 +1,9 @@
 @include('includes.navigation')
 <body>
+    @if(isset($total))
+    <div>{{$total}}</div>
+    <div>gap</div>
+    @else
     <div class="hero-container">
         <a href="{{ route('products.index',['id'=>1])}}" class="hero-column" id="hero-img1">
             <div class="overlay-link">Mens</div>
@@ -15,4 +19,5 @@
     </div>
 
 @include('includes.footer')
+@endif
 </body>

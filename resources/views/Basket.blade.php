@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    @if( $basket != null && count($basket->items) >0)
     <div class="small-container basket-page">
         <table>
             <tr>
@@ -82,7 +83,10 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="checkout-button">Checkout</button>
+                    <form action="{{route('order.checkout')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="checkout-button">Checkout</button>
+                    </form>
                 </td>
             </tr>
         </table>
@@ -91,6 +95,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', updateTotal);
     </script>
+    @endif
     @include('includes.footer')
 </body>
 
