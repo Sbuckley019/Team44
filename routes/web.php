@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
@@ -86,6 +87,10 @@ Route::name('basket')->group(function () {
     Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
     Route::post('/basket/remove/{productId}', [BasketController::class, 'removeProduct'])->name('.remove');
     Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
+});
+
+Route::name('order')->group(function () {
+    Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
 
 

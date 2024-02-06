@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\Order;
-
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller
 {
@@ -26,6 +28,44 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('orders', compact('order'));
+    }
+
+    public function checkout(Request $request = null)
+    {
+        if (Auth::check()) {
+            $user = auth()->user()->id;
+            $id = $user;
+            $order = Basket::where('user_id', $user)->with('items.product')->first();
+        } else {
+            $guest = Cookie::get('guest_id');
+            $guest_id = $guest;
+            $order = Basket::where('guest_id', $guest)->with('items.product')->first();
+        }
+
+        $total = 0;
+        $status = 'pending';
+        $basket_id = $order->items[0]->basket_id;
+
+        foreach ($order->items as $items) {
+            $total += $items->product->price;
+        }
+        try {
+            Order::create([
+                'user_id' => isset($id) ? $id : null,
+                'guest_id' => isset($id) ? null : $guest_id,
+                'total_price' => $total,
+                'status' => $status,
+            ]);
+
+            $basketController = new BasketController();
+            $basketController->emptyBasket($basket_id);
+
+            return redirect()->route('basket.index');
+        } catch (QueryException $exception) {
+            // Log the error or handle it in a way that makes sense for your application
+
+            return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
+        }
     }
 
 

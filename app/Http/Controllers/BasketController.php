@@ -92,6 +92,11 @@ class BasketController extends Controller
         return redirect()->route('basket.index');
     }
 
+    public function emptyBasket($basket_id)
+    {
+        BasketItem::where('basket_id', $basket_id)->delete();
+    }
+
     public function guestToUser()
     {
         $user = auth()->user();
