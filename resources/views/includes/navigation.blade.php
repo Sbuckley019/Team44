@@ -36,6 +36,7 @@
                     <!--<a href="{{route('orders')}}">My Orders</a>!-->
                     <a href="{{ route('passchange') }}">Change Password</a>
                     <!--<a href="GymAccessories">Update Account Details</a>-->
+                    <a href="{{route('favourite.index')}}">Favourites</a>
                     <a href="{{route('logout')}}">Log out</a>
                 </div>
             </div>

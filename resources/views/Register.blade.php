@@ -27,6 +27,7 @@
             <input type="password" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
             <button type="submit" class="register-submit-btn">Sign up</button>
         </form>
+
     </div>
         </div>
 </div>

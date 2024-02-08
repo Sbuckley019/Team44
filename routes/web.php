@@ -14,6 +14,7 @@ use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\CookieController;
+use App\Http\Controllers\FavouritesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,11 @@ Route::name('products')->group(function () {
     Route::get('/products/{id?}', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
     Route::post('/products/search', [ProductController::class, 'search'])->name('.search')->middleware('web');
+});
+
+Route::name('favourite')->group(function () {
+    Route::get('/favourite', [FavouritesController::class, 'index'])->name('.index');
+    Route::post('/favourite/{productId}', [FavouritesController::class, 'FavouriteOrNot'])->name('.add')->middleware('web');
 });
 
 Route::name('register')->group(function () {
