@@ -30,6 +30,10 @@ Route::get("/Checkout", function () {
     return view("Checkout");
 })->name('checkout');
 
+Route::get("/PastOrders", function () {
+    return view("PastOrders");
+})->name('PastOrder');
+
 Route::get("/Contact", function () {
     return view("ContactUs");
 })->name('contact');

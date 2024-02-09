@@ -15,6 +15,7 @@
         <div class="navbar-left">
             <img src="{{ asset('images/Logo.png') }}" height="50"> <!-- Replace with your logo -->
             <a href="{{ route('home') }}">Home</a>
+            <a href="{{route('PastOrder')}}">PastOrders</a>
             <div class="dropdown">
                 <a href="{{ route('products.index')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
@@ -44,6 +45,7 @@
             <a href="{{ route('register') }}"> <img src="{{ asset('images/profile.png') }}" alt="signup" height="35"></a>
             @endif
             <a href="{{route('basket.index')}}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
+           
         </div>
     </div>
 </body>
