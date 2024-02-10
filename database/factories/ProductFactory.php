@@ -30,7 +30,6 @@ class ProductFactory extends Factory
             'category_id' => $this->faker->randomElement($categoryIds),
             'stock_quantity' => $this->faker->numberBetween(0, 100),
             'image_url' => $this->faker->imageUrl(),
-            'favourite' => $this->faker->boolean,
         ];
     }
 }

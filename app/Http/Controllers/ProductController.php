@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Favourites;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +23,12 @@ class ProductController extends Controller
             ? ProductCategory::where('id', $id)->select('category_name')->first()
             : null;
 
+
         if (Auth::check()) {
             $user = auth()->user();
             $favouriteIds = Favourites::where('user_id', $user->id)->pluck('product_id')->toArray();
+        } else {
+            $favouriteIds = null;
         }
 
 

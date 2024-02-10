@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,12 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middle
 Route::get('/remove', function () {
     return view('home');
 })->name('remove');
+
+Route::name('feedback')->group(function () {
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index');
+    Route::post('/feedback/add', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
+    //Route::post('/feedback/delete', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
+});
 
 Route::name('productcategories')->group(function () {
     Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('.index');

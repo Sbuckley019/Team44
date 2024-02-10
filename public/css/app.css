@@ -1340,3 +1340,43 @@ button[disabled] {
 .icon {
     user-select: none;
 }
+
+.rating {
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    float: right;
+    cursor: pointer;
+    color: #ddd;
+}
+
+.rating label:before {
+    content: "\2605";
+    font-size: 2em;
+}
+
+.rating input:checked ~ label {
+    color: #ffa500; /* Change color for selected stars */
+}
+
+.stars {
+    background: url("../images/star-empty.png"); /* Empty star image */
+    background-size: contain;
+    width: 100px; /* Adjust according to your star size */
+    height: 20px; /* Adjust according to your star size */
+}
+
+.stars::before {
+    content: "";
+    display: block;
+    background: url("../images/star-full.png"); /* Full star image */
+    background-size: contain;
+    width: var(--rating); /* Adjust the width based on the rating */
+    height: 100%;
+    transition: width 0.3s; /* Add transition effect for smooth filling */
+}

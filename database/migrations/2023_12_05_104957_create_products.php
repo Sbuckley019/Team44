@@ -19,6 +19,7 @@ class CreateProducts extends Migration
             $table->unsignedBigInteger('category_id');
             $table->integer('stock_quantity')->unsigned();
             $table->string('image_url');
+            $table->decimal('rating', 3, 1)->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('product_categories');

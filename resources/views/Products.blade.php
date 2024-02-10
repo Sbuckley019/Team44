@@ -87,7 +87,7 @@
                         </form>
                         @endif
                         <div class="action-buttons">
-                            <i class="fas fa-star"> 4.3</i>
+                            <div class="stars" style="--rating: {{($product->rating)/5 * 100}}%"></div>
                             <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
                                 @csrf
                                 <button type="submit" class="add-to-cart-btn">Add to Cart</button>

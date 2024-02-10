@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,5 +22,9 @@ class DatabaseSeeder extends Seeder
         ProductCategory::factory()->count(5)->create();
         // Seed products
         Product::factory()->count(30)->create();
+
+        User::factory()->count(10)->create();
+
+        Review::factory()->count(100)->create();
     }
 }
