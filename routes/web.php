@@ -68,7 +68,7 @@ Route::get('/remove', function () {
 Route::name('feedback')->group(function () {
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index');
     Route::post('/feedback/add', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
-    //Route::post('/feedback/delete', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
+    Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read')->middleware('web');
 });
 
 Route::name('productcategories')->group(function () {
@@ -79,9 +79,9 @@ Route::name('productcategories')->group(function () {
 
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
-    Route::get('/products/{id?}', [ProductController::class, 'index'])->name('.index');
+    Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
-    Route::post('/products/search', [ProductController::class, 'search'])->name('.search')->middleware('web');
 });
 
 Route::name('favourite')->group(function () {

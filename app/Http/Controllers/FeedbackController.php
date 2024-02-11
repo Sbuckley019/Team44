@@ -9,10 +9,13 @@ use Illuminate\Database\QueryException;
 class FeedbackController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $feedbacks = Feedback::all();
-        return view('feedback.index', compact('feedbacks'));
+        $viewChoice = $request->query('viewChoice', '0');
+
+        $feedbacks = Feedback::where('read', $viewChoice)->get();
+
+        return view('Feedback', compact('feedbacks', 'viewChoice'));
     }
 
 
@@ -36,6 +39,20 @@ class FeedbackController extends Controller
             return redirect()->route('home')
                 ->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
+    }
+
+    public function read(Request $request)
+    {
+        $feedbackId = $request->feedbackId;
+
+        // Find the feedback by ID
+        $feedback = Feedback::findOrFail($feedbackId);
+
+        // Toggle the "read" status
+        $feedback->read = !$feedback->read;
+        $feedback->save();
+
+        return redirect()->route('feedback.index')->with('success', 'Feedback has been marked as read');
     }
 
 

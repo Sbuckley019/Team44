@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('feedback'); // Using text for longer feedback
             $table->tinyInteger('rating')->unsigned(); // Using tinyInteger for ratings out of 5
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }
