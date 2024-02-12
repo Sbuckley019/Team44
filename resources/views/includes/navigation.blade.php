@@ -29,6 +29,14 @@
             <a href="{{ route('contact') }}">Contact Us</a>
         </div>
         <div class="navbar-right">
+        <div class="admin-button">
+        <a href="{{ route('admin.login') }}">
+        <img src="{{ asset('images/admin.png') }}" height="65" alt="Admin Login"> <!-- Image acts as a button -->
+        </a>
+        </div>
+
+
+
             @if (auth()->check())
             <div class="dropdown"> 
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
