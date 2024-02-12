@@ -1,0 +1,129 @@
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#admin-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+#admin-sidebar {
+    background-color: #f4f4f4;
+    width: 200px;
+    position: fixed;
+    top: 100px; /* Height of the header */
+    bottom: 10; /* Align to the bottom of the viewport */
+    overflow-y: auto; /* Scrollable if the content is taller than the screen */
+    padding: 20px 0;
+}
+
+#admin-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#admin-sidebar ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#admin-sidebar ul li a:hover {
+    background-color: #ddd;
+}
+
+#admin-content {
+    margin-left: 200px; /* Width of the sidebar */
+    padding: 20px;
+    flex: 1;
+}
+
+#admin-footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: auto; /* Push the footer to the bottom of the layout */
+}
+
+/* New dashboard styles */
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dashboard-stat {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+    text-align: center;
+}
+
+.dashboard-stat h3 {
+    margin: 0 0 10px;
+}
+
+.dashboard-stat p {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-row {
+        flex-direction: column;
+    }
+
+    .dashboard-stat {
+        margin: 10px 0;
+    }
+
+    #admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding: 0;
+    }
+
+    #admin-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+

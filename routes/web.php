@@ -16,6 +16,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FavouritesController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,5 +113,39 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/basketItem/{basket_id}', [BasketItemController::class, 'show'])->name('.show');
         Route::post('/basketItem/edit/{basket_id}', [BasketItemController::class, 'editQuantity'])->name('.editQuantity');
         Route::post('/basketItem/remove/{basket_id}', [BasketItemController::class, 'removeFromBasket'])->name('.remove');
+    });
+});
+
+
+
+Route::get('admin/products', function() {
+    return view('admin.products');
+})->name('admin.products');
+
+Route::get('admin/orders', function() {
+    return view('admin.orders');
+})->name('admin.orders');
+
+
+Route::get('admin/customers', function() {
+    return view('admin.customers');
+})->name('admin.customers');
+
+
+ 
+
+
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function() {
+
+    Route::get('login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [AdminController::class, 'login']);
+    Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+
+
+    Route::middleware(['auth:admin'])->group(function () {
+
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard'); 
+
     });
 });
