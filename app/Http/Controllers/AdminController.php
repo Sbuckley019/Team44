@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller {
-
-    public function dashboard()
+class AdminController extends Controller
 {
 
-    \Log::info('Dashboard method accessed.');
+    public function dashboard()
+    {
 
-    // Fetch analytics data, recent orders, inventory status, etc.
-    $data = [
-        // Your data here
-    ];
+        \Log::info('Dashboard method accessed.');
 
-    return view('admin.dashboard', compact('data'));
-}
+        // Fetch analytics data, recent orders, inventory status, etc.
+        $data = [
+            // Your data here
+        ];
+
+        return view('admin.dashboard', compact('data'));
+    }
     public function products()
     {
         return view('admin.products');
@@ -34,18 +35,11 @@ class AdminController extends Controller {
 
 
 
-    public function login(Request $request)
+    public function login($username)
     {
-        $credentials = $request->only(['username', 'password']);
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            \Log::info('Authentication passed for user: ' . $request->username);
-            return redirect()->route('admin.dashboard');
-        } else {
-            \Log::warning('Authentication failed for user: ' . $request->username);
-        }
-
-        return back()->withErrors(['error' => 'Invalid credentials'])->withInput();
+        \Log::info('Authentication passed for user: ' . $username);
+        return redirect()->route('admin.dashboard');
     }
 
 
@@ -57,19 +51,18 @@ class AdminController extends Controller {
 
     public function showLoginForm()
     {
-    // Check if the admin is already logged in and redirect to dashboard if they are
-    if (Auth::guard('admin')->check()) {
-        return redirect()->route('admin.dashboard');
-    }
+        // Check if the admin is already logged in and redirect to dashboard if they are
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
 
-    // If not logged in, show the login form
-    return view('admin.login');
+        // If not logged in, show the login form
+        return view('admin.login');
     }
 
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('register');
     }
-
 }

@@ -67,7 +67,7 @@ Route::get('/remove', function () {
 })->name('remove');
 
 Route::name('feedback')->group(function () {
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index');
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index')->middleware('admin');
     Route::post('/feedback/add', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
     Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read')->middleware('web');
 });
@@ -118,24 +118,24 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('admin/products', function() {
+Route::get('admin/products', function () {
     return view('admin.products');
-})->name('admin.products');
+})->name('admin.products')->middleware('admin');
 
-Route::get('admin/orders', function() {
+Route::get('admin/orders', function () {
     return view('admin.orders');
-})->name('admin.orders');
+})->name('admin.orders')->middleware('admin');
 
 
-Route::get('admin/customers', function() {
+Route::get('admin/customers', function () {
     return view('admin.customers');
-})->name('admin.customers');
+})->name('admin.customers')->middleware('admin');
 
 
- 
 
 
-Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function() {
+
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
 
     Route::get('login', [AdminController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AdminController::class, 'login']);
@@ -144,8 +144,6 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
 
 
     Route::middleware(['auth:admin'])->group(function () {
-
-        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard'); 
-
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });

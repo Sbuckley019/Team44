@@ -60,7 +60,7 @@ class ProductController extends Controller
             session()->put('category_id', $category_id);
         }
 
-        $products->$this->sortProducts($products, $sortChoice);
+        $products = $this->sortProducts($products, $sortChoice);
 
         $category = $category_id ? $this->fetchCategoryById($category_id) : null;
         $categories = $this->fetchCategories();

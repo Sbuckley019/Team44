@@ -40,8 +40,8 @@ return [
 
             'driver' => 'session',
             'provider' => 'users',
-        ], 
-        
+        ],
+
         'admin' => [ // Define a new guard for admin
             'driver' => 'session',
             'provider' => 'admins', // This will use the 'admins' provider
@@ -72,10 +72,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        
-        'admins' => [ // Define a new provider for admins
+
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class, // Specify your admin model
+            'model' => App\Models\Admin::class,
         ],
 
 
@@ -115,9 +115,9 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'admins' => [ // Optional: Password reset for admins
-            'provider' => 'admins', // Make sure to use the 'admins' provider
-            'table' => 'admin_password_resets', // You might need to create this table
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

@@ -15,7 +15,7 @@ class FeedbackController extends Controller
 
         $feedbacks = Feedback::where('read', $viewChoice)->get();
 
-        return view('Feedback', compact('feedbacks', 'viewChoice'));
+        return view('admin.feedback', compact('feedbacks', 'viewChoice'));
     }
 
 

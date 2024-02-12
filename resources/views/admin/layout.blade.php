@@ -18,6 +18,13 @@
             <li><a href="{{ route('admin.products') }}">Products</a></li>
             <li><a href="{{ route('admin.orders') }}">Orders</a></li>
             <li><a href="{{ route('admin.customers') }}">Customers</a></li>
+            <li><a href="{{route('feedback.index')}}">Feedback</a></li>
+            <li>
+                <form action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <button class="logoutButton" type="submit">Logout</button>
+                </form>
+            </li>
             
             <!-- Add more links as needed -->
         </ul>
