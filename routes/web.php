@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,8 @@ use App\Http\Controllers\BasketController;
 
 use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\CookieController;
+use App\Http\Controllers\FavouritesController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +66,12 @@ Route::get('/remove', function () {
     return view('home');
 })->name('remove');
 
+Route::name('feedback')->group(function () {
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index')->middleware('admin');
+    Route::post('/feedback/add', [FeedbackController::class, 'store'])->name('.store')->middleware('web');
+    Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read')->middleware('web');
+});
+
 Route::name('productcategories')->group(function () {
     Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('.index');
     Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('.create');
@@ -71,9 +80,14 @@ Route::name('productcategories')->group(function () {
 
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
-    Route::get('/products/{id?}', [ProductController::class, 'index'])->name('.index');
+    Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
-    Route::post('/products/search', [ProductController::class, 'search'])->name('.search')->middleware('web');
+});
+
+Route::name('favourite')->group(function () {
+    Route::get('/favourite', [FavouritesController::class, 'index'])->name('.index');
+    Route::post('/favourite/{productId}', [FavouritesController::class, 'FavouriteOrNot'])->name('.add')->middleware('web');
 });
 
 Route::name('register')->group(function () {
@@ -99,5 +113,37 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/basketItem/{basket_id}', [BasketItemController::class, 'show'])->name('.show');
         Route::post('/basketItem/edit/{basket_id}', [BasketItemController::class, 'editQuantity'])->name('.editQuantity');
         Route::post('/basketItem/remove/{basket_id}', [BasketItemController::class, 'removeFromBasket'])->name('.remove');
+    });
+});
+
+
+
+Route::get('admin/products', function () {
+    return view('admin.products');
+})->name('admin.products')->middleware('admin');
+
+Route::get('admin/orders', function () {
+    return view('admin.orders');
+})->name('admin.orders')->middleware('admin');
+
+
+Route::get('admin/customers', function () {
+    return view('admin.customers');
+})->name('admin.customers')->middleware('admin');
+
+
+
+
+
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+
+    Route::get('login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [AdminController::class, 'login']);
+    Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+
+
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });

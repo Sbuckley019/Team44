@@ -19,19 +19,27 @@
             <img src="{{ asset('images/Logo.png') }}" height="50"> <!-- Replace with your logo -->
             <a href="{{ route('home') }}">Home</a>
             <div class="dropdown">
-                <a href="{{ route('products.index')}}" class='dropdown-item'>Products</a>
+                <a href="{{ route('products.refresh')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
-                    <a href="{{ route('products.index',['id'=>1])}}">Mens Clothing</a>
-                    <a href="{{ route('products.index',['id'=>2])}}">Womens Clothing</a>
-                    <a href="{{ route('products.index',['id'=>3])}}">Shoes</a>
-                    <a href="{{ route('products.index',['id'=>4])}}">Accessories</a>
-                    <a href="{{ route('products.index',['id'=>5])}}">Supplements</a>
+                    <a href="{{ route('products.refresh',['id'=>1])}}">Mens Clothing</a>
+                    <a href="{{ route('products.refresh',['id'=>2])}}">Womens Clothing</a>
+                    <a href="{{ route('products.refresh',['id'=>3])}}">Shoes</a>
+                    <a href="{{ route('products.refresh',['id'=>4])}}">Accessories</a>
+                    <a href="{{ route('products.refresh',['id'=>5])}}">Supplements</a>
                 </div>
             </div>
             <a href="{{ route('aboutUs') }}">About Us</a>
             <a href="{{ route('contact') }}">Contact Us</a>
         </div>
         <div class="navbar-right">
+        <div class="admin-button">
+        <a href="{{ route('admin.login') }}">
+        <img src="{{ asset('images/admin.png') }}" height="65" alt="Admin Login"> <!-- Image acts as a button -->
+        </a>
+        </div>
+
+
+
             @if (auth()->check())
             <div class="dropdown">
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
@@ -39,6 +47,7 @@
                     <!--<a href="{{route('orders')}}">My Orders</a>!-->
                     <a href="{{ route('passchange') }}">Change Password</a>
                     <!--<a href="GymAccessories">Update Account Details</a>-->
+                    <a href="{{route('favourite.index')}}">Favourites</a>
                     <a href="{{route('logout')}}">Log out</a>
                 </div>
             </div>

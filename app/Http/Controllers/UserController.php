@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $request->validate([
             'username' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:4|confirmed',
             'email' => 'email|unique:Users',
         ]);
 
@@ -137,6 +137,17 @@ class UserController extends Controller
         } else {
             // If authentication fails, redirect back with errors
             return redirect()->back()->with('error', 'Invalid credentials');
+
+
+            $basketcontroller = new BasketController();
+            $basketcontroller->guestToUser();
+
+            return redirect()->route('home')
+                ->with('success', 'Login successful');
+        } else if (Auth::guard('admin')->attempt($credentials)) {
+            $admin = new AdminController();
+            $response = $admin->login($request->username);
+            return $response;
         }
     }
 

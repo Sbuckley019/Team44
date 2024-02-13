@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
+use App\Events\ReviewCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($review) {
+            event(new ReviewCreated($review));
+        });
+    }
+
     use HasFactory;
     protected $table = 'reviews';
 
