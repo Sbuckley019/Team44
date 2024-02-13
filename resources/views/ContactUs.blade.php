@@ -12,7 +12,8 @@
 
         <div class="section-container user-input">
             <h2>Send us a message:</h2>
-            <form id="contactForm">
+            <form action="{{route('feedback.store')}}" method="POST" id="contactForm">
+                @csrf
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -22,25 +23,24 @@
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    <label for="Feedback">Message:</label>
+                    <textarea class="form-control" id="Feedback" name="feedback" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="rate">Rate us:</label>
-                    <div class="rating-container">
-                        <input type="radio" id="star5" name="rate" value="5">
-                        <i class="fas fa-star"></i>
-                        <input type="radio" id="star4" name="rate" value="4">
-                        <i class="fas fa-star"></i>
-                        <input type="radio" id="star3" name="rate" value="3">
-                        <i class="fas fa-star"></i>
-                        <input type="radio" id="star2" name="rate" value="2">
-                        <i class="fas fa-star"></i>
-                        <input type="radio" id="star1" name="rate" value="1">
-                        <i class="fas fa-star"></i>
-                    </div>
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5"></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4"></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3"></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2"></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1"></label>
+                    </fieldset>
                 </div>
-                <button type="button" class="btn-submit" onclick="submitForm()">Submit</button>
+                <button type="submit" class="btn-submit">Submit</button>
             </form>
         </div>
     </div>

@@ -25,12 +25,4 @@ class Basket extends Model
     {
         return $this->hasMany(BasketItem::class, 'basket_id');
     }
-
-    // calculate and get the total value of the basket
-    public function getTotalAttribute()
-    {
-        return $this->items->sum(function ($item) {
-            return $item->quantity * $item->product->price;
-        });
-    }
 }
