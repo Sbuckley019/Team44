@@ -62,6 +62,10 @@ Route::get('/remove', function () {
     return view('home');
 })->name('remove');
 
+Route::get('/product', function(){
+    return view('Product');
+})->name('product');
+
 Route::name('productcategories')->group(function () {
     Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('.index');
     Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('.create');

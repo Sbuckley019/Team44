@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    @if($basket != null && count($basket->items)>0)
     <div class="small-container basket-page">
         <table>
             <tr>
@@ -30,7 +31,6 @@
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            @if(isset($basket))
             @forEach($basket->items as $item)
             <tr>
                 <td>
@@ -69,7 +69,6 @@
         </td>
     <td class="subtotal">£{{($item->product->price)*$item->quantity}}</td>
     @endforeach
-    @endif
 </tr>
             <tr>
                 <td colspan="2"></td>
@@ -92,6 +91,9 @@
         document.addEventListener('DOMContentLoaded', updateTotal);
     </script>
     @include('includes.footer')
+    @else
+    
+    @endif
 </body>
 
 </html>

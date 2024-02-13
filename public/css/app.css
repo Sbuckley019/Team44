@@ -1373,31 +1373,6 @@ th:last-child {
     align-items: center;
     margin-left: auto;
 }
-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgb(0, 157, 255);
-
-    background-color: white;
-}
-button:hover {
-    background-color: blue;
-    cursor: pointer;
-}
-button:focus {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-}
-button[disabled] {
-    opacity: var(--opacity-50);
-    pointer-events: none;
-}
-button:active {
-    background-color: var(--color-blue-300);
-}
 
 .number {
     font-size: x-large;
@@ -1406,7 +1381,4 @@ button:active {
 }
 .icon {
     user-select: none;
-}
-.dim {
-    color: var(--color-gray-400);
 }
