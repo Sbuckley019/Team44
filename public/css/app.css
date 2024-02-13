@@ -259,7 +259,6 @@ footer {
 
 .input-group {
     top: 120px;
-    position: absolute;
     width: 280px;
     transition: 0.5s;
 }
@@ -739,8 +738,8 @@ nav a {
 }
 
 .register-input-group {
-    top: 120px;
     position: absolute;
+    top: 220px;
     width: 280px;
     transition: 0.5s;
 }
@@ -1040,13 +1039,6 @@ span {
     transition: 0.5s;
 }
 
-.register-input-group {
-    top: 120px;
-    position: absolute;
-    width: 280px;
-    transition: 0.5s;
-}
-
 .register-input-field {
     width: 100%;
     padding: 10px 0;
@@ -1314,6 +1306,7 @@ th:last-child {
     align-items: center;
     margin-left: auto;
 }
+
 button {
     display: flex;
     justify-content: center;
