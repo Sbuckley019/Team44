@@ -13,8 +13,11 @@
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <img src="{{ asset('images/Logo.png') }}" height="50"> <!-- Replace with your logo -->
-            <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}" height="50"></a>
+
+            
+      
+        
             <div class="dropdown">
                 <a href="{{ route('products.index')}}" class='dropdown-item'>Products</a> 
                 <div class="dropdown-content">
