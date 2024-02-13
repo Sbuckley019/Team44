@@ -2,55 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourites;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    //
-    public function index($id = null)
+    public function refresh()
     {
-        $products = $id
-            ? Product::where('category_id', $id)->get()
-            : Product::all();
+        session()->forget('products');
+        return $this->index(request());
+    }
+    public function index(Request $request)
+    {
+        $category_id = $request->category ?? $request->id;
+        $searchTerm = $request->search;
+        $sortChoice = $request->sortChoice;
+        $rating = $request->rating;
+        $min = $request->priceRangeMin;
+        $max = $request->priceRangeMax;
 
-        $category = $id
-            ? ProductCategory::where('id', $id)->select('category_name')->first()
-            : null;
+        $products = session()->get('products');
 
 
-        $category_name = $category ? $category->category_name : null;
+        // If there are no previously stored products or if search term or category has changed, 
+        // execute the query to fetch products
+        if (!$products || $searchTerm || $category_id || $rating) {
+            $productsQuery = Product::query();
 
-        $categories = ProductCategory::select('category_name')->get();
-        return view("Products", compact("products", "category_name", "categories"));
+            // Filter by category if category_id is provided
+            if ($category_id) {
+                $productsQuery->where('category_id', $category_id);
+            }
+
+            // Filter by search term if provided
+            if ($searchTerm) {
+                $productsQuery->where('product_name', 'LIKE', "%$searchTerm%");
+            }
+
+            if ($rating) {
+                $productsQuery->where('rating', '>=', $rating);
+            }
+            if ($min) {
+                $productsQuery->where('price', '>=', $min)
+                    ->where('price', '<=', $max);
+            }
+
+            // Retrieve products based on the updated query
+            $products = $productsQuery->get();
+
+            // Store the filtered products in the session
+            session()->put('products', $products);
+            session()->put('category_id', $category_id);
+        }
+
+        $products = $this->sortProducts($products, $sortChoice);
+
+        $category = $category_id ? $this->fetchCategoryById($category_id) : null;
+        $categories = $this->fetchCategories();
+        $favouriteIds = $this->fetchFavouriteIds();
+
+
+        return view("Products", compact("products", "category", "categories", "favouriteIds", "sortChoice"));
     }
 
-    public function search(Request $request)
+    private function sortProducts($products, $sortChoice)
     {
-
-        $searchTerm = $request->input('search');
-
-        $category_name = $request->input("category_name");
-
-        $category = ProductCategory::where('category_name', $category_name)->first();
-
-        $category_id = $category ? $category->id : null;
-
-
-        $products = Product::where("product_name", 'LIKE', "%$searchTerm%")
-            ->where(function ($query) use ($category_id) {
-                if ($category_id !== null) {
-                    $query->where("category_id", $category_id);
-                }
-            })
-            ->get();
-
-
-        $categories = ProductCategory::select('category_name')->get();
-
-        return view("Products", compact("products", "category_name", "categories"));
+        switch ($sortChoice) {
+            case 1:
+                return $products->sortByDesc('price');
+            case 2:
+                return $products->sortBy('price');
+            case 3:
+                return $products->sortByDesc('rating');
+            case 4:
+                return $products->sortBy('created_at');
+            default:
+                return $products->sortByDesc('created_at');
+        }
     }
 
     public function create()
@@ -87,29 +120,23 @@ class ProductController extends Controller
             return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
     }
-    /*
-    public function filter($category_id = null, $low_price = null, $high_price = null)
+    private function fetchFavouriteIds()
     {
-        $products = Product::where(function ($query) use ($category_id) {
-            if ($category_id !== null) {
-                $query->where("category_id", $category_id);
-            }
-        })->where(function ($query) use ($low_price) {
-            if ($low_price !== null) {
-                $query->where("category_id", $low_price);
-            }
-        })->where(function ($query) use ($category_id) {
-            if ($category_id !== null) {
-                $query->where("category_id", $category_id);
-            }
-        })->get();
-
-
-
-        $category_name = $category ? $category->category_name : null;
-
-        $categories = ProductCategory::select('category_name')->get();
-        return view("Products", compact("products", "category_name", "categories"));
+        if (Auth::check()) {
+            $user = auth()->user();
+            return Favourites::where('user_id', $user->id)->pluck('product_id')->toArray();
+        } else {
+            return null;
+        }
     }
-    */
+
+    private function fetchCategories()
+    {
+        return ProductCategory::select('category_name', 'id')->get();
+    }
+
+    private function fetchCategoryById($id)
+    {
+        return ProductCategory::where('id', $id)->select('category_name', 'id')->first();
+    }
 }
