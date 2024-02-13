@@ -11,6 +11,12 @@
                     <button type="button" class="register-toggle-btn" onclick="login()">Log in</button>
                     <button type="button" class="register-toggle-btn" onclick="signup()">Sign up</button>
                 </div>
+                @if(Session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {!! session()->get('error') !!}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
 
                 <form action="{{ route('register.login') }}" method="post" id="login" class="register-input-group">
                     @csrf
@@ -28,12 +34,6 @@
                     <input type="password" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
                     <button type="submit" class="register-submit-btn">Sign up</button>
                 </form>
-                @if(Session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {!! session()->get('error') !!}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
             </div>
         </div>
     </div>

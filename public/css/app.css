@@ -259,7 +259,6 @@ footer {
 
 .input-group {
     top: 120px;
-    position: absolute;
     width: 280px;
     transition: 0.5s;
 }
@@ -788,8 +787,8 @@ nav a {
 }
 
 .register-input-group {
-    top: 120px;
     position: absolute;
+    top: 220px;
     width: 280px;
     transition: 0.5s;
 }
@@ -1099,13 +1098,6 @@ span {
     transition: 0.5s;
 }
 
-.register-input-group {
-    top: 120px;
-    position: absolute;
-    width: 280px;
-    transition: 0.5s;
-}
-
 .register-input-field {
     width: 100%;
     padding: 10px 0;
@@ -1372,41 +1364,4 @@ th:last-child {
     display: flex;
     align-items: center;
     margin-left: auto;
-}
-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgb(0, 157, 255);
-
-    background-color: white;
-}
-button:hover {
-    background-color: blue;
-    cursor: pointer;
-}
-button:focus {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-}
-button[disabled] {
-    opacity: var(--opacity-50);
-    pointer-events: none;
-}
-button:active {
-    background-color: var(--color-blue-300);
-}
-
-.number {
-    font-size: x-large;
-    min-width: 12px;
-    text-align: center;
-}
-.icon {
-    user-select: none;
-}
-.dim {
-    color: var(--color-gray-400);
 }
