@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password123'), // You can use bcrypt() to hash passwords
             'address' => $this->faker->address,
-            'phone_number' => $this->faker->phoneNumber,
+            'phone_number' => $this->faker->e164PhoneNumber,
             'email_verified_at' => now(), // Assuming you want to set the email verified at current time
             'remember_token' => Str::random(10), // Generate a random remember token
         ];
