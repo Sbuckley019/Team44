@@ -17,6 +17,7 @@ use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,8 @@ Route::name('products')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
 });
+
+Route::get('/products/{product}', [ProductItemController::class, 'show'])->name('products.show');
 
 Route::name('favourite')->group(function () {
     Route::get('/favourite', [FavouritesController::class, 'index'])->name('.index');
