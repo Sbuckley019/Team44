@@ -99,12 +99,17 @@ class BasketController extends Controller
 
     public function guestToUser()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        $guest_id = Cookie::get('guest_id');
-        $basket = Basket::where(['guest_id' => $guest_id])->first();
-        if ($basket) {
-            $basket->update(['user_id' => $user->id, 'guest_id' => Null]);
+        // checks if there is an authenticated user
+        if ($user) {
+            $guest_id = Cookie::get('guest_id');
+
+            $basket = Basket::where(['guest_id' => $guest_id])->first();
+
+            if ($basket) {
+                $basket->update(['user_id' => $user->id, 'guest_id' => null]);
+            }
         }
     }
 }

@@ -134,21 +134,16 @@ class UserController extends Controller
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->route('home')->with('success', 'Login successful!');
-        } else {
-            // If authentication fails, redirect back with errors
-            return redirect()->back()->with('error', 'Invalid credentials');
-
-
-            $basketcontroller = new BasketController();
-            $basketcontroller->guestToUser();
-
-            return redirect()->route('home')
-                ->with('success', 'Login successful');
-        } else if (Auth::guard('admin')->attempt($credentials)) {
+        } elseif (Auth::guard('admin')->attempt($credentials)) {
             $admin = new AdminController();
             $response = $admin->login($request->username);
             return $response;
         }
+        // If authentication fails for either regular user or admin, redirect back with errors
+        $basketcontroller = new BasketController();
+        $basketcontroller->guestToUser();
+
+        return redirect()->back()->with('error', 'Invalid credentials');
     }
 
     public function logout()
