@@ -14,4 +14,5 @@
             </form>
         </div>
     </div>
+    @include('includes.footer')
 </body>
