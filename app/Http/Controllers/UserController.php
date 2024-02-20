@@ -24,7 +24,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('UserList', compact('users'));
+        return view('admin/customers', compact('users'));
     }
 
     public function create()
@@ -133,6 +133,8 @@ class UserController extends Controller
         // Authenticate user
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
+            $basketcontroller = new BasketController();
+            $basketcontroller->guestToUser();
             return redirect()->route('home')->with('success', 'Login successful!');
         } elseif (Auth::guard('admin')->attempt($credentials)) {
             $admin = new AdminController();
@@ -140,8 +142,6 @@ class UserController extends Controller
             return $response;
         }
         // If authentication fails for either regular user or admin, redirect back with errors
-        $basketcontroller = new BasketController();
-        $basketcontroller->guestToUser();
 
         return redirect()->back()->with('error', 'Invalid credentials');
     }

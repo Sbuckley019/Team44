@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('order.list', compact('orders'));
+        return view('admin/orders', compact('orders'));
     }
 
     // Display the specified order

@@ -20,7 +20,7 @@ a {
 }
 
 /* navbar */
-.navbar {
+.navb {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -30,15 +30,15 @@ a {
     background-color: #000;
     color: white;
     padding: 10px;
-    height: 54px;
+    max-height: 75px;
 }
-.navbar a {
+.navb a {
     color: white;
     padding: 14px 20px;
     text-decoration: none;
     text-align: center;
 }
-.navbar a:hover {
+.nav a:hover {
     color: rgb(253, 93, 0);
 }
 .navbar-left {
