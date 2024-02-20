@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="navbar">
+    <div class="navb">
         <div class="navbar-left">
             <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}" height="50"></a>
             <div class="dropdown">

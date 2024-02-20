@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Admin Dashboard - @yield('title')</title>
 </head>
 <body>
@@ -15,9 +16,9 @@
         <!-- Sidebar content -->
         <ul>
             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ route('admin.products') }}">Products</a></li>
-            <li><a href="{{ route('admin.orders') }}">Orders</a></li>
-            <li><a href="{{ route('admin.customers') }}">Customers</a></li>
+            <li><a href="{{ route('products.adminIndex') }}">Products</a></li>
+            <li><a href="{{ route('order.index') }}">Orders</a></li>
+            <li><a href="{{ route('customer.index') }}">Customers</a></li>
             <li><a href="{{route('feedback.index')}}">Feedback</a></li>
             <li>
                 <form action="{{ route('admin.logout') }}" method="POST">

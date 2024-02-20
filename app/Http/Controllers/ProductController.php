@@ -120,6 +120,13 @@ class ProductController extends Controller
             return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
     }
+
+    public function adminIndex()
+    {
+        $products = Product::all();
+
+        return view('admin/products', compact('products'));
+    }
     private function fetchFavouriteIds()
     {
         if (Auth::check()) {

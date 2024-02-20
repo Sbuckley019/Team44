@@ -111,6 +111,7 @@ Route::name('basket')->group(function () {
 });
 
 Route::name('order')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('.index')->middleware('admin');
     Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
 
@@ -125,18 +126,15 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('admin/products', function () {
-    return view('admin.products');
-})->name('admin.products')->middleware('admin');
+Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex')->middleware('admin');
 
 Route::get('admin/orders', function () {
     return view('admin.orders');
 })->name('admin.orders')->middleware('admin');
 
 
-Route::get('admin/customers', function () {
-    return view('admin.customers');
-})->name('admin.customers')->middleware('admin');
+Route::get('/customers', [UserController::class, 'index'])->name('customer.index')->middleware('admin');
+
 
 
 
