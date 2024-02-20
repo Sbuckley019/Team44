@@ -11,12 +11,24 @@
                     <button type="button" class="register-toggle-btn" onclick="login()">Log in</button>
                     <button type="button" class="register-toggle-btn" onclick="signup()">Sign up</button>
                 </div>
-                @if(Session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {!! session()->get('error') !!}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                <div class="fixed-bottom mx-3 mb-3">
+                    @if(Session()->has('success'))
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
+                        {!! session()->get('success') !!}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                 </div>
-                @endif
+
+                <div class="fixed-bottom mx-3 mb-3">
+                    @if(Session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
+                        {!! session()->get('error') !!}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+                </div>
 
                 <form action="{{ route('register.login') }}" method="post" id="login" class="register-input-group">
                     @csrf
