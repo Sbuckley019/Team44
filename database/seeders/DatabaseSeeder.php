@@ -9,6 +9,7 @@ use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -32,11 +33,6 @@ class DatabaseSeeder extends Seeder
 
         Feedback::factory()->count(10)->create();
 
-        /*DB::table('admins')->insert([
-            'username' => 'admin',
-            'password' => Hash::make('admin'), // Hash the password
-            'first_name' => 'admin',
-            'last_name' => 'admin',
-        ]);*/
+        Admin::factory()->count(1)->create();
     }
 }
