@@ -47,7 +47,13 @@ class BasketController extends Controller
             $basket->items()->save($basketItem);
         }
 
-        return redirect()->route('basket.index');
+        $product = Product::findOrFail($productId);
+
+        session()->flash('basketItem', [
+            'name' => $product->product_name
+        ]);
+
+        return redirect()->back()->with('success', ' added to basket');
     }
 
     public function removeProduct($productId)
