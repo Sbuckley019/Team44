@@ -16,14 +16,13 @@
                 total += parseFloat(subtotal.textContent.replace('£', ''));
             });
 
-
             document.getElementById('total-amount').textContent = '£' + total.toFixed(2);
         }
     </script>
 </head>
 
 <body>
-    @if( $basket != null && count($basket->items) >0)
+    @if( $basket != null && count($basket->items) > 0)
     <div class="small-container basket-page">
         <table>
             <tr>
@@ -32,7 +31,7 @@
                 <th>Subtotal</th>
             </tr>
             @if(isset($basket))
-            @forEach($basket->items as $item)
+            @foreach($basket->items as $item)
             <tr>
                 <td>
                     <div class="basket-info">
@@ -44,34 +43,30 @@
                                 @csrf
                                 <button type="submit">Remove</button>
                             </form>
-                            </div>
                         </div>
                     </div>
-
-    </td>
-    <!--<td><input type="Label" class="quantity" min="1" value="{{$item->quantity}}" onchange="updateTotal()"></td>-->
-        <td>
-            <form action="{{ route('basket.editQuantity',['productId'=> $item->product->id]) }}" method="POST">
-                @csrf
-                <button class="minus" aria-label="Decrease by one" name="action" value="0" type="submit">
-                    <svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line y1="1" x2="16" y2="1" stroke="#0064FE" stroke-width="2" class="icon" />
-                    </svg>
-                </button>
-                <div class="number dim">{{$item->quantity}}</div>
-                <button class="plus" aria-label="Increase by one" name="action" value="1" type="submit">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="icon">
-                        <line x1="8" y1="4.37114e-08" x2="8" y2="16" stroke="#0064FE" stroke-width="2" />
-                        <line y1="8" x2="16" y2="8" stroke="#0064FE" stroke-width="2" />
-                    </svg>
-                </button>
-            </form>
-        </td>
-    <td class="subtotal">£{{($item->product->price)*$item->quantity}}</td>
-    @endforeach
-    @endif
-</tr>
+                </td>
+                <td>
+                    <form action="{{ route('basket.editQuantity',['productId'=> $item->product->id]) }}" method="POST">
+                        @csrf
+                        <button class="minus" aria-label="Decrease by one" name="action" value="0" type="submit">
+                            <svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line y1="1" x2="16" y2="1" stroke="#0064FE" stroke-width="2" class="icon" />
+                            </svg>
+                        </button>
+                        <div class="number dim">{{$item->quantity}}</div>
+                        <button class="plus" aria-label="Increase by one" name="action" value="1" type="submit">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                <line x1="8" y1="4.37114e-08" x2="8" y2="16" stroke="#0064FE" stroke-width="2" />
+                                <line y1="8" x2="16" y2="8" stroke="#0064FE" stroke-width="2" />
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+                <td class="subtotal">£{{($item->product->price)*$item->quantity}}</td>
+            </tr>
+            @endforeach
+            @endif
             <tr>
                 <td colspan="2"></td>
                 <td>
@@ -91,11 +86,11 @@
             </tr>
         </table>
     </div>
+    @endif
 
     <script>
         document.addEventListener('DOMContentLoaded', updateTotal);
     </script>
-    @endif
     @include('includes.footer')
 </body>
 
