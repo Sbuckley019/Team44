@@ -89,7 +89,6 @@
     </tr>
     </table>
     </div>
-    @endif
 
     @else
     <h2> Your basket is empty.</h2>
@@ -98,6 +97,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', updateTotal);
     </script>
+    @endif
     @include('includes.footer')
 </body>
 
