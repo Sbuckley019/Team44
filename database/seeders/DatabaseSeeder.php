@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Seed Product Categories
-        //ProductCategory::factory()->count(5)->create();
+        ProductCategory::factory()->count(5)->create();
         // Seed products
-        //Product::factory()->count(30)->create();
+        Product::factory()->count(30)->create();
 
-        //User::factory()->count(10)->create();
+        User::factory()->count(10)->create();
 
-        //Review::factory()->count(100)->create();
+        Review::factory()->count(100)->create();
 
         Feedback::factory()->count(10)->create();
 
