@@ -53,7 +53,7 @@ class BasketController extends Controller
             'name' => $product->product_name
         ]);
 
-        return redirect()->back()->with('success', ' added to basket');
+        return redirect()->back()->with('info', ' added to basket');
     }
 
     public function removeProduct($productId)
@@ -69,7 +69,7 @@ class BasketController extends Controller
         if ($basket) {
             $basket->items()->where('product_id', $productId)->delete();
         }
-        return redirect()->route('basket.index');
+        return redirect()->route('basket.index')->with('info', 'removed from basket');
     }
 
     public function editQuantity($productId, Request $request)

@@ -77,12 +77,6 @@ Route::name('feedback')->group(function () {
     Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read')->middleware('web');
 });
 
-Route::name('productcategories')->group(function () {
-    Route::get('/productcategories', [ProductCategoryController::class, 'index'])->name('.index');
-    Route::get('/productcategories/create', [ProductCategoryController::class, 'create'])->name('.create');
-    Route::post('/productcategories', [ProductCategoryController::class, 'store'])->name('.store')->middleware('web');
-});
-
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
     Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');

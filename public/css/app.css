@@ -1,24 +1,22 @@
 :root {
+    --main-color: #000;
     --primary-color: #3498db;
     --secondary-color: #217dbb;
     --text-color: #333;
     --background-color: #f4f4f4;
     height: 100%;
 }
-
 body {
-    font-family: "Montserrat", "Arial", sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
     background: #ffffff;
     margin: 0;
     padding: 0;
     align-items: center;
     justify-content: center;
 }
-
 a {
     text-decoration: none;
 }
-
 /* navbar */
 .navb {
     position: sticky;
@@ -52,7 +50,6 @@ a {
     display: flex;
     align-items: center;
 }
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -79,12 +76,10 @@ a {
 .dropdown-item:hover {
     color: #ff6200;
 }
-
 .name {
     font-weight: 700;
     cursor: default;
 }
-
 .hero {
     background: #000;
     position: relative;
@@ -94,17 +89,14 @@ a {
     justify-content: center;
     align-items: center;
 }
-
 .hero-content {
     width: 100%;
     height: 70%;
 }
-
 .hero-content img {
     width: 100%;
     height: 100%;
 }
-
 .text-overlay {
     position: absolute;
     top: 30%;
@@ -113,18 +105,15 @@ a {
     text-align: left; /* Align text to the left */
     color: white; /* Change text color as needed */
 }
-
 .text-overlay #hero-text {
     font-size: 2em;
     margin: 10px;
     color: #fff;
 }
-
 .text-overlay p {
     font-size: 1.2em;
     margin: 10px;
 }
-
 /* footer */
 
 /* Footer Styles */
@@ -134,14 +123,12 @@ footer {
     padding: 30px 0;
     text-align: center;
 }
-
 .footer-logo {
     color: #e8491d;
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 .footer-links {
     list-style: none;
     padding: 0;
@@ -149,40 +136,32 @@ footer {
     justify-content: center;
     margin-bottom: 20px;
 }
-
 .footer-links li {
     margin: 0 15px;
 }
-
 .footer-links a {
     text-decoration: none;
     color: #fff;
     transition: color 0.3s ease;
 }
-
 .footer-links a:hover {
     color: #e8491d;
 }
-
 .footer-social {
     margin-top: 20px;
 }
-
 .footer-social a:hover {
     color: #e8491d;
 }
-
 .footer-bottom {
     font-size: 0.9em;
 }
-
 /* aboutus page */
 .container {
     width: 80%;
     margin: auto;
     overflow: hidden;
 }
-
 .about-section {
     padding: 50px 0;
     background: #f4f4f4;
@@ -194,14 +173,7 @@ footer {
     padding: 50px 0;
     background: #e2e2e2;
 }
-
 /* register */
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Arial", sans-serif;
-}
 .back {
     height: 100%;
     width: 100%;
@@ -211,7 +183,6 @@ footer {
     position: absolute;
     display: flex;
 }
-
 .form-box {
     width: 380px;
     height: 480px;
@@ -221,14 +192,12 @@ footer {
     padding: 5px;
     overflow: hidden;
 }
-
 .register-msg {
     text-align: center;
     font-style: italic;
     font-weight: 600;
     margin-top: 10px;
 }
-
 .button-box {
     width: 220px;
     margin: 35px auto;
@@ -236,7 +205,6 @@ footer {
     box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
 }
-
 .toggle-btn {
     padding: 10px 30px;
     cursor: pointer;
@@ -245,7 +213,6 @@ footer {
     outline: none;
     position: relative;
 }
-
 #btn {
     top: 0;
     left: 0;
@@ -256,13 +223,11 @@ footer {
     border-radius: 30px;
     transition: 0.5s;
 }
-
 .input-group {
     top: 120px;
     width: 280px;
     transition: 0.5s;
 }
-
 .input-field {
     width: 100%;
     padding: 10px 0;
@@ -274,7 +239,6 @@ footer {
     outline: none;
     background: transparent;
 }
-
 .submit-btn {
     width: 85%;
     padding: 10px 30px;
@@ -286,22 +250,12 @@ footer {
     outline: none;
     border-radius: 30px;
 }
-
 .check-box {
     margin: 30px 10px 30px 0;
 }
-
-span {
-    color: #777;
-    font-size: 12px;
-    bottom: 68px;
-    position: absolute;
-}
-
 #login {
     left: 50px;
 }
-
 #signup {
     left: 450px;
 }
@@ -315,29 +269,24 @@ span {
     width: 80%;
     margin-inline: auto;
 }
-
 .product-form {
     display: flex;
     flex-direction: column;
 }
-
 h2 {
     font-size: 1.8em;
     margin-bottom: 20px;
     color: #333;
     text-align: center;
 }
-
 .form-group {
     margin-bottom: 20px;
 }
-
 label {
     font-size: 0.9em;
     margin-bottom: 8px;
     color: #555;
 }
-
 input,
 textarea,
 select {
@@ -348,7 +297,6 @@ select {
     width: 100%;
     box-sizing: border-box;
 }
-
 .product-button {
     background-color: #3498db;
     color: #fff;
@@ -359,7 +307,6 @@ select {
     font-size: 1em;
     transition: background-color 0.3s ease;
 }
-
 .product-button:hover {
     background-color: #217dbb;
 }
@@ -389,7 +336,6 @@ header {
     height: auto;
     margin-bottom: 1em;
 }
-
 /* contactus page */
 .contact-container {
     max-width: 800px;
@@ -403,7 +349,6 @@ header {
     flex-direction: column;
     align-items: center;
 }
-
 .section-container {
     border: 2px solid black;
     border-radius: 10px;
@@ -412,34 +357,28 @@ header {
     overflow: hidden;
     background-color: #f8f9fa;
 }
-
 .contact-details,
 .user-input {
     width: 100%;
     margin-bottom: 20px;
     color: black;
 }
-
 .contact-details,
 .user-input {
     text-align: left;
 }
-
 .contact-details h2,
 .user-input h2 {
     color: black;
     margin-bottom: 10px;
 }
-
 .contact-details p {
     color: #555;
     margin: 5px 0;
 }
-
 .form-group {
     margin-bottom: 15px;
 }
-
 .btn-submit {
     background-color: #007bff;
     color: black;
@@ -448,35 +387,28 @@ header {
     border-radius: 5px;
     cursor: pointer;
 }
-
 .btn-submit:hover {
     background-color: #007bff;
 }
-
 .form-control {
     border-radius: 5px;
     color: black;
 }
-
 h1 {
     color: black;
     margin-bottom: 10px;
 }
-
 p {
     margin: 10px 0;
 }
-
 .rating-container {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
 }
-
 .rating-container input {
     display: none;
 }
-
 .rating-container label {
     cursor: pointer;
     width: 30px;
@@ -485,24 +417,14 @@ p {
     background-size: cover;
     margin: 0 5px;
 }
-
-.rating-container input:checked + label {
+.rating-container :checked + label {
     background-image: url("images/star.png"); /* Add your filled star icon image */
 }
-
 /* equipment page */
-body {
-    font-family: Arial, sans-serif;
-}
+
 .container {
     width: 80%;
     margin: auto;
-}
-header {
-    background: #333;
-    color: white;
-    padding: 1em 0;
-    text-align: center;
 }
 nav ul {
     list-style: none;
@@ -547,7 +469,6 @@ nav a {
     display: inline-block;
     margin-top: 1em;
 }
-
 /* product card creation */
 
 .product-image {
@@ -555,37 +476,31 @@ nav a {
     height: 200px;
     object-fit: contain;
 }
-
 .product-details {
     padding: 20px;
 }
-
 .product-name {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 .product-description {
     font-size: 14px;
     color: #666;
     margin-bottom: 10px;
 }
-
 .product-price {
     font-size: 18px;
     font-weight: bold;
     color: #e8491d;
     margin-bottom: 10px;
 }
-
 .action-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
 }
-
 #productCardModal {
     display: none;
     position: fixed;
@@ -595,7 +510,6 @@ nav a {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
 }
-
 #productCardContainer {
     position: fixed;
     top: 50%;
@@ -607,14 +521,12 @@ nav a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-width: 80%;
 }
-
 .hero-container {
     display: flex;
     overflow: hidden;
     background: black;
     height: 100vh;
 }
-
 .hero-column {
     flex: 1;
     position: relative;
@@ -632,12 +544,10 @@ nav a {
     background-size: cover;
     background-position: center;
 }
-
 .hero-column:hover {
     opacity: 0.8;
     transition: opacity 0.7s ease;
 }
-
 .overlay-link {
     position: absolute;
     top: 50%;
@@ -649,14 +559,12 @@ nav a {
     font-weight: bold;
     opacity: 1;
 }
-
 .hero-subcategories {
     height: 5rem;
     display: flex;
     justify-content: space-around;
     background: black;
 }
-
 .hero-sub {
     color: white;
     height: 100%;
@@ -667,27 +575,23 @@ nav a {
     font-weight: bold;
     font-size: 20px;
 }
-
 .hero-sub:hover {
     color: black;
     background: white;
     transition: background 0.7s ease;
 }
-
 /* orders page */
 .container {
     height: 100%;
     width: 80%;
     margin: 0 auto; /* Center the container on the page */
 }
-
 .container > div {
     width: 100%;
     background-color: #f4f4f4; /* Add background color if needed */
     padding: 15px; /* Add padding if needed */
     box-sizing: border-box; /* Include padding and border in the box model */
 }
-
 /* register page */
 .back {
     height: 100%;
@@ -698,62 +602,57 @@ nav a {
     position: absolute;
     display: flex;
 }
-
 .register-form-box {
-    width: 380px;
-    height: 480px;
+    width: 400px;
+    height: 500px;
     position: relative;
-    margin: 6% auto;
+    margin: 1rem auto;
     background-color: #fff;
     padding: 5px;
     overflow: hidden;
 }
 
-.register-button-box {
-    width: 220px;
-    margin: 35px auto;
-    position: relative;
-    box-shadow: 0 0 20px 9px #ff61241f;
-    border-radius: 30px;
+.register-elements {
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .register-toggle-btn {
     padding: 10px 30px;
-    cursor: pointer;
+    font-family: Montserrat;
+    font-size: 0.7rem;
     background: transparent;
     border: 0;
     outline: none;
     position: relative;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 130px;
 }
-
 #register-btn {
-    top: 0;
-    left: 0;
+    width: 130px;
+    height: 44px;
+    background: white;
     position: absolute;
-    width: 110px;
-    height: 100%;
-    background: linear-gradient(to left, #09f4ff, #091cff);
-    border-radius: 30px;
+    border-radius: 100px;
+    background-color: #fff;
+    border: 4px solid #e7e7e7;
     transition: 0.5s;
 }
-
 .register-input-group {
     position: absolute;
-    top: 220px;
-    width: 280px;
+    width: 300px;
     transition: 0.5s;
 }
 
-.register-input-field {
-    width: 100%;
-    padding: 10px 0;
-    margin: 5px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
+.register-forgot {
+    align-self: center;
+    margin-top: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
 }
 
 .register-submit-btn {
@@ -762,38 +661,21 @@ nav a {
     cursor: pointer;
     display: block;
     margin: auto;
-    background: linear-gradient(to left, #09f4ff, #091cff);
+    background: black;
     border: 0;
     outline: none;
     border-radius: 30px;
+    font-family: "MontSerrat", sans-serif;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
 }
-
-.register-check-box {
-    margin: 30px 10px 30px 80px;
-}
-
-span {
-    color: #777;
-    font-size: 12px;
-    bottom: 68px;
-    position: absolute;
-}
-
-#login {
-    left: 50px;
-}
-
-#signup {
-    left: 450px;
-}
-
 /* order page */
 .order-item {
     display: flex;
     justify-content: space-between;
     padding: 15px;
 }
-
 /* product card creation */
 .title-container {
     padding: 10px;
@@ -823,41 +705,14 @@ span {
 .product-card-link {
     margin: 20px;
 }
-
 .product-card {
     position: relative;
     width: 300px;
-    height: 385px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     overflow: hidden;
 }
-
-.product-details {
-    padding: 20px;
-}
-
-.product-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #e8491d;
-    margin-bottom: 10px;
-}
-
-.action-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-}
-
 .fa-heart {
     font-family: "Font Awesome 6 Free";
     position: absolute;
@@ -868,13 +723,11 @@ span {
     border-radius: 100px;
     border-color: darkgray;
 }
-
 .fa-heart:hover,
 .filled {
     cursor: pointer;
     font-weight: 600;
 }
-
 .add-to-cart-btn {
     background-color: #e8491d;
     color: #fff;
@@ -883,212 +736,40 @@ span {
     border-radius: 4px;
     cursor: pointer;
 }
-
 .add-to-cart-btn:hover {
     background-color: #c43117;
 }
-
-#productCardModal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-#productCardContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-width: 80%;
-}
-
-.hero-container {
-    display: flex;
-    overflow: hidden;
-    background: black;
-    height: 100vh;
-}
-
-.hero-column {
-    flex: 1;
-    position: relative;
-    height: 100%;
-    opacity: 0.2;
-    transition: opacity 0.6s ease-out;
-}
-#hero-img1 {
-    background: url("https://m.media-amazon.com/images/I/61QGA-NTmcL.jpg");
-    background-size: cover;
-    background-position: center;
-}
-#hero-img2 {
-    background: url("https://castore.com/cdn/shop/files/CFB30564_GUNMETAL_01_1024x1024.jpg?v=1692970299");
-    background-size: cover;
-    background-position: center;
-}
-
-.hero-column:hover {
-    opacity: 0.8;
-    transition: opacity 0.7s ease;
-}
-
-.overlay-link {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    opacity: 1;
-}
-
-.hero-subcategories {
-    height: 5rem;
-    display: flex;
-    justify-content: space-around;
-    background: black;
-}
-
-.hero-sub {
-    color: white;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.hero-sub:hover {
-    color: black;
-    background: white;
-    transition: background 0.7s ease;
-}
-
-/* orders page */
-.container {
-    height: 100%;
-    width: 80%;
-    margin: 0 auto; /* Center the container on the page */
-}
-
-.container > div {
-    width: 100%;
-    background-color: #f4f4f4; /* Add background color if needed */
-    padding: 15px; /* Add padding if needed */
-    box-sizing: border-box; /* Include padding and border in the box model */
-}
-
-/* register page */
-.back {
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url("register_background2.jpg");
-    background-position: center;
-    position: absolute;
-    display: flex;
-}
-
-.register-form-box {
-    width: 380px;
-    height: 480px;
-    position: relative;
-    margin: 6% auto;
-    background-color: #fff;
-    padding: 5px;
-    overflow: hidden;
-}
-
 .register-button-box {
-    width: 220px;
+    display: flex;
+    width: 260px;
     margin: 35px auto;
     position: relative;
-    box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
+    background: #e7e7e7;
+    height: 44px;
 }
 
-.register-toggle-btn {
-    padding: 10px 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
-}
-
-#register-btn {
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 110px;
-    height: 100%;
-    background: linear-gradient(to left, #09f4ff, #091cff);
-    border-radius: 30px;
-    transition: 0.5s;
+.register-input-label {
+    color: rgb(68 68 68);
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 0.25rem;
 }
 
 .register-input-field {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-color: rgb(187 188 188);
+    border-width: 1px;
+    border-radius: 0.25rem;
     width: 100%;
-    padding: 10px 0;
-    margin: 5px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
+    margin-bottom: 0.5rem;
 }
-
-.register-submit-btn {
-    width: 85%;
-    padding: 10px 30px;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    background: linear-gradient(to left, #09f4ff, #091cff);
-    border: 0;
-    outline: none;
-    border-radius: 30px;
-}
-
-.register-check-box {
-    margin: 30px 10px 30px 80px;
-}
-
-span {
-    color: #777;
-    font-size: 12px;
-    bottom: 68px;
-    position: absolute;
-}
-
-#login {
-    left: 50px;
-}
-
-#signup {
-    left: 450px;
-}
-
-/* order page */
-.order-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-}
-
 /* basket page */
 
 .basket-page {
@@ -1100,16 +781,13 @@ table {
     width: 80%;
     border-collapse: collapse;
 }
-
 .basket-info {
     display: flex;
     flex-wrap: wrap;
 }
-
 .product-details {
     flex-grow: 1;
 }
-
 .remove-link {
     margin-top: 10px;
 }
@@ -1120,17 +798,14 @@ th {
     background: #000;
     font-weight: normal;
 }
-
 td {
     padding: 10px 5px;
 }
-
 td input {
     width: 40px;
     height: 30px;
     padding: 5px;
 }
-
 td a {
     color: #000;
     font-size: 12px;
@@ -1140,25 +815,21 @@ td img {
     height: 100px;
     margin-right: 10px;
 }
-
 .total-price {
     display: flex;
     justify-content: flex-end;
 }
-
 .total-price table {
     border-top: 3px solid #000;
     width: 100%;
     max-width: 400px;
 }
-
 td:last-child {
     text-align: right;
 }
 th:last-child {
     text-align: right;
 }
-
 .checkout-button {
     background-color: #555;
     color: #fff;
@@ -1167,22 +838,18 @@ th:last-child {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .checkout-button:hover {
     background-color: #333;
 }
-
 /* Summary Section Styles */
 #summary {
     width: 40%;
     float: right;
 }
-
 .summary-details {
     background-color: #f2f2f2;
     padding: 10px;
 }
-
 #total-items,
 #subtotal,
 #shipping,
@@ -1190,26 +857,22 @@ th:last-child {
     font-weight: bold;
     margin: 0;
 }
-
 /* password change */
 
 #change-password-heading {
     text-align: center;
     color: #333;
 }
-
 #change-password-form {
     display: flex;
     flex-direction: column;
     max-width: 60%;
     margin: 0 auto;
 }
-
 .cp-label {
     margin-bottom: 8px;
     color: #333;
 }
-
 .cp-input {
     padding: 10px;
     margin-bottom: 16px;
@@ -1217,7 +880,6 @@ th:last-child {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
 .cp-btn {
     background-color: #3498db;
     color: #fff;
@@ -1226,11 +888,9 @@ th:last-child {
     border-radius: 4px;
     cursor: pointer;
 }
-
 .cp-btn:hover {
     background-color: #2980b9;
 }
-
 /* filter menu */
 .filter-menu {
     width: 200px;
@@ -1238,22 +898,18 @@ th:last-child {
     float: left;
     text-align: center;
 }
-
 .filter-group {
     margin-bottom: 15px;
 }
-
 .filter-group label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
-
 .filter-group select {
     width: 100%;
     padding: 5px;
 }
-
 .apply-button {
     background-color: #4caf50;
     color: white;
@@ -1266,18 +922,15 @@ th:last-child {
     margin: 4px 2px;
     cursor: pointer;
 }
-
 #priceRangeSlider {
     margin-top: 10px;
 }
-
 /* search bar */
 .search-container {
     display: flex;
     padding: 10px;
     margin-left: 20px;
 }
-
 .w-80 {
     width: 94%;
 }
@@ -1291,7 +944,6 @@ th:last-child {
     border-radius: 6px;
     box-sizing: border-box;
 }
-
 .sorting-container {
     display: flex;
     align-items: center;
@@ -1299,32 +951,12 @@ th:last-child {
     margin-left: 28%;
     margin-right: 20px;
 }
-
 /* basket quantity */
 .quantityInput {
     display: flex;
     align-items: center;
     margin-left: auto;
 }
-
-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgb(0, 157, 255);
-
-    background-color: white;
-}
-
-button:focus {
-    outline: none;
-}
-button[disabled] {
-    pointer-events: none;
-}
-
 .number {
     font-size: x-large;
     min-width: 12px;
@@ -1333,37 +965,30 @@ button[disabled] {
 .icon {
     user-select: none;
 }
-
 .rating {
     display: inline-block;
 }
-
 .rating input {
     display: none;
 }
-
 .rating label {
     float: right;
     cursor: pointer;
     color: #ddd;
 }
-
 .rating label:before {
     content: "\2605";
     font-size: 2em;
 }
-
 .rating input:checked ~ label {
     color: #ffa500; /* Change color for selected stars */
 }
-
 .stars {
     background: url("../images/star-empty.png"); /* Empty star image */
     background-size: contain;
     width: 100px; /* Adjust according to your star size */
     height: 20px; /* Adjust according to your star size */
 }
-
 .stars::before {
     content: "";
     display: block;

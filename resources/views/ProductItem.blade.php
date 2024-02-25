@@ -1,87 +1,22 @@
 @include('includes.navigation')
 
 <style>
-    .product-container {
-    display: flex;
-    justify-content: space-between;
-}
 
-.product-image {
-    max-width: 100%; /* Adjust as needed */
-    margin-right: 20px; /* Adjust spacing between image and content */
-}
-
-.product-details {
-    width: 50%; /* Adjust as needed */
-}
-
-.product-title {
-    font-size: 24px; /* Adjust as needed */
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 20px; /* Adjust as needed */
-    color: #e8491d; /* Adjust color as needed */
-    margin-bottom: 10px;
-}
-
-.product-description {
-    font-size: 16px; /* Adjust as needed */
-    margin-bottom: 20px;
-}
-
-.action-buttons {
-    display: flex;
-    flex-direction: column;
-}
-
-.add-to-basket-btn,
-.checkout-btn {
-    width: 100%; /* Adjust as needed */
-    padding: 10px;
-    margin-bottom: 10px; /* Adjust spacing between buttons */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.add-to-basket-btn {
-    background-color: #3498db; /* Adjust colors as needed */
-    color: white;
-}
-
-.checkout-btn {
-    background-color: #27ae60; /* Adjust colors as needed */
-    color: white;
-}
-
-hr {
-    width:75%;
-    margin: auto;
-    padding: 15px;
-}
-    </style>
-<html>
+</style>
 <body>
-    <div class="card mb-3 m-5">
-        <div class="row no-gutters align-items-center">
-            <div class="col-md-3 d-flex justify-content-center">
+    <div class="card mb-3 d-flex">
+        <div class="row no-gutters align-items-center col-md-6">
+            <div class="">
                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-fluid">
             </div>
-            <div class="col-md-9">
-                <h1>{{ $product->product_name }}</h1>
-                <p>{{ $product->description }}</p>
-                <p>Price: ${{ $product->price }}</p>
-                <div class="action-buttons">
-                    <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
-                        @csrf
-                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-                    </form>
-                </div>
-            </div>
+        </div>
+        <div class="col-md-5">
+            <section>
+                <div>20% OFF</div>
+                <h1>FRACTION OVERSIZED T-SHIRT</h1>
+                <span>OVERSIZED</span>
+                <div>£20</div>
+            </section>
         </div>
     </div>
 <hr>
@@ -119,10 +54,9 @@ hr {
             </form>
     </div>
     <div>
-    <class="container customer-reviews">
+    <div class="container customer-reviews">
         <h2>Customer reviews</h2>
     </div>
 
     @include('includes.footer')
 </body>
-</html>

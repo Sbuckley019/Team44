@@ -31,12 +31,16 @@ class FavouritesController extends Controller
 
         $favourite = $user->favourites()->where('product_id', $productId)->first();
 
+        $message = "";
+
         if ($favourite) {
             $favourite->delete();
+            $message = "removed from favourites";
         } else {
             $user->favourites()->create(['product_id' => $productId]);
+            $message = "added to favourites";
         }
 
-        return redirect()->route('favourite.index');
+        return redirect()->route('favourite.index')->with("info", $message);
     }
 }

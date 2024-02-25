@@ -103,25 +103,5 @@
     </div>
     </div>
     </div>
-    <div id="alertContainer" class="fixed-bottom mx-3 mb-3">
-        @if(Session()->has('success'))
-        <div id="alertMessage" class="alert alert-primary alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
-
-            @if(session()->has('basketItem'))
-            <strong>{{ session('basketItem.name') }}</strong>
-            {{ session('success') }}
-            @endif
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-
-        <!--<script>
-            // Automatically close the alert after 5 seconds
-            setTimeout(function() {
-                document.getElementById('itemAlert').style.display = 'none';
-            }, 5000);
-        </script> -->
-        @endif
-    </div>
     @include('includes.footer')
 </body>

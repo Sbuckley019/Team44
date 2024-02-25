@@ -37,7 +37,7 @@ class FeedbackController extends Controller
         } catch (QueryException $exception) {
             // Log the error or handle it in a way that makes sense for your application
             return redirect()->route('home')
-                ->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
+                ->with('error', 'An error occurred while submitting your rating' . $exception->getMessage());
         }
     }
 
