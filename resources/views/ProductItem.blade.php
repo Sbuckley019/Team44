@@ -4,19 +4,30 @@
 
 </style>
 <body>
-    <div class="card mb-3 d-flex">
-        <div class="row no-gutters align-items-center col-md-6">
-            <div class="">
+    <div class="card mb-3 d-flex flex-row">
+        <div class="align-items-center col-md-6">
                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-fluid">
-            </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 shop-product-info">
             <section>
-                <div>20% OFF</div>
-                <h1>FRACTION OVERSIZED T-SHIRT</h1>
-                <span>OVERSIZED</span>
-                <div>£20</div>
+                <div class="shop-product-sale">20% OFF</div>
+                <h1  class="shop-product-name">{{$product->product_name}}</h1>
+                <span class="shop-product-description">{{$product->description}}</span>
+                <div class="shop-product-price">£{{$product->price}}</div>
             </section>
+            <section class="shop-product-buttons">
+                <button class="shop-product-button">
+                    <i class="fas fa-star"></i>
+                    <span class="shop-span">{{$product->rating}}</span>
+                </button>
+                <button class="shop-product-button">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <button class="shop-product-button">
+                    <i class="far fa-copy"></i>
+                </button>
+            </section>
+            <button class="shop-cart-button">add to bag</button>
         </div>
     </div>
 <hr>

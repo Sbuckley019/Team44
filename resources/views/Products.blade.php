@@ -83,7 +83,9 @@
                             @if(auth()->check())
                             <form action="{{route('favourite.add', ['productId' => $product->id]) }}" method="POST">
                                 @csrf
-                                <button class="fa-heart {{ in_array($product->id, $favouriteIds) ? 'filled' : '' }}"></button>
+                                <button class="fav-button">
+                                    <i class="fa-heart {{ in_array($product->id, $favouriteIds) ? 'fas' : 'far' }}"></i>
+                                </button>
                             </form>
                             @endif
                             <div class="action-buttons">

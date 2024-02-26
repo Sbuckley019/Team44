@@ -18,7 +18,7 @@ class FavouritesController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
 
-            $favourites = $user->favourites()->with('product')->get();
+            $favourites = $user->favourites()->with('product')->get()->pluck('product');
 
             return view('Favourites', compact('favourites'));
         }
