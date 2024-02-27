@@ -87,7 +87,7 @@ Route::name('productcategories')->group(function () {
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
     Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');
-    Route::get('/products', [ProductController::class, 'index'])->name('.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');   
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
 });
 
@@ -156,3 +156,19 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function 
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });
+
+
+
+
+
+
+Route::middleware(['admin'])->get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+Route::middleware(['admin'])->put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+Route::middleware(['admin'])->delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::middleware(['admin'])->get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex');
+
+
+

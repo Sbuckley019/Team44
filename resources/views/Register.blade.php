@@ -12,38 +12,30 @@
                     <button type="button" class="register-toggle-btn" onclick="signup()">Sign up</button>
                 </div>
 
-                <div class="fixed-bottom mx-3 mb-3">
-                    @if(Session()->has('success'))
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
-                        {!! session()->get('success') !!}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
-                </div>
-
-                <div class="fixed-bottom mx-3 mb-3">
-                    @if(Session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
-                        {!! session()->get('error') !!}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
-                </div>
-
                 <form action="{{ route('register.login') }}" method="post" id="login" class="register-input-group">
                     @csrf
-                    <input type="text" class="register-input-field" placeholder="Username" name="username" required>
-                    <input type="password" class="register-input-field" placeholder="Password" name="password" required>
-                    <input type="checkbox" class="register-check-box"><span>Remember me</span>
+                    <div class="register-elements">
+                        <label class="register-input-label" for="username">Username</label>
+                        <input type="text" class="register-input-field" placeholder="Enter username" name="username" required>
+                        <label class="register-input-label" for="password">Password</label>
+                        <input type="password" class="register-input-field" placeholder="Enter password" name="password" required>
+                        <a class="register-forgot" href="{{route('home')}}">Forgot Password?</a>
+                    </div>
                     <button type="submit" class="register-submit-btn">Log in</button>
                 </form>
 
                 <form action="{{ route('register.store') }}" method="post" id="signup" class="register-input-group">
                     @csrf
-                    <input type="text" class="register-input-field" placeholder="Username" name="username" required>
-                    <input type="email" class="register-input-field" placeholder="Email" name="email" required>
-                    <input type="password" class="register-input-field" placeholder="Password" name="password" required>
-                    <input type="password" class="register-input-field" placeholder="Confirm Password" name="password_confirmation" required>
+                    <div class="register-elements">
+                        <label class="register-input-label" for="username">Username</label>
+                        <input type="text" class="register-input-field" placeholder="Enter username" name="username" required>
+                        <label class="register-input-label" for="email">Email</label>
+                        <input type="email" class="register-input-field" placeholder="Enter email" name="email" required>
+                        <label class="register-input-label" for="password">Password</label>
+                        <input type="password" class="register-input-field" placeholder="Enter password" name="password" required>
+                        <label class="register-input-label" for="password">Password</label>
+                        <input type="password" class="register-input-field" placeholder="Confirm password" name="password_confirmation" required>
+                    </div>
                     <button type="submit" class="register-submit-btn">Sign up</button>
                 </form>
             </div>
@@ -60,7 +52,7 @@
     function signup() {
         x.style.left = "-400px";
         y.style.left = "50px";
-        z.style.left = "110px";
+        z.style.left = "130px";
     }
 
     function login() {

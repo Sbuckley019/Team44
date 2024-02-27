@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\BasketItemChanged;
+use App\Listeners\RefreshBasketListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\ReviewCreated;
+use App\Listeners\ReloadBasketPage;
 use App\Listeners\UpdateProductRatingListener;
 
 class EventServiceProvider extends ServiceProvider
@@ -23,6 +26,10 @@ class EventServiceProvider extends ServiceProvider
 
         ReviewCreated::class => [
             UpdateProductRatingListener::class,
+        ],
+
+        BasketItemChanged::class => [
+            RefreshBasketListener::class,
         ],
 
     ];
