@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favourites::class);
     }
+
+    public function basketItems()
+    {
+        return $this->hasMany(BasketItem::class);
+    }
 }

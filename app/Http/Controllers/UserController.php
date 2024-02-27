@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Http\Controllers\BasketController;
 
+use App\Models\Order;
+
 class UserController extends Controller
 {
     //Gets all the Users, Stores them within the $Users variable
