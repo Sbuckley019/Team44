@@ -15,15 +15,10 @@ class FavouritesController extends Controller
     }
     public function index()
     {
-        if (Auth::check()) {
-            $user = Auth::user();
+        $favourites = session()->get('favourites');
 
-            $favourites = $user->favourites()->with('product')->get()->pluck('product');
-
-            return view('Favourites', compact('favourites'));
-        }
+        return view('Favourites', compact('favourites'));
     }
-
 
     public function favouriteOrNot($productId)
     {
@@ -42,5 +37,16 @@ class FavouritesController extends Controller
         }
 
         return redirect()->route('favourite.index')->with("info", $message);
+    }
+
+    public function sessionFavourites()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            $favourites = $user->favourites()->with('product')->get()->pluck('product');
+
+            session()->put('favourites', $favourites);
+        }
     }
 }

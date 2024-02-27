@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BasketItemChanged;
 use Illuminate\Http\Request;
 use App\Models\Basket;
 use App\Models\BasketItem;
@@ -14,14 +15,8 @@ class BasketController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
-            // retrieves authenticated user instance
-            $user = auth()->user();
-            // retrieves basket for the current user
-            $basket = Basket::where('user_id', $user->id)->with('items.product')->first();
-        } else {
-            $basket = Basket::where('guest_id', Cookie::get('guest_id'))->with('items.product')->first();
-        }
+        $basket = session()->get('basket');
+
         return view('Basket', compact('basket'));
     }
 
@@ -53,6 +48,8 @@ class BasketController extends Controller
             'name' => $product->product_name
         ]);
 
+        event(new BasketItemChanged());
+
         return redirect()->back()->with('info', ' added to basket');
     }
 
@@ -69,6 +66,9 @@ class BasketController extends Controller
         if ($basket) {
             $basket->items()->where('product_id', $productId)->delete();
         }
+
+        event(new BasketItemChanged());
+
         return redirect()->route('basket.index')->with('info', 'removed from basket');
     }
 
@@ -95,6 +95,9 @@ class BasketController extends Controller
                 $this->removeProduct($productId);
             }
         }
+
+        event(new BasketItemChanged());
+
         return redirect()->route('basket.index');
     }
 
@@ -109,13 +112,29 @@ class BasketController extends Controller
 
         // checks if there is an authenticated user
         if ($user) {
-            $guest_id = Cookie::get('guest_id');
+            if (!Basket::where('user_id', $user->id)) {
+                $guest_id = Cookie::get('guest_id');
 
-            $basket = Basket::where(['guest_id' => $guest_id])->first();
+                $basket = Basket::where(['guest_id' => $guest_id])->first();
 
-            if ($basket) {
-                $basket->update(['user_id' => $user->id, 'guest_id' => null]);
+                if ($basket) {
+                    $basket->update(['user_id' => $user->id, 'guest_id' => null]);
+                }
             }
         }
+    }
+
+    public function sessionBasket()
+    {
+        if (Auth::check()) {
+            // retrieves authenticated user instance
+            $user = auth()->user();
+            // retrieves basket for the current user
+            $basket = Basket::where('user_id', $user->id)->with('items.product')->first();
+        } else {
+            $basket = Basket::where('guest_id', Cookie::get('guest_id'))->with('items.product')->first();
+        }
+
+        session()->put('basket', $basket);
     }
 }
