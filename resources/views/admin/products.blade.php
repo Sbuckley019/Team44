@@ -29,13 +29,25 @@
                                             <p class="card-text">{{$product->stock_quantity}}</p>
                                         </div>
                                     </div>
+                                    
+
                                     <div class="col-md-3">
                                         <div class="card-body text-center">
                                             <button class="btn btn-primary btn-sm mb-1">Increase Stock</button>
-                                            <button class="btn btn-secondary btn-sm mb-1">Edit Product</button>
-                                            <button class="btn btn-danger btn-sm">Remove Product</button>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-secondary btn-sm mb-1">Edit Product</a>
+                                           
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Remove Product</button>
+                                            </form>
                                         </div>
                                     </div>
+
+                                    
+
+
+
                                 </div>
                             </div>
                         @endforeach
