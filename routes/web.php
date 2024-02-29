@@ -19,6 +19,7 @@ use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductItemController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,9 @@ Route::name('order')->group(function () {
     Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::name('basketItem')->group(function () {
@@ -129,7 +133,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
+Route::post('/create-account', [UserController::class, 'createAccount'])->name('create.account');
 
 Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex')->middleware('admin');
 
