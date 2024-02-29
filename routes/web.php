@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
@@ -86,7 +87,7 @@ Route::name('productcategories')->group(function () {
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
     Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');
-    Route::get('/products', [ProductController::class, 'index'])->name('.index');   
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
 });
 
@@ -108,6 +109,10 @@ Route::name('basket')->group(function () {
     Route::post('/basket/add/{productId}', [BasketController::class, 'addProduct'])->name('.add');
     Route::post('/basket/remove/{productId}', [BasketController::class, 'removeProduct'])->name('.remove');
     Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
+});
+
+Route::name('review')->group(function () {
+    Route::post('/review/{reviewId}', [ReviewController::class, 'helpfulReview'])->name('.helpful');
 });
 
 Route::name('order')->group(function () {
@@ -165,6 +170,3 @@ Route::middleware(['admin'])->put('/products/{product}', [ProductController::cla
 Route::middleware(['admin'])->delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Route::middleware(['admin'])->get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex');
-
-
-
