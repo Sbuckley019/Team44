@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
+
     <h2>Edit Product</h2>
     <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -42,23 +43,10 @@
             <label for="category_id" class="form-label">Category</label>
             <select class="form-control" id="category_id" name="category_id" required>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
                 @endforeach
             </select>
         </div>
-
-        {{-- Rating --}}
-        <div class="mb-3">
-            <label for="rating" class="form-label">Rating</label>
-            <input type="number" step="0.1" class="form-control" id="rating" name="rating" value="{{ $product->rating }}" required>
-        </div>
-
-        {{-- Favourite --}}
-        <div class="mb-3">
-            <label for="favourite" class="form-label">Favourite</label>
-            <input type="checkbox" id="favourite" name="favourite" value="1" {{ $product->favourite ? 'checked' : '' }}>
-        </div>
-
 
         <button type="submit" class="btn btn-primary">Update Product</button>
     </form>

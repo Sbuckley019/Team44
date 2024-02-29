@@ -115,7 +115,7 @@ class ProductController extends Controller
 
             return redirect()->route('products.create')->with('success', 'Product added to database');
         } catch (QueryException $exception) {
-            
+
 
             return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
         }
@@ -150,16 +150,16 @@ class ProductController extends Controller
 
 
 
-    
+
 
     public function edit(Product $product)
     {
-        $categories = ProductCategory::all(); 
+        $categories = $this->fetchCategories();
         return view('admin.editProduct', compact('product', 'categories'));
     }
 
 
-    public function update(Request $request, Product $product) 
+    public function update(Request $request, Product $product)
     {
         $request->validate([
             'product_name' => 'required',
@@ -167,27 +167,27 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:product_categories,id',
             'stock_quantity' => 'required|numeric',
-            'image_url' => 'sometimes|url', 
+            'image_url' => 'sometimes|url',
         ]);
-    
+
         try {
-            
+
             $product->update($request->only([
                 'product_name',
                 'description',
                 'price',
                 'category_id',
                 'stock_quantity',
-                'image_url', 
+                'image_url',
             ]));
-    
-           
+
+
             return redirect()->route('products.adminIndex')->with('success', 'Product updated successfully');
-        } catch (\Throwable $exception) { 
-            
+        } catch (\Throwable $exception) {
+
             \Log::error("Error updating product: {$exception->getMessage()}");
-    
-            
+
+
             return redirect()->route('products.adminIndex')->with('error', 'An error occurred while updating the product.');
         }
     }
@@ -197,29 +197,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-    
-            
-        $products = Product::all(); 
 
-        
-        return view('admin/products', ['products' => $products]);
+        return redirect('products.adminIndex')->with('sucess', 'Product successfully removed from database');
     }
-
-
-
-
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-    
 }
