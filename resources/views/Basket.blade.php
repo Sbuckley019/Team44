@@ -81,10 +81,7 @@
                     </tr>
                 </table>
             </div>
-            <form action="{{route('order.checkout')}}" method="POST">
-                @csrf
-                <button type="submit" class="checkout-button">Checkout</button>
-            </form>
+            <a href="{{ route('checkout.index') }}" class="btn btn-primary">Proceed to Checkout</a>
         </td>
     </tr>
     </table>

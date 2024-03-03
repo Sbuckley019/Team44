@@ -24,8 +24,14 @@ class Review extends Model
         'user_id',
         'product_id',
         'rating',
+        'review_heading',
         'review_text'
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('j F Y');
+    }
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

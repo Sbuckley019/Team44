@@ -586,12 +586,7 @@ nav a {
     width: 80%;
     margin: 0 auto; /* Center the container on the page */
 }
-.container > div {
-    width: 100%;
-    background-color: #f4f4f4; /* Add background color if needed */
-    padding: 15px; /* Add padding if needed */
-    box-sizing: border-box; /* Include padding and border in the box model */
-}
+
 /* register page */
 .back {
     height: 100%;
@@ -1079,4 +1074,123 @@ th:last-child {
 
 .shop-cart-button:hover {
     background-color: #1b1b1b;
+}
+
+.review-box {
+    padding: 3rem;
+}
+.review-user {
+}
+.review-rating {
+    display: flex;
+    margin: 0.4rem 0;
+    gap: 0.8rem;
+}
+.review-heading {
+    font-weight: bold;
+    font-family: "Montserrat";
+    font-size: 0.9rem;
+}
+.review-verified {
+    color: black;
+    font-weight: bold;
+    font-family: Montserrat;
+    font-size: 0.8rem;
+}
+.review-text {
+}
+.review-time {
+    color: #565959;
+    font-size: 0.8rem;
+}
+
+.review-helpfulness {
+    margin: 0.7rem 0;
+    font-size: 0.8rem;
+    color: #565959;
+}
+
+.review-helpful-button {
+    margin-top: 0.7rem;
+    background-color: #fafbfc;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+        rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    color: #24292e;
+    display: inline-block;
+    font-family: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 6px 16px;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.review-button:hover {
+    background-color: #f3f4f6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+}
+
+.review-icon {
+    font-size: 0.85rem;
+}
+.review-response {
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: #067d62;
+}
+/* Carousel Not currently in use */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease;
+    overflow: overlay;
+}
+
+.carousel-slide:hover::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+.carousel-slide::-webkit-scrollbar {
+    height: 8px;
+    width: 10px;
+}
+
+.carousel-slide::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.carousel-object {
+    position: relative;
+    display: none;
+}
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
 }

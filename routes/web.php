@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductItemController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +88,7 @@ Route::name('productcategories')->group(function () {
 Route::name('products')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
     Route::get('/products/refresh', [ProductController::class, 'refresh'])->name('.refresh');
-    Route::get('/products', [ProductController::class, 'index'])->name('.index');   
+    Route::get('/products', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
 });
 
@@ -110,10 +112,17 @@ Route::name('basket')->group(function () {
     Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
 });
 
+Route::name('review')->group(function () {
+    Route::post('/review/{reviewId}', [ReviewController::class, 'helpfulReview'])->name('.helpful');
+});
+
 Route::name('order')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('.index')->middleware('admin');
     Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -124,7 +133,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
+Route::post('/create-account', [UserController::class, 'createAccount'])->name('create.account');
 
 Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex')->middleware('admin');
 
@@ -165,6 +174,3 @@ Route::middleware(['admin'])->put('/products/{product}', [ProductController::cla
 Route::middleware(['admin'])->delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Route::middleware(['admin'])->get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex');
-
-
-

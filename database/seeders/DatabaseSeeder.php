@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(10)->create();
 
-        Review::factory()->count(100)->create();
+        Review::factory()->count(200)->create();
 
         Feedback::factory()->count(10)->create();
 

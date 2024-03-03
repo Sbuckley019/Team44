@@ -36,31 +36,96 @@ function closeProductCard() {
     $("#productCardModal").hide();
 }
 
-var products = JSON.parse(
-    document.getElementById("sort").getAttribute("data-items")
-);
+$(document).ready(function () {
+    $(".reviewid").click(function () {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        var reviewId = $(this).attr("value");
 
-function sortProducts() {
-    var selectedOption = document.getElementById("sort").value;
+        $.ajax({
+            url: "/review/helpful",
+            type: "POST",
+            data: {
+                _token: csrfToken,
+                reviewId: reviewId,
+            },
+            success: function (response) {
+                // Handle the response from the controller
+                console.log(response);
+            },
+            error: function (xhr) {
+                // Handle any errors
+                console.error(xhr.responseText);
+            },
+        });
 
-    switch (selectedOption) {
-        case "priceHighToLow":
-            products.sort((a, b) => b.price - a.price);
-            break;
-        case "priceLowToHigh":
-            products.sort((a, b) => a.price - b.price);
-            break;
-        case "rating":
-            products.sort((a, b) => b.rating - a.rating);
-            break;
-        case "newest":
-            products.sort(
-                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        var responseDiv = $("<div>")
+            .addClass("review-response")
+            .html(
+                $("<i>").addClass("fas fa-check-circle").prop("outerHTML") +
+                    "<div> Thank you for your feedback </div>"
             );
-            break;
-        default:
-            products.sort((a, b) => a.id - b.id);
-    }
 
-    console.log(products);
-}
+        $(this).replaceWith(responseDiv);
+    });
+});
+
+$(document).ready(function () {
+    const $carouselSlide = $(".carousel-slide");
+    const $carouselItems = $(".carousel-object");
+    const $prevButton = $(".prev-button");
+    const $nextButton = $(".next-button");
+
+    let counter = 0;
+
+    // Get the width of the container
+    const containerWidth = $(".carousel-container").width();
+    // Get the width of a single product card including margin
+    const itemWidth = $carouselItems.outerWidth(true); // Use outerWidth to include margin
+    // Calculate the number of items visible at a time
+    const visibleItems = 3;
+
+    // Show the first set of items
+    $carouselItems.slice(0, visibleItems).show();
+
+    $nextButton.on("click", function () {
+        if (counter >= $carouselItems.length - visibleItems) return;
+        counter++;
+        // Show the next set of items
+        $carouselItems.slice(counter, counter + visibleItems).show();
+        // Adjust the left property to shift the visible items
+        $carouselSlide.animate({ left: -counter * itemWidth }, 420);
+    });
+
+    $prevButton.on("click", function () {
+        if (counter <= 0) return;
+        counter--;
+
+        // Show the previous set of items
+        $carouselItems.slice(counter, counter + visibleItems).show();
+        // Adjust the left property to shift the visible items
+        $carouselSlide.animate({ left: -counter * itemWidth }, 500);
+    });
+});
+
+$(document).ready(function () {
+    // Scroll to review section when shop-rating button is clicked
+    var navbarHeight = 75;
+    $("#shop-rating").click(function () {
+        $("html, body").animate(
+            {
+                scrollTop: $("#review-section").offset().top - navbarHeight,
+            },
+            0
+        );
+    });
+
+    // Copy URL to clipboard when shop-copy button is clicked
+    $("#shop-copy").click(function () {
+        var url = window.location.href;
+        var tempInput = $("<input>");
+        $("body").append(tempInput);
+        tempInput.val(url).select();
+        document.execCommand("copy");
+        tempInput.remove();
+    });
+});
