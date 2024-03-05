@@ -4,6 +4,7 @@
     Favourites
 </div>
 <body>
+<div>
 @if(isset($favourites) && count($favourites)>0)
 <div class="products-container">
     @foreach ($favourites as $product)
@@ -48,4 +49,5 @@
 </div>
 @endif
 @include('includes.footer')
+</div>
 </body>
