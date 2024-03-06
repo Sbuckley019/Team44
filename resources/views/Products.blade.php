@@ -76,6 +76,7 @@
                 <a href="{{route('products.show', $product)}}" class="product-card-link">
                     <div class="product-card">
                         <img class="product-image" src="{{$product->image_url}}" alt="Product Image">
+                        
                         <div class="product-details">
                             <div class="product-name">{{$product->product_name}}</div>
                             <div class="product-description">{{$product->description}}</div>

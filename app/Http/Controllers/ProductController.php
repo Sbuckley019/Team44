@@ -121,12 +121,14 @@ class ProductController extends Controller
         }
     }
 
-    public function adminIndex()
+    public function adminIndex($filter = null)
     {
         $products = Product::all();
 
         return view('admin/products', compact('products'));
     }
+
+
     private function fetchFavouriteIds()
     {
         if (Auth::check()) {
