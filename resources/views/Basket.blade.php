@@ -81,7 +81,13 @@
                     </tr>
                 </table>
             </div>
-            <a href="{{ route('checkout.index') }}" class="btn btn-primary">Proceed to Checkout</a>
+            @if(!auth()->check())
+            <a href="{{ route('register', ['redirect' => route('checkout.index')]) }}" class="btn btn-primary">Checkout as User</a>
+            <a href="{{ route('checkout.index') }}" class="btn btn-primary">Checkout as Guest</a>
+            @endif
+            @if(auth()->check())
+            <a href="{{ route('checkout.index') }}" class="btn btn-primary">Checkout</a>
+            @endif
         </td>
     </tr>
     </table>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Http\Controllers\BasketController;
 
-use App\Models\Order;
+use App\Events\BasketChanged;
 
 class UserController extends Controller
 {
@@ -51,8 +51,16 @@ class UserController extends Controller
             'email' => $request->email
         ]);
 
-        return redirect()->route('home')
-            ->with('success', 'User created successfully');
+        $redirect = $request->input('redirect', route('home'));
+        return redirect()->intended($redirect)->with('success', 'Registration successful!');
+
+        if (session()->has('redirect_url')) {
+            $redirectUrl = session('redirect_url');
+            session()->forget('redirect_url');
+            return redirect($redirectUrl);
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     public function show(User $user)
@@ -144,7 +152,8 @@ class UserController extends Controller
             $favouritecontroller->sessionFavourites();
 
 
-            return redirect()->route('home')->with('success', 'Login successful!');
+            $redirect = $request->input('redirect', route('home'));
+            return redirect()->intended($redirect)->with('success', 'Login successful!');
         } elseif (Auth::guard('admin')->attempt($credentials)) {
             $admin = new AdminController();
             $response = $admin->login($request->username);
@@ -153,11 +162,21 @@ class UserController extends Controller
         // If authentication fails for either regular user or admin, redirect back with errors
 
         return redirect()->back()->with('error', 'Invalid credentials');
+
+        if (session()->has('redirect_url')) {
+            $redirectUrl = session('redirect_url');
+            session()->forget('redirect_url');
+            return redirect($redirectUrl);
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     public function logout()
     {
         Auth::logout();
+
+        event(new BasketChanged());
 
         return redirect()->route('home')->with('success', 'Successfully logged out');
     }

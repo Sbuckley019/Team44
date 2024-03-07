@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BasketItemChanged;
+use App\Events\BasketChanged;
 use Illuminate\Http\Request;
 use App\Models\Basket;
 use App\Models\BasketItem;
@@ -48,7 +48,7 @@ class BasketController extends Controller
             'name' => $product->product_name
         ]);
 
-        event(new BasketItemChanged());
+        event(new BasketChanged());
 
         return redirect()->back()->with('info', ' added to basket');
     }
@@ -67,7 +67,7 @@ class BasketController extends Controller
             $basket->items()->where('product_id', $productId)->delete();
         }
 
-        event(new BasketItemChanged());
+        event(new BasketChanged());
 
         return redirect()->route('basket.index')->with('info', 'removed from basket');
     }
@@ -96,7 +96,7 @@ class BasketController extends Controller
             }
         }
 
-        event(new BasketItemChanged());
+        event(new BasketChanged());
 
         return redirect()->route('basket.index');
     }
@@ -112,6 +112,7 @@ class BasketController extends Controller
 
         // checks if there is an authenticated user
         if ($user) {
+            event(new BasketChanged());
             if (!Basket::where('user_id', $user->id)) {
                 $guest_id = Cookie::get('guest_id');
 

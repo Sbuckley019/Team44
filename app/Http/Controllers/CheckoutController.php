@@ -13,17 +13,23 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
-            // retrieves authenticated user instance
-            $user = auth()->user();
-            // retrieves basket for the current user
+        $user = auth()->user();
+        $basket = null;
+
+        if ($user) {
+            // User is authenticated
             $basket = Basket::where('user_id', $user->id)->with('items.product')->first();
         } else {
-            $basket = Basket::where('guest_id', Cookie::get('guest_id'))->with('items.product')->first();
+            // User is a guest
+            $guestId = Cookie::get('guest_id');
+            if ($guestId) {
+                $basket = Basket::where('guest_id', $guestId)->with('items.product')->first();
+            }
         }
 
         return view('checkout', compact('basket'));
     }
+
 
     public function processCheckout(Request $request)
     {
@@ -39,6 +45,18 @@ class CheckoutController extends Controller
 
         ]);
 
+        $user = auth()->user();
+
+        // Process the order for both authenticated and guest users
+        $order = new Order();
+        $order->user_id = $user ? $user->id : null;
+        $order->first_name = $request->input('first_name');
+        $order->last_name = $request->input('last_name');
+        $order->phone_number = $request->input('phone_number');
+        $order->email = $request->input('email');
+        $order->address = $request->input('address');
+        $order->save();
+
         if ($request->has('save_info')) {
             // Save user information to the database
             $user = auth()->user(); // Assuming the user is authenticated
@@ -51,5 +69,8 @@ class CheckoutController extends Controller
             /** @var \App\Models\User $user */
             $user->save();
         }
+
+        // Redirect with success message
+        return redirect()->route('home')->with('success', 'Order placed successfully!');
     }
 }
