@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Http\Controllers\BasketController;
 
+use App\Models\Order;
+
 class UserController extends Controller
 {
     //Gets all the Users, Stores them within the $Users variable
@@ -133,8 +135,15 @@ class UserController extends Controller
         // Authenticate user
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
+            //Transforms the guest basket into a user basket if not in database
             $basketcontroller = new BasketController();
             $basketcontroller->guestToUser();
+
+            //Gets all favourites of user and stores them in session
+            $favouritecontroller = new FavouritesController();
+            $favouritecontroller->sessionFavourites();
+
+
             return redirect()->route('home')->with('success', 'Login successful!');
         } elseif (Auth::guard('admin')->attempt($credentials)) {
             $admin = new AdminController();

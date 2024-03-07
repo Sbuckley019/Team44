@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductItemController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,10 +112,17 @@ Route::name('basket')->group(function () {
     Route::post('/basket/edit/{productId}', [BasketController::class, 'editQuantity'])->name('.editQuantity');
 });
 
+Route::name('review')->group(function () {
+    Route::post('/review/{reviewId}', [ReviewController::class, 'helpfulReview'])->name('.helpful');
+});
+
 Route::name('order')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('.index')->middleware('admin');
     Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -124,7 +133,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
+Route::post('/create-account', [UserController::class, 'createAccount'])->name('create.account');
 
 Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex')->middleware('admin');
 
@@ -152,3 +161,16 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function 
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });
+
+
+
+
+
+
+Route::middleware(['admin'])->get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+Route::middleware(['admin'])->put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+Route::middleware(['admin'])->delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::middleware(['admin'])->get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.adminIndex');

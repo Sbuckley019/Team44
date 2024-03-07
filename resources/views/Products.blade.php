@@ -84,14 +84,16 @@
                             @if(auth()->check())
                             <form action="{{route('favourite.add', ['productId' => $product->id]) }}" method="POST">
                                 @csrf
-                                <button class="fa-heart {{ in_array($product->id, $favouriteIds) ? 'filled' : '' }}"></button>
+                                <button class="fav-button">
+                                    <i class="fa-heart {{ in_array($product->id, $favouriteIds) ? 'fas' : 'far' }}"></i>
+                                </button>
                             </form>
                             @endif
                             <div class="action-buttons">
                                 <div class="stars" style="--rating: {{($product->rating)/5 * 100}}%"></div>
-                                <form action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
+                                <form id="addToBasketForm" action="{{ route('basket.add', ['productId' => $product->id]) }}" method="post">
                                     @csrf
-                                    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                                    <button type="submit" class="add-to-cart-btn" onclick="addToBasket()">Add to Cart</button>
                                 </form>
                             </div>
                         </div>
