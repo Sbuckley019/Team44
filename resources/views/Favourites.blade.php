@@ -1,8 +1,10 @@
 @include('includes.navigation')
+
 <div class="title-container">
     Favourites
 </div>
-
+<body>
+<div>
 @if(isset($favourites) && count($favourites)>0)
 <div class="products-container">
     @foreach ($favourites as $product)
@@ -34,7 +36,18 @@
     @endforeach
 </div>
 @else
-<div>You do not have any favourites at the moment</div>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <div>
+        <img src="{{ asset('images/Favourites.png') }}" alt="Empty basket" style="width: 450px; auto: 0">
+    </div>
+    <div>
+        <div>
+            <h2>You have no favourites...</h2>
+            <a href="{{ route('products.refresh')}}">Back to products</a>
+        </div>
+    </div>
+</div>
 @endif
 @include('includes.footer')
-
+</div>
+</body>

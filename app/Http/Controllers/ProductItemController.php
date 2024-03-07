@@ -9,6 +9,13 @@ class ProductItemController extends Controller
 {
     public function show(Product $product)
     {
-        return view('.ProductItem', compact('product'));
+        $reviewController = new ReviewController();
+        $reviews = $reviewController->index($product->id);
+
+        $purchaseController = new PurchaseController();
+        $mostPurchased = $purchaseController->mostPurchasedInCategory($product);
+        $alsoPurchased = $purchaseController->alsoPurchasedByUsers($product);
+
+        return view('.ProductItem', compact('product', 'reviews', 'mostPurchased', 'alsoPurchased'));
     }
 }

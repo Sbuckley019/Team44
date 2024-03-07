@@ -92,11 +92,19 @@
     </tr>
     </table>
     </div>
-
     @else
-    <h2> Your basket is empty.</h2>
-    <p> There are no products in your basket.</p>
-    <a href="{{ route('products.refresh')}}"> Shop All Products </a>
+    <div style="display: flex; align-items: center; justify-content: center;">
+    <div>
+        <img src="{{ asset('images/Empty_basket.png') }}" alt="Empty basket" style="width: 450px; auto: 0">
+    </div>
+    <div>
+        <div>
+            <h2>Your basket is empty.</h2>
+            <p>There are no products in your basket.</p>
+            <a href="{{ route('products.refresh')}}">Shop All Products</a>
+        </div>
+    </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', updateTotal);
     </script>
