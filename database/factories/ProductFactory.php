@@ -22,6 +22,8 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+
+
         $categoryIds = ProductCategory::pluck('id')->toArray();
         return [
             'product_name' => $this->faker->word,

@@ -24,9 +24,4 @@ class BasketItem extends Model
     {
         return $this->belongsTo(Product::class, 'product_id')->select(['id', 'product_name', 'price', 'image_url']);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

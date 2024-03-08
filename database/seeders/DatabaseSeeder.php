@@ -13,6 +13,8 @@ use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\ProductSeeder;
+use Database\Seeders\ProductTableSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +27,11 @@ class DatabaseSeeder extends Seeder
         // Seed Product Categories
         ProductCategory::factory()->count(5)->create();
         // Seed products
-        Product::factory()->count(30)->create();
+        //Product::factory()->count(30)->create();
+
+        $this->call(ProductTableSeeder::class);
+        $this->call(ProductTableSeeder::class);
+
 
         User::factory()->count(10)->create();
 
