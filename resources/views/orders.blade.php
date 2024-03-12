@@ -1,7 +1,7 @@
 @include('includes.navigation')
+
 <body>
-        <h1>Orders</h1>
-        <div class="container">
+    <div class="container">
         <div>
             @if(@isset($orders))
             @foreach($orders as $order)
@@ -13,7 +13,21 @@
                 <a href='#'>Inspect Order</a>
             </div>
             @endforeach
+            @else
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div>
+                    <img src="{{ asset('images/noorder.png') }}" alt="noorder" style="width: 400px; auto: 0">
+                </div>
+                <div>
+                    <div>
+                        <h2>No order placed yet</h2>
+                        <p>You don't have any orders placed in your history.</p>
+                        <a class="btn btn-primary" href="{{ route('products.refresh')}}">Shop All Products</a>
+                    </div>
+                </div>
+            </div>
             @endif
+        </div>
     </div>
-@include('includes.footer')
+    @include('includes.footer')
 </body>

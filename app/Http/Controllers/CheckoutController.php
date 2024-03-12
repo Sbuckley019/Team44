@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Basket;
+use App\Models\BasketItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
@@ -48,14 +49,7 @@ class CheckoutController extends Controller
         $user = auth()->user();
 
         // Process the order for both authenticated and guest users
-        $order = new Order();
-        $order->user_id = $user ? $user->id : null;
-        $order->first_name = $request->input('first_name');
-        $order->last_name = $request->input('last_name');
-        $order->phone_number = $request->input('phone_number');
-        $order->email = $request->input('email');
-        $order->address = $request->input('address');
-        $order->save();
+        $order = $this->createOrder($request);
 
         if ($request->has('save_info')) {
             // Save user information to the database
@@ -71,6 +65,71 @@ class CheckoutController extends Controller
         }
 
         // Redirect with success message
-        return redirect()->route('home')->with('success', 'Order placed successfully!');
+        return redirect()->route('order.show', ['order' => $order->id]);
+    }
+
+    private function clearBasket()
+    {
+        $user = auth()->user();
+
+        // Delete all basket items for the user
+        BasketItem::where('user_id', $user->id)->delete();
+    }
+
+    private function createOrder(Request $request)
+    {
+        // Assuming you have an authenticated user
+        $user = auth()->user();
+
+        // Create a new order
+        $order = new Order();
+        $order->user_id = $user->id;
+        $order->total_price = $this->calculateTotalPrice(); // Implement your own logic
+        // Add other fields as needed
+        $order->save();
+
+        // Retrieve basket items for the user
+        $basketItems = BasketItem::where('user_id', $user->id)->get();
+
+        // Save order items
+        foreach ($basketItems as $basketItem) {
+            $order->items()->create([
+                'product_id' => $basketItem->product_id,
+                'quantity' => $basketItem->quantity,
+                'price' => $basketItem->product->price,
+                // Add other fields as needed
+            ]);
+        }
+
+        // Clear the user's basket (assuming you have a method for this)
+        $this->clearBasket();
+
+        return $order;
+    }
+
+    private function calculateTotalPrice()
+    {
+        $user = auth()->user();
+
+        // Retrieve basket items for the user
+        $basketItems = BasketItem::where('user_id', $user->id)->get();
+
+        // Calculate the total price
+        $totalPrice = 0;
+
+        foreach ($basketItems as $basketItem) {
+            $totalPrice += $basketItem->quantity * $basketItem->product->price;
+        }
+
+        return $totalPrice;
+    }
+
+    public function showOrder($orderId)
+    {
+        // Retrieve the order details from the database
+        $order = Order::find($orderId);
+
+        // Pass order details to the view
+        return view('orders.show', ['order' => $order]);
     }
 }

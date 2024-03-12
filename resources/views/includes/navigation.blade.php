@@ -32,7 +32,7 @@
                     <a href="{{ route('products.index',['id'=>3])}}">Shoes</a>
                     <a href="{{ route('products.index',['id'=>4])}}">Accessories</a>
                     <a href="{{ route('products.index',['id'=>5])}}">Supplements</a>
-                    
+
                 </div>
             </div>
             <a href="{{ route('aboutUs') }}">About Us</a>
@@ -51,7 +51,7 @@
             <div class="dropdown">
                 <a class="dropdown-item name"> Hello, {{ auth()->user()->username }} </a>
                 <div class="dropdown-content">
-                    <!--<a href="{{route('orders')}}">My Orders</a>!-->
+                    <a href="{{route('orders.show')}}">My Orders</a>
                     <a href="{{ route('passchange') }}">Change Password</a>
                     <!--<a href="GymAccessories">Update Account Details</a>-->
                     <a href="{{route('favourite.index')}}">Favourites</a>
@@ -68,7 +68,7 @@
 
     <div class="fixed-bottom mx-3 mb-3">
         @if(Session()->has('success'))
-        
+
         <div class="alert alert-success alert-dismissible fade show" role="alert" style="max-width: 400px; margin: 0 auto;">
             {!! session()->get('success') !!}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

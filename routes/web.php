@@ -121,6 +121,8 @@ Route::name('order')->group(function () {
     Route::post('/basket/checkout', [OrderController::class, 'checkout'])->name('.checkout');
 });
 
+Route::get('/orders', [OrderController::class, 'show'])->name('orders.show');
+
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 
