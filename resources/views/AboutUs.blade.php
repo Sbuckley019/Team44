@@ -2,7 +2,7 @@
 <body>
     <section class="about-section">
         <div class="container">
-            <h1>About Gains</h1>
+            <h1>About mo</h1>
             <p>
                 Gains is a leading e-commerce platform dedicated to fitness enthusiasts, offering premium gym equipment, clothing, and accessories. Our mission is to provide a smooth shopping experience supported by an extensive inventory control system for effective order fulfillment.
             </p>
