@@ -812,6 +812,27 @@ th:last-child {
 .checkout-button:hover {
     background-color: #333;
 }
+
+.empty-basket img{
+    width: 450px; 
+    height: auto;
+}
+
+.back-to-shop-btn{
+    background-color: #e8491d;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-to-shop-btn:hover{
+    background-color: #c43117;
+    color: #fff;
+}
+
 /* Summary Section Styles */
 #summary {
     width: 40%;
