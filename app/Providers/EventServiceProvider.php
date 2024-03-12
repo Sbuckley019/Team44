@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\BasketItemChanged;
+use App\Events\BasketChanged;
 use App\Listeners\RefreshBasketListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
             UpdateProductRatingListener::class,
         ],
 
-        BasketItemChanged::class => [
+        BasketChanged::class => [
             RefreshBasketListener::class,
         ],
 

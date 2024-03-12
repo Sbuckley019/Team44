@@ -9,7 +9,6 @@
                     <div class="card-header">Checkout</div>
 
                     <div class="card-body">
-                        @auth
                         <!-- show a summary of the items in the basket -->
                         <h5>Order Summary</h5>
                         <div class="small-container basket-page">
@@ -74,27 +73,47 @@
                             <!-- user details -->
                             <div class="form-group col-md-4">
                                 <label for="first_name" class="form-label">First Name:</label>
+                                @if(auth()->check())
                                 <input class="form-control" type="text" name="first_name" id="first_name" value="{{ auth()->user()->first_name }}" required>
+                                @else
+                                <input class="form-control" type="text" name="first_name" id="first_name" required>
+                                @endif
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="last_name" class="form-label">Last Name:</label>
+                                @if(auth()->check())
                                 <input class="form-control" type="text" name="name" id="name" value="{{ auth()->user()->last_name }}" required>
+                                @else
+                                <input class="form-control" type="text" name="name" id="name" required>
+                                @endif
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="phone_number" class="form-label">Phone Number:</label>
+                                @if(auth()->check())
                                 <input class="form-control" type="text" name="phone_number" id="phone_number" value="{{ auth()->user()->phone_number }}" required>
+                                @else
+                                <input class="form-control" type="text" name="phone_number" id="phone_number" required>
+                                @endif
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="email" class="form-label">Email:</label>
+                                @if(auth()->check())
                                 <input class="form-control" type="email" name="email" id="email" value="{{ auth()->user()->email }}" required>
+                                @else
+                                <input class="form-control" type="email" name="email" id="email" required>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="address" class="form-label">Address:</label>
+                                @if(auth()->check())
                                 <input class="form-control" type="text" name="address" id="address" value="{{ auth()->user()->address }}" required>
+                                @else
+                                <input class="form-control" type="text" name="address" id="address" required>
+                                @endif
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="use_shipping_as_billing" id="use_shipping_as_billing" checked>
@@ -111,10 +130,12 @@
                                 </div>
                             </div>
 
+                            @if (auth()->check())
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="save_info" id="save_info">
                                 <label class="form-check-label" for="save_info">Save my information for future orders.</label>
                             </div>
+                            @endif
 
                             <h4>Shipping method</h4>
 
@@ -156,9 +177,6 @@
 
                             <button type="submit" class="btn btn-primary">Complete Order</button>
                         </form>
-                        @else
-                        <p>You must be logged in to proceed to checkout. <a href="{{ route('register') }}">Login</a></p>
-                        @endauth
                         <script>
                             document.getElementById('use_shipping_as_billing').addEventListener('change', function() {
                                 const billingAddressInput = document.getElementById('billing_address_input');

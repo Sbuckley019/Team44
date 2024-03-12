@@ -151,13 +151,6 @@ class ProductController extends Controller
 
         return view('admin/products', compact('products', 'categories'));
     }
-
-
-
-
-
-
-
     private function fetchFavouriteIds()
     {
         if (Auth::check()) {
