@@ -43,7 +43,7 @@
     <div>
         <div>
             <h2>You have no favourites...</h2>
-            <a href="{{ route('products.refresh')}}">Back to products</a>
+            <a class="back-to-shop-btn" href="{{ route('products.refresh')}}">Back to products</a>
         </div>
     </div>
 </div>
