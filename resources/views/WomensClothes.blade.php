@@ -47,6 +47,22 @@
                 <p>Seamless technology is the future of fitness wear, and our USA PRO 3 inch shorts will give you the confidence and style in the gym, park, yoga studio or just working out at home.</p>
                 <a href="#" class="buy-now">Buy Now</a>
             </div>
+
+            <div class="product-box">
+                <h3>Seamless Shorts</h3>
+                <img src="WC5.jpg">
+                <p class="price">£12.99</p>
+                <p>Seamless technology is the future of fitness wear, and our USA PRO 3 inch shorts will give you the confidence and style in the gym, park, yoga studio or just working out at home.</p>
+                <a href="#" class="buy-now">Buy Now</a>
+            </div>
+
+            <div class="product-box">
+                <h3>Seamless Shorts</h3>
+                <img src="WC5.jpg">
+                <p class="price">£12.99</p>
+                <p>Seamless technology is the future of fitness wear, and our USA PRO 3 inch shorts will give you the confidence and style in the gym, park, yoga studio or just working out at home.</p>
+                <a href="#" class="buy-now">Buy Now</a>
+            </div>
         </section>
     </div>
 
