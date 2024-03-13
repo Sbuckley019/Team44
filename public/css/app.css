@@ -364,7 +364,7 @@ header {
     cursor: pointer;
 }
 .btn-submit:hover {
-    background-color: #007bff;
+    background-color: #24292e;
 }
 .form-control {
     border-radius: 5px;
