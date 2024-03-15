@@ -700,7 +700,7 @@ nav a {
     font-weight: 600;
 }
 .add-to-cart-btn {
-    background-color: #040404;
+    background-color: #000000;
     color: #fff;
     padding: 8px 16px;
     border: none;
@@ -708,7 +708,7 @@ nav a {
     cursor: pointer;
 }
 .add-to-cart-btn:hover {
-    background-color: #2e353b;
+    background-color: #24292e;
 }
 .register-button-box {
     display: flex;
