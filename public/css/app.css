@@ -356,15 +356,15 @@ header {
     margin-bottom: 15px;
 }
 .btn-submit {
-    background-color: #000000;
-    color: rgb(255, 255, 255);
+    background-color: #010101;
+    color: black;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 .btn-submit:hover {
-    background-color: #24292e;
+    background-color: rgb(45, 45, 45);
 }
 .form-control {
     border-radius: 5px;
@@ -700,7 +700,7 @@ nav a {
     font-weight: 600;
 }
 .add-to-cart-btn {
-    background-color: #000000;
+    background-color: #040404;
     color: #fff;
     padding: 8px 16px;
     border: none;
@@ -708,7 +708,7 @@ nav a {
     cursor: pointer;
 }
 .add-to-cart-btn:hover {
-    background-color: #24292e;
+    background-color: #232222;
 }
 .register-button-box {
     display: flex;
