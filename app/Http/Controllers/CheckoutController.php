@@ -50,11 +50,11 @@ class CheckoutController extends Controller
         $order->total_price = $this->calculateTotalPrice($basketItems);
         $order->save();
         // Save order items
-        foreach ($basketItems as $basketItem) {
+        foreach ($basket as $basketItems) {
             $order->items()->create([
-                'product_id' => $basketItem->product_id,
-                'quantity' => $basketItem->quantity,
-                'price' => $basketItem->product->price
+                'product_id' => $basketItems->product_id,
+                'quantity' => $basketItems->quantity,
+                'price' => $basketItems->product->price
             ]);
         }
 
@@ -88,11 +88,13 @@ class CheckoutController extends Controller
 
     private function calculateTotalPrice($basketItems = null)
     {
+        $user = auth()->user();
+        $basket = Basket::where('user_id', $user->id)->select('basket_id');
         // Calculate the total price
         $totalPrice = 100;
 
-        foreach ($basketItems as $basketItem) {
-            $totalPrice += $basketItem->quantity * $basketItem->product->price;
+        foreach ($basket as $basketItems) {
+            $totalPrice += $basketItems->quantity * $basketItems->product->price;
         }
 
         return $totalPrice;

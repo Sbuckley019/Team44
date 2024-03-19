@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,14 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return view('orders', compact('order'));
+        $user = Auth::user();
+
+        if ($user) {
+            $orders = $user->orders()->get();
+            return view('orders', compact('orders'));
+        } else {
+            return redirect()->route('login')->with('error', 'Please log in to view your orders.');
+        }
     }
 
     public function checkout(Request $request = null)
