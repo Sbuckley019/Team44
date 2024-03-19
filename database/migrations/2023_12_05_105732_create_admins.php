@@ -13,11 +13,11 @@ class CreateAdmins extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 50)->unique();
-            $table->string('password', 255);
-            $table->string('first_name', 50);
-            $table->string('last_name', 50);
+            $table->unsignedBigInteger('user_id');
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -37,17 +37,9 @@ return [
 
     'guards' => [
         'web' => [
-
             'driver' => 'session',
             'provider' => 'users',
         ],
-
-        'admin' => [ // Define a new guard for admin
-            'driver' => 'session',
-            'provider' => 'admins', // This will use the 'admins' provider
-        ],
-
-
     ],
 
     /*
@@ -72,16 +64,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
-
-
-
-
-
 
         // 'users' => [
         //     'driver' => 'database',
@@ -115,16 +97,6 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'admin_password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-
-
-
-
     ],
 
     /*

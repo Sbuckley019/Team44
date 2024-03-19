@@ -5,24 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Inertia\Inertia;
 
 class ReviewController extends Controller
 {
+
     public function index($productId)
     {
-        $reviews = Review::where('product_id', $productId)->with('user')->get();
+        $reviews = Review::where('product_id', $productId)->with('user')->paginate(8);
 
-        $perPage = 6;
-        $page = request()->query('page', 1);
-
-        $pagedData = $reviews->slice(($page - 1) * $perPage, $perPage)->all();
-
-        $paginator = new LengthAwarePaginator($pagedData, $reviews->count(), $perPage, $page, [
-            'path' => request()->url(),
-            'query' => request()->query(),
-        ]);
-        return $paginator;
+        return $reviews;
     }
+
     public function addReview()
     {
     }
@@ -39,11 +33,11 @@ class ReviewController extends Controller
     {
         $reviewId = $request->input('reviewId');
 
+
         $review = Review::where('id', $reviewId)->first();
 
         if ($review) {
             $review->increment('helpfulness');
-            return 'review successfully incremented';
         }
     }
 }

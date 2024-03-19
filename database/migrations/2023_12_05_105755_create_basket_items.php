@@ -19,8 +19,7 @@ class CreateBasketItems extends Migration
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('basket_id')->references('id')->on('baskets');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreign('basket_id')->references('id')->on('baskets')->onDelete('cascade');
         });
     }
 
