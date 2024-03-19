@@ -24,20 +24,20 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Seed Product Categories
-        //ProductCategory::factory()->count(4)->create();
+        //ProductCategory::factory()->count(5)->create();
         // Seed products
         //Product::factory()->count(100)->create();
 
-        $this->call(ProductTableSeeder::class);
-        $this->call(ProductTableSeeder::class);
-        $this->call(ProductTableSeeder::class);
+        //$this->call(ProductTableSeeder::class);
+        //$this->call(ProductTableSeeder::class);
+        //$this->call(ProductTableSeeder::class);
 
-        //User::factory()->count(10)->create();
+        User::factory()->count(10)->create();
 
-        //Review::factory()->count(500)->create();
+        Review::factory()->count(500)->create();
 
-        //Feedback::factory()->count(10)->create();
+        Feedback::factory()->count(10)->create();
 
-        Admin::factory()->count(1)->create();
+        //Admin::factory()->count(1)->create();
     }
 }
