@@ -13,16 +13,12 @@ class Admin extends Authenticatable
 
     protected $table = 'admins';
 
-    protected $fillable = [
-        'username',
-        'password',
-        'first_name',
-        'last_name',
-    ];
-
     protected $hidden = [
         'password',
     ];
 
-    public $timestamps = true;
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

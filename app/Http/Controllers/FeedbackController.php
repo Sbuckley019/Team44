@@ -15,29 +15,26 @@ class FeedbackController extends Controller
 
         $feedbacks = Feedback::where('read', $viewChoice)->get();
 
-        return view('admin.feedback', compact('feedbacks', 'viewChoice'));
+        //return view('admin.feedback', compact('feedbacks', 'viewChoice'));
     }
 
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'feedback' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+
         try {
-            $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|email',
-                'feedback' => 'required|string',
-                'rating' => 'required|integer|between:1,5',
-            ]);
-
-
-            Feedback::create($request->all());
-
-            return redirect()->route('home')
-                ->with('success', 'Feedback added successfully.');
+            Feedback::create($validated);
+            return redirect()->route('home')->with('success', 'Feedback submitted successfully!');
         } catch (QueryException $exception) {
-            // Log the error or handle it in a way that makes sense for your application
-            return redirect()->route('home')
-                ->with('error', 'An error occurred while submitting your rating' . $exception->getMessage());
+
+            return redirect()->back()->with('error', 'An error occurred while submitting your feedback. Please try again.');
         }
     }
 

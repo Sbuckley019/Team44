@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(BasketItem::class);
     }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'user_id', 'id');
+    }
 }

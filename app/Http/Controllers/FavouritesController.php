@@ -4,24 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Favourites;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class FavouritesController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
-    public function index()
-    {
-        $favourites = session()->get('favourites');
 
-        return view('Favourites', compact('favourites'));
+        $user = Auth::user();
+        if ($user) {
+            $productService = new ProductService();
+            $favourites = $productService->getProducts($request, $user->id, true);
+
+            return Inertia::render('Products', ['products' => $favourites, 'mode' => 'favourites']);
+        }
+        return Inertia::render('Favourites');
     }
 
-    public function favouriteOrNot($productId)
+    public function favouriteOrNot(Request $request)
     {
+        $productId = $request->input('productId');
         $user = Auth::user();
 
         $favourite = $user->favourites()->where('product_id', $productId)->first();
@@ -36,17 +41,6 @@ class FavouritesController extends Controller
             $message = "added to favourites";
         }
 
-        return redirect()->route('favourite.index')->with("info", $message);
-    }
-
-    public function sessionFavourites()
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-
-            $favourites = $user->favourites()->with('product')->get()->pluck('product');
-
-            session()->put('favourites', $favourites);
-        }
+        Inertia::render('Products');
     }
 }
