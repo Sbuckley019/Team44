@@ -17,6 +17,7 @@
                                     <p class="card-text">Placed on {{ $order->created_at->format('d M Y') }}</p>
                                     <p class="card-text">Total Cost: ${{ number_format($order->total_price, 2) }}</p>
                                 </div>
+                                <div class="">{{$order -> status}}</div>
                             </div>
                         @endforeach
                         </div>
