@@ -4,7 +4,7 @@
 
     <div class="container">
         <header>
-            <h1>Women's Gym Clothes</h1>
+            <h1>Women's Clothes</h1>
         </header>
 
         <section class="product-list">

@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="{{asset('js/app.js')}}" defer></script>
+
     <title>Gains</title>
 </head>
 
@@ -63,6 +64,17 @@
             @endif
             <a href="{{route('basket.index')}}"> <img src="{{ asset('images/Basket.png') }}" alt="basket" height="35"></a>
 
+        </div>
+
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="colorModeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/color-icon.png" width="25" height="25" alt="Color Mode">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="colorModeDropdown">
+                <li><a class="dropdown-item" href="#" data-mode="normal">Normal</a></li>
+                <li><a class="dropdown-item" href="#" data-mode="high-contrast">High Contrast</a></li>
+                <li><a class="dropdown-item" href="#" data-mode="color-blind">Color Blind</a></li>
+            </ul>
         </div>
     </div>
 
