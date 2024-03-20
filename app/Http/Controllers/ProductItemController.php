@@ -3,19 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductItemController extends Controller
 {
-    public function show(Product $product)
+    public function show($product_id = null)
     {
-        $reviewController = new ReviewController();
-        $reviews = $reviewController->index($product->id);
+        if ($product_id) {
+            $productService = new ProductService();
+            $product = $productService->getProduct($product_id);
 
-        $purchaseController = new PurchaseController();
-        $mostPurchased = $purchaseController->mostPurchasedInCategory($product);
-        $alsoPurchased = $purchaseController->alsoPurchasedByUsers($product);
+            $reviewController = new ReviewController();
+            $reviews = $reviewController->index($product_id);
 
-        return view('.ProductItem', compact('product', 'reviews', 'mostPurchased', 'alsoPurchased'));
+
+            if ($product) {
+                $purchaseController = new PurchaseController();
+                $mostPurchased = $purchaseController->mostPurchasedInCategory($product);
+                $alsoPurchased = $purchaseController->alsoPurchasedByUsers($product);
+                return Inertia::render('Product', [
+                    'product' => $product,
+                    'reviews' => $reviews,
+                    'mostPurchased' => $mostPurchased,
+                    'alsoPurchased' => $alsoPurchased,
+                ]);
+            } else {
+                dd("uh oh spegghetios");
+            }
+        }
+        return redirect();
     }
 }

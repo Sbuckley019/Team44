@@ -4,11 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($product) {
+            if (File::exists(public_path($product->image_path))) {
+                File::delete(public_path($product->image_path));
+            }
+        });
+    }
 
     protected $fillable = [
         'product_name',
@@ -44,5 +56,10 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourites::class);
     }
 }

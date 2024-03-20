@@ -4,21 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminController extends Controller
 {
 
     public function dashboard()
     {
-
-        \Log::info('Dashboard method accessed.');
-
-        // Fetch analytics data, recent orders, inventory status, etc.
-        $data = [
-            // Your data here
-        ];
-
-        return view('admin.dashboard', compact('data'));
+        return Inertia::render('Admin/Dashboard');
     }
     public function products()
     {

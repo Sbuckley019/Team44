@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BasketChanged;
+use App\Events\BasketItemChanged;
 use Illuminate\Http\Request;
 use App\Models\Basket;
+use App\Services\BasketService;
 use App\Models\BasketItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class BasketController extends Controller
 {
@@ -21,8 +23,13 @@ class BasketController extends Controller
     }
 
 
-    public function addProduct($productId)
+    public function addOrUpdateProduct(Request $request)
     {
+        $productId = $request->input('productId');
+        $quantity = $request->input('quantity');
+
+        $basketService = new BasketService();
+
         if (Auth::check()) {
             $user = Auth::user();
             $basket = Basket::firstOrCreate(['user_id' => $user->id], ['user_id' => $user->id]);
@@ -48,10 +55,11 @@ class BasketController extends Controller
             'name' => $product->product_name
         ]);
 
-        event(new BasketChanged());
+        event(new BasketItemChanged());
 
         return redirect()->back()->with('info', ' added to basket');
     }
+
 
     public function removeProduct($productId)
     {
@@ -67,7 +75,7 @@ class BasketController extends Controller
             $basket->items()->where('product_id', $productId)->delete();
         }
 
-        event(new BasketChanged());
+        event(new BasketItemChanged());
 
         return redirect()->route('basket.index')->with('info', 'removed from basket');
     }
@@ -96,14 +104,15 @@ class BasketController extends Controller
             }
         }
 
-        event(new BasketChanged());
+        event(new BasketItemChanged());
 
         return redirect()->route('basket.index');
     }
 
     public function emptyBasket($basket_id)
     {
-        BasketItem::where('basket_id', $basket_id)->delete();
+        $basketService = new BasketService();
+        $basketService->emptyBasket($basket_id);
     }
 
     public function guestToUser()
@@ -112,7 +121,6 @@ class BasketController extends Controller
 
         // checks if there is an authenticated user
         if ($user) {
-            event(new BasketChanged());
             if (!Basket::where('user_id', $user->id)) {
                 $guest_id = Cookie::get('guest_id');
 
