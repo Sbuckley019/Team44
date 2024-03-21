@@ -26,7 +26,11 @@ function submit() {
 }
 </script>
 <template>
+<<<<<<< Updated upstream
     <UserLayout :revolving-bar="true">
+=======
+    <UserLayout >
+>>>>>>> Stashed changes
         <div class="p-6 bg-topback mx-auto my-4 text-center hidden md:block">
             <Header class="mb-4">Get in Touch</Header>
             <div class="flex justify-center gap-40">

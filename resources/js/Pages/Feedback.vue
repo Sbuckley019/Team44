@@ -25,7 +25,11 @@ function submit() {
 }
 </script>
 <template>
+<<<<<<< Updated upstream
     <UserLayout :revolving-bar="true">
+=======
+    <UserLayout >
+>>>>>>> Stashed changes
         <form
             v-if="!formSubmitted"
             @submit.prevent="submit"

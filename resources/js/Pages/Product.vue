@@ -77,7 +77,11 @@ const reviewScroll = () => {
 };
 </script>
 <template>
+<<<<<<< Updated upstream
     <UserLayout :revolvingBar="true"
+=======
+    <UserLayout 
+>>>>>>> Stashed changes
         ><div class="md:flex mb-4">
             <div
                 class="image-container w-full md:w-6/12 relative"
