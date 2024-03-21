@@ -13,7 +13,11 @@ const basket = computed(() => store.items);
 const totalPrice = computed(() => store.calculateTotalPrice());
 </script>
 <template>
+<<<<<<< Updated upstream
     <UserLayout revolving-bar="true">
+=======
+    <UserLayout>
+>>>>>>> Stashed changes
         <div class="md:flex pt-10">
             <div id="bag" class="w-full p-10">
                 <Header class="text-start text-xl">Your bag</Header>
