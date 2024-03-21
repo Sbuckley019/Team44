@@ -4,8 +4,25 @@
 
   .zoom:hover {
     transform: scale(1.5);
+ }
+
+  .thumbnail-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
-  .img-thumbnail {
+  .thumbnail {
+    width: 50px;
+    margin-bottom: 10px;
     cursor: pointer;
+  }
+
+  .main-image {
+    max-width: 100%;
+  }
+
+  .main-image-container {
+    text-align: center;
   }
