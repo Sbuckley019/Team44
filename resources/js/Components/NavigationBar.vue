@@ -7,6 +7,7 @@ import TopBar from "@/Components/TopBar.vue";
 import Burger from "@/Components/Burger.vue";
 import BurgerMenu from "@/Components/BurgerMenu.vue";
 import SearchModal from "@/Components/SearchModal.vue";
+import UserDropdown from "@/Components/UserDropdown.vue";
 import { useBasketStore } from "@/stores/basket";
 import { usePersistBasket } from "@/Composables/PersistBasket.js";
 
@@ -17,6 +18,7 @@ const store = useBasketStore();
 const { props } = usePage();
 
 const user = computed(() => props.auth.user).value;
+const isAdmin = computed(() => props.auth.isAdmin).value;
 
 const basket = computed(() => store.items);
 
@@ -36,8 +38,8 @@ const toggleSearch = () => {
 </script>
 <template>
     <div class="z-50 sticky top-0">
-        <TopBar :user="user" class="hidden md:block" />
-        <nav class="bg-white border-y border-greyt">
+        <TopBar :user="user" />
+        <nav class="bg-white border-t border-greyt">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20">
@@ -71,30 +73,21 @@ const toggleSearch = () => {
 
                             <div class="flex flex-row justify-end">
                                 <div class="flex">
-                                    <button @click="toggleSearch" class="px-5">
+                                    <button
+                                        @click="toggleSearch"
+                                        class="hover:border-b-2 hover:border-gray-300 px-5"
+                                    >
                                         <i class="bi bi-search text-lg"></i>
                                     </button>
-                                    <div v-if="user" class="flex">
-                                        <NavLink href="/profile" class="px-5">
-                                            <i class="bi bi-person text-xl"></i
-                                        ></NavLink>
-                                        <div
-                                            class="hidden flex flex-col absolute bg-black min-w-40 shadow-lg z-10"
-                                        >
-                                            <NavLink href="/password/change"
-                                                >Change Password</NavLink
-                                            >
-                                            <a href="#" @click="logout"
-                                                >Log out</a
-                                            >
-                                        </div>
-                                    </div>
+                                    <NavLink
+                                        v-if="isAdmin"
+                                        href="/dashboard"
+                                        class="px-5"
+                                    >
+                                        <i class="bi bi-briefcase text-xl"></i>
+                                    </NavLink>
+                                    <UserDropdown :user="user" />
 
-                                    <div v-else class="flex">
-                                        <NavLink href="/login" class="px-5">
-                                            <i class="bi bi-person text-xl"></i
-                                        ></NavLink>
-                                    </div>
                                     <NavLink href="/favourites" class="px-5">
                                         <i class="bi bi-heart text-lg"></i>
                                     </NavLink>
