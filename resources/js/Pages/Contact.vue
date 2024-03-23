@@ -17,13 +17,13 @@ const form = useForm({
 
 const formSubmitted = ref(false);
 
-function submit() {
+const submit = () => {
     form.post(route("contact.store"), {
         onSuccess: () => {
             formSubmitted.value = true;
         },
     });
-}
+};
 </script>
 <template>
     <UserLayout :revolving-bar="true">

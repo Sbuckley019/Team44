@@ -59,7 +59,6 @@ const isFavourite = (productId) => {
             {
                 preserveScroll: true,
                 onError: (errors) => {
-                    console.log(errors);
                     props.product.isFavourite = !props.product.isFavourite;
                 },
             }
