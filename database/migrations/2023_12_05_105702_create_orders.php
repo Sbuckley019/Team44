@@ -14,7 +14,7 @@ class CreateOrders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('guest_id')->nullable();
+            $table->string('email');
             $table->timestamp('order_date')->useCurrent();
             $table->decimal("total_price", 10, 2)->unsigned();
             $table->enum("status", ['pending', 'shipped', 'delivered'])->default('pending');
