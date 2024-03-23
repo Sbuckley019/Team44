@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\BasketItemController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FavouritesController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,14 +28,19 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+})->name('checkout');
+
+Route::name('checkout')->group(function () {
+    Route::post('/checkout/shipping', [CheckoutController::class, 'validateShipping'])->name('.shipping');
+    Route::post('/checkout/payment', [CheckoutController::class, 'validatePayment'])->name('.payment');
+    Route::post('/checkout/submit', [CheckoutController::class, 'checkout'])->name('.submit');
+});
+
+
+Route::get('/', [HomeController::class, 'homeProductCarousels'])
+    ->name('home');
 
 
 Route::get('/about', function () {
@@ -55,6 +63,10 @@ Route::name('products')->group(function () {
 Route::name('favourite')->group(function () {
     Route::get('/favourites', [FavouritesController::class, 'index'])->name('.index');
     Route::post('/favourite/add', [FavouritesController::class, 'FavouriteOrNot'])->name('.add');
+});
+
+Route::name('orders')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('.index');
 });
 
 Route::name('review')->group(function () {

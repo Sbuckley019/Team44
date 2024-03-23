@@ -59,7 +59,6 @@ const isFavourite = (productId) => {
             {
                 preserveScroll: true,
                 onError: (errors) => {
-                    console.log(errors);
                     props.product.isFavourite = !props.product.isFavourite;
                 },
             }
@@ -77,7 +76,7 @@ const reviewScroll = () => {
 };
 </script>
 <template>
-    <UserLayout :revolvingBar="true"
+    <UserLayout
         ><div class="md:flex mb-4">
             <div
                 class="image-container w-full md:w-6/12 relative"

@@ -62,7 +62,6 @@ class User extends Authenticatable
     public function basketItems()
     {
         return $this->hasMany(BasketItem::class);
-
     }
 
     public function admin()

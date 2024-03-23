@@ -7,9 +7,13 @@ const props = defineProps({
         type: String,
         default: "pt-3 pb-1 bg-white mb-3",
     },
+    open: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const open = ref(false);
+const open = ref(props.open);
 
 const toggleDropdown = () => {
     open.value = !open.value;

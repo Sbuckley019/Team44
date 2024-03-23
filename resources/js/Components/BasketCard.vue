@@ -34,6 +34,16 @@ const props = defineProps({
     product: {
         type: Object,
     },
+    isCheckout: {
+        type: Boolean,
+        default: false,
+    },
+    customWidth: {
+        type: String,
+    },
+    customHeight: {
+        type: String,
+    },
 });
 
 const isFavourite = (productId) => {
@@ -46,7 +56,6 @@ const isFavourite = (productId) => {
             {
                 preserveScroll: true,
                 onError: (errors) => {
-                    console.log(errors);
                     props.product.isFavourite = !props.product.isFavourite;
                 },
             }
@@ -67,7 +76,7 @@ const isFavourite = (productId) => {
                 <img
                     :src="product.image_url"
                     alt="Product Image"
-                    class="w-32 h-40"
+                    :class="`w-32 ${customHeight ? customHeight : 'h-40'}`"
                 />
             </div>
         </Link>
@@ -77,7 +86,7 @@ const isFavourite = (productId) => {
             >
                 {{ product.product_name }}
             </div>
-            <div class="text-sm text-gray-600 mb-1">
+            <div class="text-sm text-gray-600 mb-1" :class="customWidth">
                 {{ product.description }}
             </div>
             <div
@@ -101,10 +110,19 @@ const isFavourite = (productId) => {
             <div v-else class="text-xs text-yellow-400 font-bold mb-1.5">
                 Currently Unavailable
             </div>
-            <div class="font-roboto text-base font-bold text-dark capitalize">
+            <div
+                v-if="!isCheckout"
+                class="font-roboto text-base font-bold text-dark capitalize"
+            >
                 £{{ product.price }}
             </div>
-            <div class="mt-3 flex gap-4">
+            <div
+                v-else
+                class="font-roboto text-base font-bold text-dark capitalize"
+            >
+                £{{ (product.price * product.quantity).toFixed(2) }}
+            </div>
+            <div v-if="!isCheckout" class="mt-3 flex gap-4">
                 <button
                     class="w-9 h-9 rounded-full bg-lgrey text-black hover:text-black focus:outline-none flex items-center justify-center"
                     @click.stop="isFavourite(product.id)"
@@ -126,11 +144,17 @@ const isFavourite = (productId) => {
                 </button>
             </div>
         </div>
+
         <QuantitySelect
+            v-if="!isCheckout"
             :totalQty="product.stock > 10 ? 10 : product.stock"
             :selectedQty="product.quantity"
             @quantitySelected="addToBasket"
         />
+
+        <div v-else class="absolute bottom-0 right-0 px-4 font-bold">
+            Qty: {{ product.quantity }}
+        </div>
     </div>
-    <hr class="my-6" />
+    <hr v-if="!isCheckout" class="my-6" />
 </template>

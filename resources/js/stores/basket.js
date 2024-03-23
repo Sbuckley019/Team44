@@ -19,6 +19,10 @@ export const useBasketStore = defineStore("basket", () => {
         delete items.value[productId];
     }
 
+    function emptyBasket() {
+        localStorage.clear();
+    }
+
     function updateMessage(response) {
         message.value = response;
     }
@@ -41,6 +45,7 @@ export const useBasketStore = defineStore("basket", () => {
         items,
         addToBasket,
         removeFromBasket,
+        emptyBasket,
         message,
         updateMessage,
         numberOfProducts,

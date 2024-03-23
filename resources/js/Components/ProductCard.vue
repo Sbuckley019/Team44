@@ -6,7 +6,7 @@ const props = defineProps({
     product: {
         type: Object,
     },
-    customClass: {
+    customWidth: {
         type: String,
     },
 });
@@ -23,7 +23,6 @@ const isFavourite = (productId) => {
             {
                 preserveScroll: true,
                 onError: (errors) => {
-                    console.log(errors);
                     props.product.isFavourite = !props.product.isFavourite;
                 },
             }
@@ -80,7 +79,7 @@ async function addToBasket(productId) {
                 >
                     {{ product.product_name }}
                 </div>
-                <div class="text-sm text-gray-600 mb-0.5" :class="customClass">
+                <div class="text-sm text-gray-600 mb-0.5" :class="customWidth">
                     {{ product.description }}
                 </div>
                 <div class="font-roboto text-sm font-bold text-dark capitalize">
