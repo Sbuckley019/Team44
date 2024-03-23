@@ -4,6 +4,7 @@ import UserLayout from "@/Layouts/UserLayout.vue";
 import FilterMenu from "@/Components/FilterMenu.vue";
 import { router } from "@inertiajs/vue3";
 import ProductCard from "@/Components/ProductCard.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 function filterProducts(filters) {
     const routeName =
@@ -23,11 +24,22 @@ const handleScroll = () => {
 
 onMounted(() => {
     window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("resize", checkWindowSize);
+    checkWindowSize();
 });
 
 onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", checkWindowSize);
 });
+
+const checkWindowSize = () => {
+    screenSize.value = window.innerWidth >= 1024 ? "large" : "small";
+    if (screenSize.value === "large") {
+        visible.value = true;
+    }
+};
 
 const props = defineProps({
     products: {
@@ -47,11 +59,19 @@ const props = defineProps({
         default: "All Products",
     },
 });
+
+const visible = ref(false);
+
+const screenSize = ref("large");
+
+const showFilterMenu = () => {
+    visible.value = !visible.value;
+};
 </script>
 <template>
     <UserLayout>
         <div
-            class="h-12 w-full pt-2 px-8 sticky top-28 z-50 bg-white transition ease-in duration-300"
+            class="flex items-center justify-between h-24 lg:h-12 w-full pt-2 px-8 sticky top-24 lg:top-28 z-10 bg-white transition ease-in duration-300"
             :class="{ 'shadow-custom': hasScrolled }"
         >
             <div class="flex flex-wrap items-center pb-4">
@@ -72,13 +92,21 @@ const props = defineProps({
                     >{{ Object.keys(products).length }} Products</span
                 >
             </div>
+            <PrimaryButton
+                @click="showFilterMenu"
+                class="w-6/12 ms-0 me-0 h-10 lg:hidden"
+                >Filter & Sort</PrimaryButton
+            >
         </div>
 
         <div class="flex flex-col lg:flex-row">
             <FilterMenu
                 :category="category"
+                :is-visible="visible"
+                :screen-size="screenSize"
                 @filters="(env) => filterProducts(env)"
                 @reset="(env) => filterProducts(env)"
+                @changeVisibility="showFilterMenu"
             />
             <div
                 class="flex-1 bg-white grid gap-y-2 gap-x-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 p-2.5 pt-0"
