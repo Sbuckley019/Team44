@@ -5,6 +5,7 @@ import UserLayout from "@/Layouts/UserLayout.vue";
 import Header from "@/Components/Header.vue";
 import BasketCard from "@/Components/BasketCard.vue";
 import Summary from "@/Components/Summary.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { router } from "@inertiajs/vue3";
 
 const store = useBasketStore();
@@ -15,6 +16,10 @@ const totalPrice = computed(() => store.calculateTotalPrice());
 
 const checkout = () => {
     router.visit(route("checkout"));
+};
+
+const goToProducts = () => {
+    router.visit(route("products.index"));
 };
 </script>
 <template>

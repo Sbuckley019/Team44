@@ -1,4 +1,5 @@
 <script setup>
+import Header from "@/Components/Header.vue";
 import NavigationBar from "@/Components/NavigationBar.vue";
 import ProductCarousel from "@/Components/ProductCarousel.vue";
 import UserLayout from "@/Layouts/UserLayout.vue";
@@ -28,26 +29,71 @@ const props = defineProps({
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div>
+            <div>
+                <div class="bg-white overflow-hidden">
                     <div v-if="BestSellingProducts">
-                        <img
-                            src="../../../public/images/gordon-cowie-RKrwVMiW-ik-unsplash.jpg"
-                        />
-                        <ProductCarousel :products="BestSellingProducts" />
+                        <div class="bg-image bg-cover h-[480px] flex items-end">
+                        <div class="flex flex-col justify-center py-4 rounded text-white">
+                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
+                                With great gains comes great responsibility
+                            </h2>
+                        </div>
+                        </div>
+                        <div class="mt-4 mb-8">
+                            <Header>Best Selling Products</Header>
+                            <ProductCarousel class="pt-8" :products="BestSellingProducts" />
+                     
+                        </div>
                     </div>
                     <div v-if="NewestProducts">
-                        <ProductCarousel :products="NewestProducts" />
+                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="flex flex-col justify-center py-4 rounded text-white">
+                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
+                                Shop our newest products
+                            </h2>
+                        </div>
+                        </div>
+                        <div  class="mt-4 mb-8">
+                            <Header>Newest Products</Header>
+                        <ProductCarousel class="pt-8" :products="NewestProducts" />
+                        </div>
                     </div>
                     <div v-if="MensProducts">
-                        <ProductCarousel :products="MensProducts" />
+                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="flex flex-col justify-center py-4 rounded text-white">
+                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
+                                All new mens products
+                            </h2>
+                            <p class="ms-4">Be greater with our new selection of mens products</p>
+                        </div>
+                        </div>
+                        <div  class="mt-4 mb-8">
+                            <Header>Mens Products</Header>
+                        <ProductCarousel class="pt-8" :products="MensProducts" />
+                        </div>
                     </div>
                     <div v-if="WomensProducts">
-                        <ProductCarousel :products="WomensProducts" />
+                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="flex flex-col justify-center py-4 rounded text-white">
+                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
+                                All new womans products
+                            </h2>
+                            <p class="ms-4">Dress to impress with our new variety of womans clothing</p>
+                        </div>
+                        </div>
+                        <div  class="mt-4 mb-8">
+                            <Header>Womans Products</Header>
+                        <ProductCarousel class="pt-8":products="WomensProducts" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </UserLayout>
 </template>
+<style scoped>
+.bg-image{
+    background-image: url("../../../public/images/gordon-cowie-RKrwVMiW-ik-unsplash.jpg");
+}
+</style>
