@@ -4,13 +4,18 @@ import { useBasketStore } from "@/stores/basket";
 import UserLayout from "@/Layouts/UserLayout.vue";
 import Header from "@/Components/Header.vue";
 import BasketCard from "@/Components/BasketCard.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Summary from "@/Components/Summary.vue";
+import { router } from "@inertiajs/vue3";
 
 const store = useBasketStore();
 
 const basket = computed(() => store.items);
 
 const totalPrice = computed(() => store.calculateTotalPrice());
+
+const checkout = () => {
+    router.visit(route("checkout"));
+};
 </script>
 <template>
     <UserLayout revolving-bar="true">
@@ -25,32 +30,11 @@ const totalPrice = computed(() => store.calculateTotalPrice());
                     />
                 </div>
             </div>
-            <div id="summary" class="w-full p-10 md:w-2/6 md:px-4">
-                <Header class="text-start text-xl">Summary</Header>
-                <hr />
-                <div class="px-3">
-                    <div
-                        class="flex font-roboto text-base text-midgrey py-3 justify-between"
-                    >
-                        <p>Subtotal</p>
-                        £{{ totalPrice }}
-                    </div>
-                    <div
-                        class="flex font-roboto text-base text-midgrey py-3 justify-between"
-                    >
-                        <p>Sales</p>
-                        £250
-                    </div>
-                    <div
-                        class="flex font-bold font-roboto text-base py-3 justify-between"
-                    >
-                        <p>Total</p>
-                        £{{ totalPrice + 250 }}
-                    </div>
-                </div>
-                <hr />
-                <PrimaryButton class="mt-4"> Checkout</PrimaryButton>
-            </div>
+            <Summary
+                @is-clicked="checkout"
+                :total="totalPrice"
+                :isCheckout="false"
+            />
         </div>
     </UserLayout>
 </template>

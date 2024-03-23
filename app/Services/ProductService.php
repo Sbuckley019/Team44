@@ -6,13 +6,16 @@ use App\Models\Product;
 
 class ProductService
 {
-    public function getProducts($filters = null, $userId = null, $isFavourites = false)
+    public function getProducts($filters = null, $userId = null, $isFavourites = false, $limit = null)
     {
         $query = Product::query();
 
         /* if ($searchTerm) {
     $query->where('product_name', 'LIKE', "%{$searchTerm}%");
 } */
+        if ($limit) {
+            $query->limit($limit);
+        }
 
         if (isset($filters['category_id'])) {
             $query->where('category_id', $filters['category_id']);
@@ -67,5 +70,21 @@ class ProductService
         $product->isFavourite = $product->favourites->contains('user_id', $userId);
 
         return $product;
+    }
+
+    public function findProductById($productId)
+    {
+        $product = Product::where('id', $productId)->first();
+
+        return $product;
+    }
+
+    public function checkAvailability($productId, $quantity)
+    {
+        $product = Product::where('id', $productId)->first();
+
+        $stock = $product->stock_quantity;
+
+        return $quantity <= $stock;
     }
 }
