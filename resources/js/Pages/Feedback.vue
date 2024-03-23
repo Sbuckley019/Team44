@@ -25,7 +25,7 @@ function submit() {
 }
 </script>
 <template>
-    <UserLayout :revolving-bar="true">
+    <UserLayout>
         <form
             v-if="!formSubmitted"
             @submit.prevent="submit"

@@ -18,7 +18,7 @@ const checkout = () => {
 };
 </script>
 <template>
-    <UserLayout revolving-bar="true">
+    <UserLayout>
         <div class="md:flex pt-10">
             <div id="bag" class="w-full p-10">
                 <Header class="text-start text-xl">Your bag</Header>

@@ -1,0 +1,48 @@
+
+/* Default background color */
+body {
+    background-color: #ffffff;
+
+}
+
+/* High contrast mode background color */
+body.high-contrast {
+    background-color: #000000 !important;
+    color: #ffffff;
+}
+
+/* Dark mode background color */
+body.dark-mode {
+    background-color: #343a40 !important;
+    color: #ffffff;
+}
+
+/* Color blind mode background color */
+body.color-blind {
+    background-color: #ffc107 !important;
+}
+
+/* Default navbar style */
+.navbar {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* High contrast mode navbar style */
+.high-contrast .navbar {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Dark mode navbar style */
+.dark-mode .navbar {
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+
+}
+
+/* Color blind mode navbar style */
+.color-blind .navbar {
+    background-color: #ffc107 !important;
+    color: #000000 !important;
+}

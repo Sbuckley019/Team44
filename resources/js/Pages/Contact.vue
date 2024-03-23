@@ -26,7 +26,7 @@ const submit = () => {
 };
 </script>
 <template>
-    <UserLayout :revolving-bar="true">
+    <UserLayout>
         <div class="p-6 bg-topback mx-auto my-4 text-center hidden md:block">
             <Header class="mb-4">Get in Touch</Header>
             <div class="flex justify-center gap-40">
