@@ -9,84 +9,32 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
-    //Gets all the orders, Stores them within the $orders variable
-    //Navigates to the 'list' view (list.blade.php needs to be created in order directory in views directory.)
-    //When on the page use the $orders variable to display the orders
 
     public function index()
     {
-        $orders = Order::all();
-        return view('admin/orders', compact('orders'));
+        if (Auth::check()) {
+            $user = Auth::id();
+
+            $orders = Order::where('user_id', $user)->get();
+        }
+
+        return Inertia::render('Orders', ['orders' => $orders]);
     }
 
-    // Display the specified order
-    // 'show' view needs to be created
 
     public function show(Order $order)
     {
         return view('orders', compact('order'));
     }
 
-    public function checkout(Request $request = null)
-    {
-        if (Auth::check()) {
-            $user = auth()->user()->id;
-            $id = $user;
-            $order = Basket::where('user_id', $user)->with('items.product')->first();
-        } else {
-            $guest = Cookie::get('guest_id');
-            $guest_id = $guest;
-            $order = Basket::where('guest_id', $guest)->with('items.product')->first();
-        }
-
-        $total = 0;
-        $status = 'pending';
-        $basket_id = $order->items[0]->basket_id;
-
-        foreach ($order->items as $items) {
-            $total += $items->product->price;
-        }
-        try {
-            Order::create([
-                'user_id' => isset($id) ? $id : null,
-                'guest_id' => isset($id) ? null : $guest_id,
-                'total_price' => $total,
-                'status' => $status,
-            ]);
-
-            $basketController = new BasketController();
-            $basketController->emptyBasket($basket_id);
-
-            return redirect()->route('basket.index');
-        } catch (QueryException $exception) {
-            // Log the error or handle it in a way that makes sense for your application
-
-            return redirect()->route('home')->with('error', 'An error occurred while adding the product.' . $exception->getMessage());
-        }
-    }
 
 
-    public function addOrder(Request $request)
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
 
-            $order = Order::firstOrCreate(
-                [
-                    'user_id' => $user->id,
-                    'total_price' => $request->total_price,
-                    'status' => 'pending'
-                ],
-            );
 
-            return redirect()->route('order.index');
-        } else {
-            return redirect()->route('register');
-        }
-    }
 
 
     //   public function create()
