@@ -56,6 +56,26 @@ class AdminProductController extends Controller
         }
     }
 
+    public function index()
+    {
+        $products = Product::all();
+
+        $products->transform(function ($product) {
+            return [
+                'id' => $product->id,
+                'image_url' => $product->image_url,
+                'product_name' => $product->product_name,
+                'description' => $product->description,
+                'category_id' => $product->category_id,
+                'stock_quantity' =>  $product->stock_quantity,
+                'price' => $product->price,
+                'discount' => 12,
+            ];
+        });
+
+        return Inertia::render('Admin/Products', ['products' => $products]);
+    }
+
     public function adminIndex(Request $request)
     {
         $query = Product::query();

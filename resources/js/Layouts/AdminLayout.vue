@@ -8,9 +8,6 @@ import NavLink from "@/Components/NavLink.vue";
 const logout = () => {
     //route('admin.logout')
     //{{ route('admin.dashboard') }}
-    //{{ route('products.adminIndex') }}
-    //{{ route('order.index') }}
-    //{{ route('customer.index') }}
     //{{route('feedback.index')}}
 };
 </script>
@@ -20,45 +17,54 @@ const logout = () => {
     >
         <ApplicationLogo class="w-16" />
     </div>
+    <div class="flex">
+        <aside
+            class="fi-sidebar-nav flex flex-col gap-y-4 overflow-y-auto overflow-x-hidden px-6 py-8 w-68 border-r"
+        >
+            <AdminHeader :value="'Dashboard'"
+                ><i class="bi bi-house text-2xl"></i
+            ></AdminHeader>
+            <div>
+                <AdminHeader
+                    :value="'Operations'"
+                    class="hover:bg-inherit cursor-default"
+                />
+                <AdminHeader :value="'Products'" :href="route('admin.items')">
+                    <i class="bi bi-boxes text-2xl"></i
+                ></AdminHeader>
+                <AdminHeader :value="'Orders'" :href="route('admin.orders')">
+                    <i class="bi bi-bag text-2xl"></i
+                ></AdminHeader>
+                <AdminHeader
+                    :value="'Customers'"
+                    :href="route('admin.customers')"
+                    ><i class="bi bi-people text-2xl"></i
+                ></AdminHeader>
+            </div>
+            <div>
+                <AdminHeader
+                    :value="'Communications'"
+                    class="cursor-default hover:bg-inherit"
+                />
+                <AdminHeader :value="'Feedback'"
+                    ><i class="bi bi-clipboard text-2xl"></i
+                ></AdminHeader>
+                <AdminHeader :value="'Contact Requests'"
+                    ><i class="bi bi-chat text-2xl"></i
+                ></AdminHeader>
+            </div>
 
-    <aside
-        class="fi-sidebar-nav flex-grow flex flex-col gap-y-4 overflow-y-auto overflow-x-hidden px-6 py-8 w-80 border-r"
-    >
-        <AdminHeader :value="'Dashboard'"
-            ><i class="bi bi-house text-2xl"></i
-        ></AdminHeader>
-        <div>
-            <AdminHeader
-                :value="'Operations'"
-                class="hover:bg-inherit cursor-default"
-            />
-            <AdminHeader :value="'Products'">
-                <i class="bi bi-boxes text-2xl"></i
-            ></AdminHeader>
-            <AdminHeader :value="'Orders'" :href="route('admin.orders')">
-                <i class="bi bi-bag text-2xl"></i
-            ></AdminHeader>
-            <AdminHeader :value="'Customers'"
-                ><i class="bi bi-people text-2xl"></i
-            ></AdminHeader>
-        </div>
-        <div>
-            <AdminHeader
-                :value="'Communications'"
-                class="cursor-default hover:bg-inherit"
-            />
-            <AdminHeader :value="'Feedback'"
-                ><i class="bi bi-clipboard text-2xl"></i
-            ></AdminHeader>
-            <AdminHeader :value="'Contact Requests'"
-                ><i class="bi bi-chat text-2xl"></i
-            ></AdminHeader>
-        </div>
+            <NavLink
+                class="logoutButton"
+                href="/logout"
+                method="post"
+                as="button"
+                >Logout</NavLink
+            >
+        </aside>
 
-        <button class="logoutButton" @click="logout">Logout</button>
-    </aside>
-
-    <main class="ms-96 p-8 flex-1">
-        <slot />
-    </main>
+        <main class="p-8 flex-1">
+            <slot />
+        </main>
+    </div>
 </template>

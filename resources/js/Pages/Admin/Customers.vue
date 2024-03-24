@@ -1,44 +1,43 @@
 <template>
     <AdminLayout>
         <div class="font-roboto text-footer mx-auto p-4">
-            <Header>Order Management</Header>
+            <Header>Customer Management</Header>
             <div id="table" class="mt-4 w-full shadow-md">
                 <table class="border-collapse w-full">
                     <thead>
                         <tr class="hover:bg-footer">
-                            <TableHeader> Order ID </TableHeader>
-                            <TableHeader> Customer Name </TableHeader>
-                            <TableHeader> Total Price </TableHeader>
-                            <TableHeader> Status </TableHeader>
+                            <TableHeader> User ID </TableHeader>
+                            <TableHeader> Username </TableHeader>
+                            <TableHeader> Email </TableHeader>
+                            <TableHeader> Spent </TableHeader>
                             <TableHeader> Actions </TableHeader>
-                            <TableHeader> Order Date </TableHeader>
+                            <TableHeader> Registration Date </TableHeader>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="order in orders" :key="order.id">
+                        <tr v-for="customer in customers" :key="customer.id">
                             <TableCell>
-                                {{ order.id }}
+                                {{ customer.id }}
                             </TableCell>
                             <TableCell>
-                                {{ order.customer_name }}
-                            </TableCell>
-                            <TableCell> £{{ order.total_price }} </TableCell>
-                            <TableCell>
-                                {{ order.status }}
+                                {{ customer.username }}
                             </TableCell>
                             <TableCell>
-                                <SecondaryButton @click="viewOrder(order.id)">
-                                    View
+                                {{ customer.email }}
+                            </TableCell>
+                            <TableCell>
+                                {{ 1 }}
+                            </TableCell>
+                            <TableCell>
+                                <SecondaryButton @click="editCustomer">
+                                    Edit
                                 </SecondaryButton>
-                                <SecondaryButton
-                                    @click="processOrder(order)"
-                                    :disabled="order.status === 'Shipped'"
-                                >
-                                    Process
+                                <SecondaryButton @click="deleteCustomer">
+                                    Delete
                                 </SecondaryButton>
                             </TableCell>
                             <TableCell>
-                                {{ order.date }}
+                                {{ customer.created_at }}
                             </TableCell>
                         </tr>
                     </tbody>
@@ -57,18 +56,16 @@ import TableCell from "../../Components/TableCell.vue";
 import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
-    orders: {
+    customers: {
         type: Array,
     },
 });
 
-const viewOrder = () => {
-    const url = `/Admin/Orders/${orderId}`;
-    console.log(`Attempting to navigate to order ${orderId}`);
-    router.visit(url);
-};
+console.log(props.customers);
 
-const processOrder = () => {};
+const editCustomer = () => {};
+
+const deleteCustomer = () => {};
 </script>
 
 <style scoped>
