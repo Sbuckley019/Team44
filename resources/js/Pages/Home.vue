@@ -33,7 +33,7 @@ const props = defineProps({
             <div>
                 <div class="bg-white overflow-hidden">
                     <div v-if="BestSellingProducts">
-                        <div class="bg-image bg-cover h-[480px] flex items-end">
+                        <div class="bg-image-1 bg-cover h-[480px] flex items-end">
                         <div class="flex flex-col justify-center py-4 rounded text-white">
                             <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
                                 With great gains comes great responsibility
@@ -47,7 +47,7 @@ const props = defineProps({
                         </div>
                     </div>
                     <div v-if="NewestProducts">
-                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="bg-image-2 bg-cover h-[472px] flex items-end">
                         <div class="flex flex-col justify-center py-4 rounded text-white">
                             <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
                                 Shop our newest products
@@ -60,7 +60,7 @@ const props = defineProps({
                         </div>
                     </div>
                     <div v-if="MensProducts">
-                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="bg-image-3 bg-cover h-[472px] flex items-end">
                         <div class="flex flex-col justify-center py-4 rounded text-white">
                             <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
                                 All new mens products
@@ -74,7 +74,7 @@ const props = defineProps({
                         </div>
                     </div>
                     <div v-if="WomensProducts">
-                        <div class="bg-image bg-cover h-[472px] flex items-end">
+                        <div class="bg-image-4 bg-cover h-[472px] flex items-end">
                         <div class="flex flex-col justify-center py-4 rounded text-white">
                             <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
                                 All new womans products
@@ -93,7 +93,19 @@ const props = defineProps({
     </UserLayout>
 </template>
 <style scoped>
-.bg-image{
+.bg-image-1{
     background-image: url("../../../public/images/gordon-cowie-RKrwVMiW-ik-unsplash.jpg");
+}
+
+.bg-image-2{
+    background-image: url("../../../public/images/Equipment_image.jpg");
+}
+
+.bg-image-3{
+    background-image: url("../../../public/images/man_on_tredmill.jpg");
+}
+
+.bg-image-4{
+    background-image: url("../../../public/images/womans_clothing.jpg");
 }
 </style>
