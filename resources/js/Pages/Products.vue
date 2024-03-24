@@ -23,10 +23,10 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+    checkWindowSize();
     window.addEventListener("scroll", handleScroll);
 
     window.addEventListener("resize", checkWindowSize);
-    checkWindowSize();
 });
 
 onUnmounted(() => {
@@ -37,6 +37,8 @@ onUnmounted(() => {
 const checkWindowSize = () => {
     screenSize.value = window.innerWidth >= 1024 ? "large" : "small";
     if (screenSize.value === "large") {
+        visible.value = false;
+    } else {
         visible.value = true;
     }
 };
@@ -51,8 +53,9 @@ const props = defineProps({
     categories: {
         type: Array,
     },
-    favouriteIds: {
-        type: Array,
+    searchTerm: {
+        type: String,
+        default: null,
     },
     mode: {
         type: String,
@@ -76,7 +79,13 @@ const showFilterMenu = () => {
         >
             <div class="flex flex-wrap items-center pb-4">
                 <h1
-                    v-if="category"
+                    v-if="searchTerm"
+                    class="font-montserrat font-bold text-lg mr-3 text-black uppercase"
+                >
+                    "{{ searchTerm }}"
+                </h1>
+                <h1
+                    v-else-if="category"
                     class="font-montserrat font-bold text-lg mr-3 text-black uppercase"
                 >
                     {{ category.category_name }}
@@ -102,6 +111,7 @@ const showFilterMenu = () => {
         <div class="flex flex-col lg:flex-row">
             <FilterMenu
                 :category="category"
+                :searchTerm="searchTerm"
                 :is-visible="visible"
                 :screen-size="screenSize"
                 @filters="(env) => filterProducts(env)"

@@ -12,9 +12,12 @@ const props = defineProps({
         type: Object,
         default: 0,
     },
+    searchTerm: {
+        type: String,
+        default: null,
+    },
     isVisible: {
         type: Boolean,
-        default: false,
     },
     screenSize: {
         type: String,
@@ -45,13 +48,22 @@ const updateFilters = ({ type, value }) => {
     if (type === "priceRange") selectedPriceRange.value = value;
     if (type === "rating") selectedRating.value = value;
 
-    emit("filters", {
+    const filters = {
         sort: selectedSort.value,
         minPrice: selectedPriceRange.value[0],
         maxPrice: selectedPriceRange.value[1],
         rating: selectedRating.value,
-        category_id: props.category.id,
-    });
+    };
+
+    if (props.searchTerm) {
+        filters.searchTerm = props.searchTerm;
+    }
+
+    if (props.category) {
+        filters.category_id = props.category.id;
+    }
+
+    emit("filters", filters);
 
     filtersModified.value = true;
 };
@@ -61,14 +73,14 @@ const changeVisibility = () => {
 };
 
 const menuClass = computed(() => ({
-    "slide h-full lg:h-[402px] pr-[3.3rem] ps-8 pt-4 flex-shrink-0 self-start sticky w-11/12 z-10 bg-white top-44 lg:top-50 overflow-y-scroll lg:w-80 lg:top-36": true,
+    "slide h-full lg:h-[402px] pr-[3.3rem] ps-8 pt-4 flex-shrink-0 self-start sticky w-11/12 z-10 bg-white top-44  overflow-y-scroll lg:z-0 lg:w-80 lg:top-40": true,
     "hidden lg:block": props.screenSize === "large" || props.isVisible,
     "fixed lg:sticky": props.screenSize === "small",
 }));
 
 function beforeEnter() {
     if (props.screenSize !== "large") {
-        const el = document.getElementById("god");
+        const el = document.getElementById("transitionbg");
         el.classList.add(
             "w-full",
             "bg-footer/75",
@@ -82,7 +94,7 @@ function beforeEnter() {
 
 function afterLeave() {
     if (props.screenSize !== "large") {
-        const el = document.getElementById("god");
+        const el = document.getElementById("transitionbg");
         el.classList.remove(
             "w-full",
             "bg-footer/75",
@@ -95,7 +107,7 @@ function afterLeave() {
 }
 </script>
 <template>
-    <div id="god" @click="changeVisibility">
+    <div id="transitionbg" @click="changeVisibility">
         <transition
             name="slide"
             mode="out-in"

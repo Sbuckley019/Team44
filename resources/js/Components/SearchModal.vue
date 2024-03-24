@@ -50,7 +50,7 @@ onUnmounted(() => {
         <Transition leave-active-class="duration-200">
             <div
                 v-show="show"
-                class="fixed inset-0 overflow-y-auto z-50"
+                class="fixed inset-0 lg:overflow-y-auto top-8 z-50"
                 scroll-region
             >
                 <Transition
@@ -63,7 +63,7 @@ onUnmounted(() => {
                 >
                     <div
                         v-show="show"
-                        class="fixed inset-0 transform transition-all"
+                        class="fixed inset-0 transform transition-all top-8"
                         @click="close"
                     >
                         <div class="absolute inset-0 bg-gray-500 opacity-75" />
@@ -80,7 +80,7 @@ onUnmounted(() => {
                 >
                     <div
                         v-show="show"
-                        class="mb-6 h-28 bg-white overflow-hidden transform transition-all sm:w-full sm:mx-auto"
+                        class="flex flex-col lg:justify-center px-8 lg:px-0 lg:items-center mb-6 h-full lg:h-16 bg-white transform transition-all sm:w-full sm:mx-auto"
                     >
                         <slot v-if="show" />
                     </div>

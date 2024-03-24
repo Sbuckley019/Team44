@@ -10,7 +10,7 @@ const props = defineProps({
 });
 </script>
 <template>
-    <div class="bg-topback h-8">
+    <div class="bg-topback h-8 hidden sm:block">
         <ul class="flex flex-row justify-end h-full me-7">
             <li
                 class="flex border-solid border-topbord text-toptext border-r items-center px-2.5 hover:text-black"

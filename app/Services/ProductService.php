@@ -10,11 +10,13 @@ class ProductService
     {
         $query = Product::query();
 
-        /* if ($searchTerm) {
-    $query->where('product_name', 'LIKE', "%{$searchTerm}%");
-} */
+
         if ($limit) {
             $query->limit($limit);
+        }
+
+        if (isset($filters['searchTerm'])) {
+            $query->where('product_name', 'LIKE', '%' . $filters['searchTerm'] . '%');
         }
 
         if (isset($filters['category_id'])) {
@@ -61,11 +63,11 @@ class ProductService
         return $products;
     }
 
-    public function getProduct($product_id)
+    public function getProduct($product_name)
     {
         $userId = auth()->check();
 
-        $product = Product::where('id', $product_id)->first();
+        $product = Product::where('product_name', $product_name)->first();
 
         $product->isFavourite = $product->favourites->contains('user_id', $userId);
 

@@ -45,7 +45,7 @@ async function addToBasket(productId) {
 
 <template>
     <Link
-        :href="route('product.show', { product_id: product.id })"
+        :href="route('product.show', { product_name: product.product_name })"
         class="group block w-full cursor-pointer"
         as="div"
     >

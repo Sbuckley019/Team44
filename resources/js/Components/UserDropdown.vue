@@ -17,10 +17,18 @@ const props = defineProps({
         @mouseover="() => (menuVisible = true)"
         @mouseleave="() => (menuVisible = false)"
     >
-        <NavLink v-if="user" class="cursor-pointer px-5 h-full" href="/profile">
+        <NavLink
+            v-if="user"
+            class="cursor-pointer px-2 sm:px-5 h-full"
+            href="/profile"
+        >
             <i class="bi bi-person text-xl"></i>
         </NavLink>
-        <NavLink v-else class="cursor-pointer px-5 h-full" href="/login">
+        <NavLink
+            v-else
+            class="cursor-pointer px-2 sm:px-5 h-full"
+            href="/login"
+        >
             <i class="bi bi-person text-xl"></i>
         </NavLink>
 
@@ -43,7 +51,7 @@ const props = defineProps({
                     >
                 </li>
                 <li class="mb-2 flex">
-                    <NavLink href="/logout" method="post"
+                    <NavLink href="/logout" method="post" as="button"
                         ><i class="bi bi-box-arrow-right text-xl me-3"></i
                         >Logout</NavLink
                     >

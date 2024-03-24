@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -10,8 +11,10 @@ use Inertia\Inertia;
 class ReviewController extends Controller
 {
 
-    public function index($productId)
+    public function index($productName)
     {
+        $productId = Product::where('product_name', $productName)->value('id');
+
         $reviews = Review::where('product_id', $productId)->with('user')->paginate(8);
 
         return $reviews;

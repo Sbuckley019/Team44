@@ -9,14 +9,14 @@ use Inertia\Inertia;
 
 class ProductItemController extends Controller
 {
-    public function show($product_id = null)
+    public function show($product_name = null)
     {
-        if ($product_id) {
+        if ($product_name) {
             $productService = new ProductService();
-            $product = $productService->getProduct($product_id);
+            $product = $productService->getProduct($product_name);
 
             $reviewController = new ReviewController();
-            $reviews = $reviewController->index($product_id);
+            $reviews = $reviewController->index($product_name);
 
 
             if ($product) {

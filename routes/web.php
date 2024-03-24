@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminCustomerController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\CheckoutController;
@@ -16,7 +19,7 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Admin\AdminOrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +56,10 @@ Route::get('/contact', function () {
 Route::get('/feedback', function () {
     return Inertia::render('Feedback');
 });
-Route::get('/product/{product_id}', [ProductItemController::class, 'show'])->name('product.show');
+Route::get('/product/{product_name}', [ProductItemController::class, 'show'])->name('product.show');
 
 Route::name('products')->group(function () {
+    Route::get('products/search', [ProductController::class, 'searchProducts'])->name('.search');
     Route::get('/products/create', [ProductController::class, 'create'])->name('.create');
     Route::get('/products/{category_id?}', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
@@ -115,9 +119,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('admin/orders', function () {
-        return view('admin.orders');
-    })->name('admin.orders');
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
+    Route::get('/items', [AdminProductController::class, 'index'])->name('admin.items');
 
     //Route::get('/customers', [UserController::class, 'index'])->name('customer.index');
 
