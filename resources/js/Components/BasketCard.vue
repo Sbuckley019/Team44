@@ -68,7 +68,9 @@ const isFavourite = (productId) => {
 <template>
     <div class="flex bg-white w-full relative">
         <Link
-            :href="route('product.show', { product_id: product.product_id })"
+            :href="
+                route('product.show', { product_name: product.product_name })
+            "
             class="block cursor-pointer me-4"
             as="div"
         >
