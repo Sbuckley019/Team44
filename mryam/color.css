@@ -43,6 +43,6 @@ body.color-blind {
 
 /* Color blind mode navbar style */
 .color-blind .navbar {
-    background-color: #ffc107 !important;
+    background-color: #8e9ef1 !important;
     color: #000000 !important;
 }
