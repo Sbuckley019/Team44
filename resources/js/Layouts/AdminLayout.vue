@@ -35,7 +35,7 @@ const logout = () => {
             <AdminHeader :value="'Products'">
                 <i class="bi bi-boxes text-2xl"></i
             ></AdminHeader>
-            <AdminHeader :value="'Orders'">
+            <AdminHeader :value="'Orders'" :href="route('admin.orders')">
                 <i class="bi bi-bag text-2xl"></i
             ></AdminHeader>
             <AdminHeader :value="'Customers'"

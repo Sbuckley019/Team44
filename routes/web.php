@@ -16,6 +16,7 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,9 @@ Route::middleware('admin')->group(function () {
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('.destroy');
         Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('.adminIndex');
     });
+
+    Route::get('/Admin/Orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/Admin/Orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
 });
 
 
