@@ -26,11 +26,13 @@ class ProductController extends Controller
         $category_id = $request->category_id;
         $category = $category_id ? $this->fetchCategoryById($category_id) : null;
         $searchTerm = $request->input("searchTerm") ?? null;
-        $categories = $this->fetchCategories();
+
+        $categories = $category_id ? null : $this->fetchCategories();
 
         return Inertia::render('Products', [
             'products' => $products,
             'category' => $category,
+            'categories' => $categories,
             'searchTerm' => $searchTerm,
         ]);
     }

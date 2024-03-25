@@ -21,7 +21,7 @@ const submit = () => {
     <AuthLayout>
         <Head title="Confirm Password" />
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm dark:text-white text-gray-600">
             This is a secure area of the application. Please confirm your
             password before continuing.
         </div>

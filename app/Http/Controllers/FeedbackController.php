@@ -5,18 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Feedback;
 use Illuminate\Database\QueryException;
+use Inertia\Inertia;
 
 class FeedbackController extends Controller
 {
 
     public function index(Request $request)
     {
-        $viewChoice = $request->query('viewChoice', '0');
+        $read = $request->read === 'true' ? 1 : 0;
 
-        $feedbacks = Feedback::where('read', $viewChoice)->get();
+        $feedback = Feedback::where('read', $read)->get();
 
-        //return view('admin.feedback', compact('feedbacks', 'viewChoice'));
+        return Inertia::render('Admin/Feedback', ['feedback' => $feedback]);
     }
+
 
 
     public function store(Request $request)
@@ -49,7 +51,7 @@ class FeedbackController extends Controller
         $feedback->read = !$feedback->read;
         $feedback->save();
 
-        return redirect()->route('feedback.index')->with('success', 'Feedback has been marked as read');
+        Inertia::render('Admin/Feedback');
     }
 
 

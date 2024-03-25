@@ -5,7 +5,7 @@ const props = defineProps({
     title: String, // The title for the dropdown, if you want to pass it as a prop
     contentClasses: {
         type: String,
-        default: "pt-3 pb-1 bg-white mb-3",
+        default: "pt-3 pb-1 bg-white dark:bg-black mb-3",
     },
     open: {
         type: Boolean,
@@ -32,7 +32,7 @@ onUnmounted(() => window.removeEventListener("keydown", closeOnEscape));
 <template>
     <div class="">
         <div
-            class="h-full w-full relative font-montserrat text-black font-bold text-lg py-5 border-solid border-greyt border-y cursor-pointer"
+            class="h-full w-full relative font-montserrat text-black dark:text-white font-bold text-lg py-5 border-solid border-white border-y cursor-pointer"
             @click="toggleDropdown"
         >
             <slot name="trigger">{{ title }}</slot>

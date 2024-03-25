@@ -14,7 +14,8 @@ class AdminProductController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
-        return view("createProduct", compact("categories"));
+
+        return Inertia::render('Admin/Product', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -58,9 +59,15 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('orderItems')->get();
 
         $products->transform(function ($product) {
+            $totalEarned = $product->orderItems->reduce(function ($total, $item) {
+                return $total + ($item->subtotal * $item->quantity);
+            }, 0);
+
+            $totalEarned = number_format($totalEarned, 2, '.', '');
+
             return [
                 'id' => $product->id,
                 'image_url' => $product->image_url,
@@ -69,11 +76,36 @@ class AdminProductController extends Controller
                 'category_id' => $product->category_id,
                 'stock_quantity' =>  $product->stock_quantity,
                 'price' => $product->price,
-                'discount' => 12,
+                'sales' => $totalEarned,
+                'discount' => $product->discount,
             ];
         });
 
         return Inertia::render('Admin/Products', ['products' => $products]);
+    }
+
+    public function applyDiscount(Request $request)
+    {
+        try {
+            $request->validate([
+                'product_id' => 'required|integer',
+                'discount' => 'required|numeric',
+            ]);
+
+            $product = Product::findOrFail($request->input('product_id'));
+
+            $product->update(['discount' => $request->input('discount')]);
+
+            return response()->json([
+                'message' => 'Discount applied successfully.',
+                'product' => $product
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to apply discount',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function adminIndex(Request $request)

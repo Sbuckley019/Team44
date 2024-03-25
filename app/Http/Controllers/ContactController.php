@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Database\QueryException;
+use Inertia\Inertia;
 
 class ContactController extends Controller
 {
 
     public function index(Request $request)
     {
-        $viewChoice = $request->query('viewChoice', '0');
+        $read = $request->read === 'true' ? 1 : 0;
+        $category = $request->category;
 
-        $contacts = Contact::where('read', $viewChoice)->get();
 
-        //return view('admin.Contact', compact('Contacts', 'viewChoice'));
+        $contact = Contact::query()->when($category !== 'all', function ($q) use ($category) {
+            return $q->where('category', $category);
+        })->get();
+
+        return Inertia::render('Admin/Contact', ['requests' => $contact]);
     }
+
+
 
 
     public function store(Request $request)
@@ -41,16 +48,15 @@ class ContactController extends Controller
 
     public function read(Request $request)
     {
-        $ContactId = $request->ContactId;
 
-        // Find the Contact by ID
-        $contact = Contact::findOrFail($ContactId);
+        $contactId = $request->contactId;
 
-        // Toggle the "read" status
+        $contact = Contact::findOrFail($contactId);
+
         $contact->read = !$contact->read;
         $contact->save();
 
-        return redirect()->route('Contact.index')->with('success', 'Contact has been marked as read');
+        Inertia::render('Admin/Contact');
     }
 
 

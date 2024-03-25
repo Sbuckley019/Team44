@@ -34,7 +34,8 @@ const props = defineProps({
 
         <div
             v-if="user"
-            class="menu-wrapper absolute top-20 left-0 w-48 bg-white border-b border-s border-r border-gray-300 p-2 opacity-0"
+            v-show="menuVisible"
+            class="menu-wrapper absolute top-20 left-0 w-48 bg-white dark:bg-black border-b border-s border-r border-gray-300 p-2 opacity-0"
             :class="{ 'menu-visible': menuVisible }"
         >
             <ul class="list-none m-0 p-0">

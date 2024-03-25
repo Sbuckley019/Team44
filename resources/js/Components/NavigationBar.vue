@@ -41,7 +41,8 @@ const toggleSearch = () => {
 <template>
     <div class="z-50 sticky top-0">
         <TopBar :user="user" />
-        <nav class="bg-white border-y border-greyt">
+
+        <nav class="bg-white dark:bg-black border-y border-white">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-20">
@@ -50,7 +51,7 @@ const toggleSearch = () => {
                         <div class="flex items-center">
                             <Link :href="route('home')">
                                 <ApplicationLogo
-                                    class="block h-9 w-auto fill-current text-gray-800"
+                                    class="block h-9 w-auto fill-current dark:text-white text-gray-800"
                                 />
                             </Link>
                         </div>
@@ -95,11 +96,14 @@ const toggleSearch = () => {
                             >
                                 <i class="bi bi-heart text-lg"></i>
                             </NavLink>
-                            <NavLink href="/basket" class="px-2 sm:px-5 h-full">
+                            <NavLink
+                                href="/basket"
+                                class="px-2 sm:px-5 h-full relative"
+                            >
                                 <i class="bi bi-bag text-lg"></i>
                                 <div
                                     v-if="basketSize"
-                                    class="flex absolute text-white bg-black rounded-full w-4 h-4 top-14 right-11 text-xxs justify-center items-center"
+                                    class="flex absolute text-white bg-black rounded-full w-4 h-4 top-6 right-3 text-xxs justify-center items-center"
                                 >
                                     {{ basketSize }}
                                 </div></NavLink
@@ -119,7 +123,5 @@ const toggleSearch = () => {
             <BurgerMenu v-if="showingNavigationDropdown" :user="user" />
         </nav>
     </div>
-    <SearchModal :show="search" @close="toggleSearch">
-        <SearchBar />
-    </SearchModal>
+    <SearchModal :show="search" @close="toggleSearch" />
 </template>

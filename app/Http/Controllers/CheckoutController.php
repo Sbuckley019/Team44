@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Basket;
 use App\Models\BasketItem;
+use App\Models\Purchase;
 use App\Services\BasketService;
 use App\Services\ProductService;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,11 @@ class CheckoutController extends Controller
                     'product_id' => $productData->id,
                     'quantity' => $product['quantity'],
                     'subtotal' => $product['quantity'] * $productData->price,
+                ]);
+
+                Purchase::create([
+                    'user_id' => Auth::id() ?? null,
+                    'product_id' => $productData->id,
                 ]);
             }
 

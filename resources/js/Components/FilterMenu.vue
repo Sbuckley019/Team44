@@ -5,12 +5,17 @@ import Dropdown from "@/Components/Dropdown.vue";
 import RadioSort from "@/Components/RadioSort.vue";
 import RadioFilter from "@/Components/RadioFilter.vue";
 import PrimaryButton from "./PrimaryButton.vue";
+import CategoryFilter from "@/Components/CategoryFilter.vue";
 import { computed } from "vue";
 
 const props = defineProps({
     category: {
         type: Object,
         default: 0,
+    },
+    categories: {
+        type: Object,
+        default: null,
     },
     searchTerm: {
         type: String,
@@ -27,6 +32,7 @@ const props = defineProps({
 const selectedSort = ref("relevancy");
 const selectedPriceRange = ref([0, 1000]);
 const selectedRating = ref("1");
+const selectedCategory = ref(null);
 
 const filtersModified = ref(false);
 
@@ -36,10 +42,11 @@ const resetValuesToDefault = () => {
     selectedSort.value = "relevancy";
     selectedPriceRange.value = [0, 1000];
     selectedRating.value = "1";
+    selectedCategory.value = null;
     filtersModified.value = false;
 
     emit("reset", {
-        category_id: props.category.id,
+        category_id: props.category ? props.category.id : null,
     });
 };
 
@@ -47,12 +54,14 @@ const updateFilters = ({ type, value }) => {
     if (type === "sort") selectedSort.value = value;
     if (type === "priceRange") selectedPriceRange.value = value;
     if (type === "rating") selectedRating.value = value;
+    if (type === "category") selectedCategory.value = value;
 
     const filters = {
         sort: selectedSort.value,
         minPrice: selectedPriceRange.value[0],
         maxPrice: selectedPriceRange.value[1],
         rating: selectedRating.value,
+        category: selectedCategory.value,
     };
 
     if (props.searchTerm) {
@@ -73,7 +82,7 @@ const changeVisibility = () => {
 };
 
 const menuClass = computed(() => ({
-    "slide h-full lg:h-[402px] pr-[3.3rem] ps-8 pt-4 flex-shrink-0 self-start sticky w-11/12 z-10 bg-white top-44  overflow-y-scroll lg:z-0 lg:w-80 lg:top-40": true,
+    "slide h-full lg:h-[402px] pr-[3.3rem] ps-8 pt-4 flex-shrink-0 self-start sticky w-11/12 z-10 bg-white dark:bg-black top-44  overflow-y-scroll lg:z-0 lg:w-80 lg:top-40": true,
     "hidden lg:block": props.screenSize === "large" || props.isVisible,
     "fixed lg:sticky": props.screenSize === "small",
 }));
@@ -120,15 +129,18 @@ function afterLeave() {
                 @click.stop
             >
                 <div
-                    class="py-5 font-montserrat border-solid border-greyt border-b flex justify-between"
+                    class="py-5 font-montserrat border-solid border-white border-b flex justify-between"
                 >
-                    <h2 class="text-black font-bold text-lg">Filter & Sort</h2>
+                    <h2 class="text-black dark:text-white font-bold text-lg">
+                        Filter & Sort
+                    </h2>
 
                     <button
                         class="text-base"
                         :class="{
-                            'text-topbord': !filtersModified,
-                            'text-black': filtersModified,
+                            'text-topbord dark:text-whitebord':
+                                !filtersModified,
+                            'text-black dark:text-white': filtersModified,
                         }"
                         @click="resetValuesToDefault"
                         :disabled="!filtersModified"
@@ -143,6 +155,16 @@ function afterLeave() {
                         <RadioSort
                             :selectedSort="selectedSort"
                             @sortChoice="updateFilters"
+                        />
+                    </template>
+                </Dropdown>
+                <Dropdown v-if="categories">
+                    <template #trigger> Category </template>
+                    <template #content>
+                        <CategoryFilter
+                            :selectedCategory="selectedCategory"
+                            :categories="categories"
+                            @filterCategory="updateFilters"
                         />
                     </template>
                 </Dropdown>

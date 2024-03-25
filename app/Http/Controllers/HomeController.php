@@ -12,9 +12,10 @@ class HomeController extends Controller
     public function homeProductCarousels(Request $request)
     {
         $productService = new ProductService();
+        $purchaseController = new PurchaseController();
 
 
-        $bestSellingProducts = $productService->getProducts(null, null, false, 9);
+        $bestSellingProducts = $purchaseController->bestSellingProducts();
         $newestProducts = $productService->getProducts(['sort' => 'newest'], null, false, 9);
         $mensProducts = $productService->getProducts(['category_id' => 1], null, false, 9);
         $womensProducts = $productService->getProducts(['category_id' => 2], null, false, 9);

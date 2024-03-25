@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 
 class ProductService
 {
     public function getProducts($filters = null, $userId = null, $isFavourites = false, $limit = null)
     {
         $query = Product::query();
-
 
         if ($limit) {
             $query->limit($limit);
@@ -21,6 +21,11 @@ class ProductService
 
         if (isset($filters['category_id'])) {
             $query->where('category_id', $filters['category_id']);
+        }
+
+        if (isset($filters['category'])) {
+            $category_id = ProductCategory::where('category_name', $filters['category'])->pluck('id');
+            $query->where('category_id', $category_id);
         }
 
         if (isset($filters['rating'])) {

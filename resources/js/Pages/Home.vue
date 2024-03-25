@@ -4,6 +4,7 @@ import NavigationBar from "@/Components/NavigationBar.vue";
 import ProductCarousel from "@/Components/ProductCarousel.vue";
 import UserLayout from "@/Layouts/UserLayout.vue";
 import { Head } from "@inertiajs/vue3";
+
 const props = defineProps({
     BestSellingProducts: {
         type: Object,
@@ -24,67 +25,110 @@ const props = defineProps({
     <Head title="Home" />
     <UserLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2
+                class="font-semibold text-xl dark:text-white text-gray-800 leading-tight"
+            >
                 Home
             </h2>
         </template>
 
         <div>
             <div>
-                <div class="bg-white overflow-hidden">
+                <div class="bg-white dark:bg-black overflow-hidden">
                     <div v-if="BestSellingProducts">
-                        <div class="bg-image-1 bg-cover h-[480px] flex items-end">
-                        <div class="flex flex-col justify-center py-4 rounded text-white">
-                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
-                                With great gains comes great responsibility
-                            </h2>
-                        </div>
+                        <div
+                            class="bg-image-1 bg-cover h-[480px] flex items-end"
+                        >
+                            <div
+                                class="flex flex-col justify-center py-4 rounded text-white"
+                            >
+                                <h2
+                                    class="ms-4 text-5xl font-bold uppercase font-montserrat my-4"
+                                >
+                                    With great gains comes great responsibility
+                                </h2>
+                            </div>
                         </div>
                         <div class="mt-4 mb-8">
                             <Header>Best Selling Products</Header>
-                            <ProductCarousel class="pt-8" :products="BestSellingProducts" />
-                     
+                            <ProductCarousel
+                                class="pt-8"
+                                :products="BestSellingProducts"
+                            />
                         </div>
                     </div>
                     <div v-if="NewestProducts">
-                        <div class="bg-image-2 bg-cover h-[472px] flex items-end">
-                        <div class="flex flex-col justify-center py-4 rounded text-white">
-                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
-                                Shop our newest products
-                            </h2>
+                        <div
+                            class="bg-image-2 bg-cover h-[472px] flex items-end"
+                        >
+                            <div
+                                class="flex flex-col justify-center py-4 rounded text-white"
+                            >
+                                <h2
+                                    class="ms-4 text-5xl font-bold uppercase font-montserrat my-4"
+                                >
+                                    Shop our newest products
+                                </h2>
+                            </div>
                         </div>
-                        </div>
-                        <div  class="mt-4 mb-8">
+                        <div class="mt-4 mb-8">
                             <Header>Newest Products</Header>
-                        <ProductCarousel class="pt-8" :products="NewestProducts" />
+                            <ProductCarousel
+                                class="pt-8"
+                                :products="NewestProducts"
+                            />
                         </div>
                     </div>
                     <div v-if="MensProducts">
-                        <div class="bg-image-3 bg-cover h-[472px] flex items-end">
-                        <div class="flex flex-col justify-center py-4 rounded text-white">
-                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
-                                All new mens products
-                            </h2>
-                            <p class="ms-4">Be greater with our new selection of mens products</p>
+                        <div
+                            class="bg-image-3 bg-cover h-[472px] flex items-end"
+                        >
+                            <div
+                                class="flex flex-col justify-center py-4 rounded text-white"
+                            >
+                                <h2
+                                    class="ms-4 text-5xl font-bold uppercase font-montserrat my-4"
+                                >
+                                    All new mens products
+                                </h2>
+                                <p class="ms-4">
+                                    Be greater with our new selection of mens
+                                    products
+                                </p>
+                            </div>
                         </div>
-                        </div>
-                        <div  class="mt-4 mb-8">
+                        <div class="mt-4 mb-8">
                             <Header>Mens Products</Header>
-                        <ProductCarousel class="pt-8" :products="MensProducts" />
+                            <ProductCarousel
+                                class="pt-8"
+                                :products="MensProducts"
+                            />
                         </div>
                     </div>
                     <div v-if="WomensProducts">
-                        <div class="bg-image-4 bg-cover h-[472px] flex items-end">
-                        <div class="flex flex-col justify-center py-4 rounded text-white">
-                            <h2 class="ms-4 text-5xl font-bold uppercase font-montserrat my-4">
-                                All new womans products
-                            </h2>
-                            <p class="ms-4">Dress to impress with our new variety of womans clothing</p>
+                        <div
+                            class="bg-image-4 bg-cover h-[472px] flex items-end"
+                        >
+                            <div
+                                class="flex flex-col justify-center py-4 rounded text-white"
+                            >
+                                <h2
+                                    class="ms-4 text-5xl font-bold uppercase font-montserrat my-4"
+                                >
+                                    All new womans products
+                                </h2>
+                                <p class="ms-4">
+                                    Dress to impress with our new variety of
+                                    womans clothing
+                                </p>
+                            </div>
                         </div>
-                        </div>
-                        <div  class="mt-4 mb-8">
+                        <div class="mt-4 mb-8">
                             <Header>Womans Products</Header>
-                        <ProductCarousel class="pt-8":products="WomensProducts" />
+                            <ProductCarousel
+                                class="pt-8"
+                                :products="WomensProducts"
+                            />
                         </div>
                     </div>
                 </div>
@@ -93,19 +137,19 @@ const props = defineProps({
     </UserLayout>
 </template>
 <style scoped>
-.bg-image-1{
+.bg-image-1 {
     background-image: url("../../../public/images/gordon-cowie-RKrwVMiW-ik-unsplash.jpg");
 }
 
-.bg-image-2{
+.bg-image-2 {
     background-image: url("../../../public/images/Equipment_image.jpg");
 }
 
-.bg-image-3{
+.bg-image-3 {
     background-image: url("../../../public/images/man_on_tredmill.jpg");
 }
 
-.bg-image-4{
+.bg-image-4 {
     background-image: url("../../../public/images/womans_clothing.jpg");
 }
 </style>

@@ -14,10 +14,12 @@ class CreateProducts extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
+            $table->string('brief_description');
             $table->text('description');
             $table->decimal('price', 10, 2)->unsigned();
             $table->unsignedBigInteger('category_id');
             $table->integer('stock_quantity')->unsigned();
+            $table->float('discount')->default('0');
             $table->string('image_url');
             $table->decimal('rating', 3, 1)->nullable();
             $table->timestamps();

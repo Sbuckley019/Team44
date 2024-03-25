@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -50,12 +51,7 @@ Route::get('/', [HomeController::class, 'homeProductCarousels'])
 Route::get('/about', function () {
     return Inertia::render('About');
 });
-Route::get('/contact', function () {
-    return Inertia::render('Contact');
-});
-Route::get('/feedback', function () {
-    return Inertia::render('Feedback');
-});
+
 Route::get('/product/{product_name}', [ProductItemController::class, 'show'])->name('product.show');
 
 Route::name('products')->group(function () {
@@ -64,6 +60,7 @@ Route::name('products')->group(function () {
     Route::get('/products/{category_id?}', [ProductController::class, 'index'])->name('.index');
     Route::post('/products', [ProductController::class, 'store'])->name('.store')->middleware('web');
 });
+
 
 Route::name('favourite')->group(function () {
     Route::get('/favourites', [FavouritesController::class, 'index'])->name('.index');
@@ -74,21 +71,26 @@ Route::name('orders')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('.index');
 });
 
+Route::post('/return-order-item', [OrderItemController::class, 'returnOrderItem'])->name('order-items.return');
+
 Route::name('review')->group(function () {
     Route::post('/review', [ReviewController::class, 'helpfulReview'])->name('.helpful');
     Route::get('/reviews/{productId}', [ReviewController::class, 'index'])->name('.index');
 });
 
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
+Route::get('/feedback', function () {
+    return Inertia::render('Feedback');
+});
+
 Route::name('feedback')->group(function () {
-    //Route::get('/feedback', [FeedbackController::class, 'index'])->name('.index');
     Route::post('/feedback/add', [FeedbackController::class, 'store'])->name('.store');
-    Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read');
 });
 
 Route::name('contact')->group(function () {
-    //Route::get('/contact', [ContactController::class, 'index'])->name('.index');
     Route::post('/contact/add', [ContactController::class, 'store'])->name('.store');
-    Route::post('/contact/read/{contactId}', [ContactController::class, 'read'])->name('.read');
 });
 
 Route::get('/basket', function () {
@@ -114,26 +116,38 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::name('review')->group(function () {
+        Route::get('/create', [ReviewController::class, 'create'])->name('.create');
+        Route::post('/', [ReviewController::class, 'store'])->name('.store');
+        Route::patch('/{reviewId}', [ReviewController::class, 'update'])->name('.update');
+        Route::get('/review/edit', [ReviewController::class, 'edit'])->name('.edit');
+    });
 });
 
 Route::middleware('admin')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
-    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
-    Route::get('/items', [AdminProductController::class, 'index'])->name('admin.items');
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
+    Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products');
 
-    //Route::get('/customers', [UserController::class, 'index'])->name('customer.index');
+    Route::name('feedback')->group(function () {
+        Route::get('/admin/feedback', [FeedbackController::class, 'index'])->name('.index');
+        Route::post('/feedback/read/{feedbackId}', [FeedbackController::class, 'read'])->name('.read');
+    });
+
+    Route::name('contact')->group(function () {
+        Route::get('/admin/contact', [ContactController::class, 'index'])->name('.index');
+        Route::post('/contact/read/{contactId}', [ContactController::class, 'read'])->name('.read');
+    });
 
     Route::name('products')->group(function () {
+        Route::get('/admin/create', [AdminProductController::class, 'create'])->name(".create");
         Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('.edit');
         Route::put('/products/{product}', [ProductController::class, 'update'])->name('.update');
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('.destroy');
-        Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('.adminIndex');
     });
-
-    Route::get('/Admin/Orders', [AdminOrderController::class, 'index'])->name('admin.orders');
-    Route::get('/Admin/Orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
 });
 
 

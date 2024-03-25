@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, onUnmounted, watch } from "vue";
+import SearchBar from "./SearchBar.vue";
 
 const props = defineProps({
     show: {
@@ -50,7 +51,7 @@ onUnmounted(() => {
         <Transition leave-active-class="duration-200">
             <div
                 v-show="show"
-                class="fixed inset-0 lg:overflow-y-auto top-8 z-50"
+                class="fixed inset-0 lg:overflow-y-auto top-0 sm:top-8 z-50"
                 scroll-region
             >
                 <Transition
@@ -80,9 +81,9 @@ onUnmounted(() => {
                 >
                     <div
                         v-show="show"
-                        class="flex flex-col lg:justify-center px-8 lg:px-0 lg:items-center mb-6 h-full lg:h-16 bg-white transform transition-all sm:w-full sm:mx-auto"
+                        class="flex flex-col lg:justify-center px-8 lg:px-0 items-center mb-6 h-full lg:h-16 bg-white dark:bg-black transform transition-all sm:w-full sm:mx-auto"
                     >
-                        <slot v-if="show" />
+                        <SearchBar v-if="show" @close="close" />
                     </div>
                 </Transition>
             </div>

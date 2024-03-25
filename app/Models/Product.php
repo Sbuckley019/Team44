@@ -28,6 +28,7 @@ class Product extends Model
         'price',
         'category_id',
         'stock_quantity',
+        'discount',
         'image_url',
         'rating',
         'favourite',
@@ -61,5 +62,10 @@ class Product extends Model
     public function favourites()
     {
         return $this->hasMany(Favourites::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

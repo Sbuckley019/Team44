@@ -7,6 +7,25 @@ use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
+    public function bestSellingProducts()
+    {
+        $productsWithPurchasesCount = Product::withCount('purchases')
+            ->orderByDesc('purchases_count')
+            ->take(9)
+            ->get();
+
+        $totalProductsNeeded = 9 - $productsWithPurchasesCount->count();
+
+        if ($totalProductsNeeded > 0) {
+            $additionalProducts = Product::whereNotIn('id', $productsWithPurchasesCount->pluck('id')->toArray())
+                ->take($totalProductsNeeded)
+                ->get();
+
+            $productsWithPurchasesCount = $productsWithPurchasesCount->merge($additionalProducts);
+        }
+
+        return $productsWithPurchasesCount;
+    }
     public function mostPurchasedInCategory(Product $product)
     {
         return $this->getPurchasedProducts(Product::query()
@@ -16,12 +35,12 @@ class PurchaseController extends Controller
             ->orderByDesc('purchases_count'), $product);
     }
 
+
     public function alsoPurchasedByUsers(Product $product)
     {
-        // Get user IDs who purchased the given product
         $userIds = $product->purchases()->pluck('user_id');
 
-        // Get products that were purchased by those users, excluding the given product
+
         return $this->getPurchasedProducts(Product::whereHas('purchases', function ($query) use ($userIds) {
             $query->whereIn('user_id', $userIds);
         })->where('id', '!=', $product->id)->withCount('purchases')->orderByDesc('purchases_count'), $product);

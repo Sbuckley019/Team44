@@ -15,7 +15,9 @@
                 :key="index"
                 :class="[
                     'h-2 w-2 rounded-full',
-                    currentSlide === index ? 'bg-white' : 'bg-gray-400',
+                    currentSlide === index
+                        ? 'bg-white dark:bg-black'
+                        : 'bg-gray-400',
                 ]"
                 @click="currentSlide = index"
             ></button>

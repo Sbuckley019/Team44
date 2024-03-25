@@ -66,7 +66,7 @@ const isFavourite = (productId) => {
 };
 </script>
 <template>
-    <div class="flex bg-white w-full relative">
+    <div class="flex bg-white dark:bg-black w-full relative">
         <Link
             :href="
                 route('product.show', { product_name: product.product_name })
@@ -84,11 +84,14 @@ const isFavourite = (productId) => {
         </Link>
         <div class="py-3 h-24">
             <div
-                class="font-roboto text-base font-normal text-dark mb-0.5 capitalize"
+                class="font-roboto text-base font-normal text-dark dark:text-white mb-0.5 capitalize"
             >
                 {{ product.product_name }}
             </div>
-            <div class="text-sm text-gray-600 mb-1" :class="customWidth">
+            <div
+                class="text-sm dark:text-white text-gray-600 mb-1"
+                :class="customWidth"
+            >
                 {{ product.description }}
             </div>
             <div
@@ -114,19 +117,19 @@ const isFavourite = (productId) => {
             </div>
             <div
                 v-if="!isCheckout"
-                class="font-roboto text-base font-bold text-dark capitalize"
+                class="font-roboto text-base font-bold text-dark dark:text-white capitalize"
             >
                 £{{ product.price }}
             </div>
             <div
                 v-else
-                class="font-roboto text-base font-bold text-dark capitalize"
+                class="font-roboto text-base font-bold text-dark dark:text-white capitalize"
             >
                 £{{ (product.price * product.quantity).toFixed(2) }}
             </div>
             <div v-if="!isCheckout" class="mt-3 flex gap-4">
                 <button
-                    class="w-9 h-9 rounded-full bg-lgrey text-black hover:text-black focus:outline-none flex items-center justify-center"
+                    class="w-9 h-9 rounded-full bg-lgrey text-black dark:text-white dark:text-white dark:hover:text-white hover:text-black dark:text-white focus:outline-none flex items-center justify-center"
                     @click.stop="isFavourite(product.id)"
                 >
                     <i
@@ -139,7 +142,7 @@ const isFavourite = (productId) => {
                     ></i>
                 </button>
                 <button
-                    class="w-9 h-9 rounded-full bg-lgrey text-black hover:text-black focus:outline-none flex items-center justify-center"
+                    class="w-9 h-9 rounded-full bg-lgrey text-black dark:text-white hover:text-black dark:text-white focus:outline-none flex items-center justify-center"
                     @click="removeFromBasket(product.product_id)"
                 >
                     <i class="fa-solid fa-trash text-lg"></i>

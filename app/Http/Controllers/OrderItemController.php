@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class OrderItemController extends Controller
 {
@@ -34,6 +36,25 @@ class OrderItemController extends Controller
         $status = $orderItem->order->status;
         return view('order_items.order_status', ['status' => $status]);
     }
-    
-    // Other methods for create, store, edit, update, destroy can be added as per your requirement
+
+
+    public function returnOrderItem(Request $request)
+    {
+
+        $request->validate([
+            'productId' => 'required|integer',
+            'orderId' => 'required|integer',
+        ]);
+
+        DB::transaction(function () use ($request) {
+            $orderItem = OrderItem::where('order_id', $request->orderId)
+                ->where('product_id', $request->productId)
+                ->firstOrFail();
+
+            $orderItem->product->increment('stock_quantity');
+            $orderItem->delete();
+        });
+
+        return redirect()->back()->with('message', 'Product returned successfully.');
+    }
 }

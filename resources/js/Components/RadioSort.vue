@@ -39,7 +39,7 @@ const sortOptions = [
         <label
             v-for="option in sortOptions"
             :key="option.value"
-            class="text-sm text-midgrey font-roboto font-normal py-3"
+            class="text-sm text-midgrey dark:text-white font-roboto font-normal py-3"
         >
             <input
                 type="radio"

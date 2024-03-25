@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,7 +15,12 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return Inertia::render('Admin/Dashboard');
+        $totalCustomers = User::count();
+        $totalOrders = Order::count();
+        $lowStock = Product::where('stock_quantity', '<', 5)->count();
+        $totalSales = Order::sum('total_price');
+
+        return Inertia::render('Admin/Dashboard', ['totalCustomers' => $totalCustomers, 'totalOrders' => $totalOrders, 'low_stock' => $lowStock, 'totalSales' => $totalOrders]);
     }
     public function products()
     {

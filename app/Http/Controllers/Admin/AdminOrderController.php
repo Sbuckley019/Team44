@@ -17,21 +17,19 @@ class AdminOrderController extends Controller
 
 
 
-        $orders = Order::with(['user', 'orderItems'])
+        $orders = Order::with(['user'])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($order) {
+                return [
+                    'id' => $order->id,
+                    'email' => $order->email,
+                    'total_price' => $order->total_price,
+                    'status' => $order->status,
+                    'date' => $order->created_at->toDateString(),
+                ];
+            });
 
-
-        $orders->transform(function ($order) {
-            return [
-                'id' => $order->id,
-                'customer_name' => optional($order->user)->name,
-                'total_price' => $order->total_price,
-                'status' => $order->status,
-                'date' => $order->created_at->toDateString(),
-                'order_items_count' => $order->orderItems->count(),
-            ];
-        });
 
         return Inertia::render('Admin/Orders', ['orders' => $orders]);
     }

@@ -8,13 +8,12 @@ import { computed } from "vue";
 
 const store = useBasketStore();
 const message = computed(() => store.message);
-
 </script>
 
 <template>
-    <div class="min-h-screen bg-white">
+    <div class="min-h-screen bg-white dark:bg-black dark:bg-black">
         <NavigationBar />
-
+        <!--
         <FlashMessage
             v-if="$page.props.flash.success || message"
             :message="$page.props.flash.success || message"
@@ -26,7 +25,7 @@ const message = computed(() => store.message);
             :message="$page.props.flash.error"
             color="red"
         />
-
+-->
         <!-- Page Content -->
         <main class="mb-8">
             <slot />

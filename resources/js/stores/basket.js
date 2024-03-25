@@ -20,7 +20,10 @@ export const useBasketStore = defineStore("basket", () => {
     }
 
     function emptyBasket() {
+        console.log(items.value);
         localStorage.clear();
+        items.value = {};
+        console.log(items.value);
     }
 
     function updateMessage(response) {

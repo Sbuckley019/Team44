@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-6/12 h-11 bg-white absolute rounded-full border-4 border-gray-200 transition duration-500"
+        class="w-6/12 h-11 bg-white dark:bg-black absolute rounded-full border-4 border-gray-200 transition duration-500"
         :style="sliderStyle"
     ></div>
 </template>

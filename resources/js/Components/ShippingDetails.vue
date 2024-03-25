@@ -41,10 +41,10 @@ const loginUrl = ref(`/login?intended=${encodeURIComponent(url)}`);
             <div v-if="user">
                 <Header>Checkout as {{ user.email }}</Header>
                 <p
-                    class="font-roboto text-sm font-medium text-midgrey text-center"
+                    class="font-roboto text-sm font-medium text-midgrey dark:text-white text-center"
                 >
                     Not You?
-                    <NavLink :href="'/logout'"  method="post">Logout</NavLink>
+                    <NavLink :href="'/logout'" method="post">Logout</NavLink>
                 </p>
                 <hr />
             </div>
@@ -60,7 +60,9 @@ const loginUrl = ref(`/login?intended=${encodeURIComponent(url)}`);
                     autocomplete="email"
                 />
                 <InputError :message="form.errors.email" />
-                <p class="font-roboto text-sm font-medium text-midgrey">
+                <p
+                    class="font-roboto text-sm font-medium text-midgrey dark:text-white"
+                >
                     Checkout as User?
                     <NavLink :href="loginUrl">Log In</NavLink>
                 </p>

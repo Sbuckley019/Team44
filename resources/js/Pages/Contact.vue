@@ -36,8 +36,12 @@ const submit = () => {
                     >
                         <i class="fas fa-envelope text-8xl text-white"></i>
                     </div>
-                    <p class="font-roboto text-gray-700">Email</p>
-                    <p class="font-roboto text-gray-700">gains@gmail.com</p>
+                    <p class="font-roboto dark:text-white text-gray-700">
+                        Email
+                    </p>
+                    <p class="font-roboto dark:text-white text-gray-700">
+                        gains@gmail.com
+                    </p>
                 </div>
                 <div class="flex flex-col items-center w-32">
                     <div
@@ -45,8 +49,12 @@ const submit = () => {
                     >
                         <i class="fas fa-phone text-8xl text-white"></i>
                     </div>
-                    <p class="font-roboto text-gray-700">Phone</p>
-                    <p class="font-roboto text-gray-700">01332 345475</p>
+                    <p class="font-roboto dark:text-white text-gray-700">
+                        Phone
+                    </p>
+                    <p class="font-roboto dark:text-white text-gray-700">
+                        01332 345475
+                    </p>
                 </div>
                 <div class="flex flex-col items-center w-32">
                     <div
@@ -54,20 +62,24 @@ const submit = () => {
                     >
                         <i class="fas fa-location-dot text-8xl text-white"></i>
                     </div>
-                    <p class="font-roboto text-gray-700">Address</p>
-                    <p class="font-roboto text-gray-700">
+                    <p class="font-roboto dark:text-white text-gray-700">
+                        Address
+                    </p>
+                    <p class="font-roboto dark:text-white text-gray-700">
                         64 Striker Lane, Kensington, London, W8 4AB
                     </p>
                 </div>
             </div>
-            <p class="font-montserrat font-semibold text-black mt-6">
+            <p
+                class="font-montserrat font-semibold text-black dark:text-white mt-6"
+            >
                 For inquiries, please use the form below.
             </p>
         </div>
         <form
             v-if="!formSubmitted"
             @submit.prevent="submit"
-            class="w-full md:w-6/12 p-6 bg-white rounded-lg mx-auto my-4"
+            class="w-full md:w-6/12 p-6 bg-white dark:bg-black rounded-lg mx-auto my-4"
         >
             <Header class="mb-4">Contact Us</Header>
 
@@ -79,7 +91,7 @@ const submit = () => {
                     v-model="form.name"
                     type="text"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 />
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
@@ -91,7 +103,7 @@ const submit = () => {
                     v-model="form.email"
                     type="email"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
@@ -105,7 +117,7 @@ const submit = () => {
                     type="text"
                     maxlength="100"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 />
                 <InputError class="mt-2" :message="form.errors.subject" />
             </div>
@@ -113,7 +125,7 @@ const submit = () => {
             <div class="mb-4">
                 <InputLabel
                     for="category"
-                    class="font-roboto text-sm font-medium text-midgrey"
+                    class="font-roboto text-sm font-medium text-midgrey dark:text-white"
                     :value="'Category:'"
                 />
 
@@ -121,7 +133,7 @@ const submit = () => {
                     id="category"
                     v-model="form.category"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 >
                     <option disabled value="">Please select one</option>
                     <option value="technical_support">Technical Support</option>
@@ -139,7 +151,7 @@ const submit = () => {
                     id="query"
                     v-model="form.query"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 min-h-32 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 min-h-32 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 ></textarea>
                 <InputError class="mt-2" :message="form.errors.query" />
             </div>
@@ -151,11 +163,5 @@ const submit = () => {
                 Submit
             </PrimaryButton>
         </form>
-        <div
-            v-else
-            class="w-full md:w-6/12 p-6 bg-white rounded-lg mx-auto my-4"
-        >
-            Yay
-        </div>
     </UserLayout>
 </template>

@@ -52,15 +52,21 @@ const openSearch = () => {
 const closeSearch = () => {
     open.value = false;
 };
+
+const emit = defineEmits(["close"]);
+
+const closeModal = () => {
+    emit("close");
+};
 </script>
 <template>
-    <div class="relative flex center mx-auto w-96 mt-4 lg:mt-0">
+    <div class="relative flex center mx-auto w-full sm:w-96 mt-4 lg:mt-0">
         <i
             @click="search"
             class="bi bi-search text-lg absolute right-4 top-3 cursor-pointer"
         ></i>
         <input
-            class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+            class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
             placeholder="Search for Products"
             maxlength="20"
             v-model="searchInput"
@@ -69,9 +75,13 @@ const closeSearch = () => {
             @keyup.enter="search"
         />
     </div>
+    <i
+        @click="closeModal"
+        class="fa-solid fa-x text-2xl top-4 right-8 my-auto absolute cursor-pointer"
+    ></i>
     <transition name="slide" mode="out-in">
         <div
-            class="lg:flex w-full absolute -z-20 top-16 h-60 bg-white justify-around lg:border-t-2"
+            class="lg:flex w-full absolute -z-20 top-16 h-60 bg-white dark:bg-black justify-around lg:border-t-2"
             v-if="open"
         >
             <div id="search History" class="mt-4 max-w-60 overflow-hidden">
@@ -108,7 +118,7 @@ const closeSearch = () => {
 
                 <div
                     v-else-if="searchInput.length > 0"
-                    class="w-8 h-8 border-4 border-t-greyt border-b-greyt border-l-greyt border-r-transparent rounded-full animate-spin m-auto"
+                    class="w-8 h-8 border-4 border-t-white border-b-white border-l-white border-r-transparent rounded-full animate-spin m-auto"
                 ></div>
             </div>
         </div>

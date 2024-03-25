@@ -29,12 +29,14 @@ console.log(shipping);
         <hr />
         <div class="px-3">
             <div
-                class="flex font-roboto text-base text-midgrey py-3 justify-between"
+                class="flex font-roboto text-base text-midgrey dark:text-white py-3 justify-between"
             >
                 <p>Subtotal</p>
                 £{{ total }}
             </div>
-            <div class="font-roboto text-base text-midgrey py-3">
+            <div
+                class="font-roboto text-base text-midgrey dark:text-white py-3"
+            >
                 <div class="flex justify-between" v-if="shipping">
                     <p>Shipping</p>
                     £{{ shipping }}

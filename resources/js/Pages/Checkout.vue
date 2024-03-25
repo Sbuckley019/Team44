@@ -42,6 +42,7 @@ const checkout = () => {
         {
             onSuccess: () => {
                 basketStore.emptyBasket();
+                console.log(basket);
                 router.visit("/");
             },
             onError: (error) => console.log(error),
@@ -52,7 +53,9 @@ const checkout = () => {
 
 <template>
     <div class="lg:flex mb-10">
-        <div class="w-full lg:w-6/12 px-6 bg-white rounded-lg mx-auto mt-10">
+        <div
+            class="w-full lg:w-6/12 px-6 bg-white dark:bg-black rounded-lg mx-auto mt-10"
+        >
             <ApplicationLogo class="mx-auto w-40" />
             <component
                 :is="checkoutStage"

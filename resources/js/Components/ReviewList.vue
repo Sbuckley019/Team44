@@ -1,12 +1,21 @@
 <script setup>
-import { router } from "@inertiajs/vue3";
+import { router, usePage } from "@inertiajs/vue3";
 import Pagination from "./Pagination.vue";
-import { onUnmounted } from "vue";
+import { onUnmounted, computed } from "vue";
 import ReviewButton from "./ReviewButton.vue";
+import SecondaryButton from "./SecondaryButton.vue";
 
-const props = defineProps({
+const { props } = usePage();
+
+const userId = computed(() => props.auth.user).value.id;
+
+const reviewProps = defineProps({
     reviews: {
         type: Object,
+    },
+    canReview: {
+        type: Boolean,
+        default: false,
     },
 });
 
@@ -27,6 +36,10 @@ const markAsHelpful = (review) => {
             preserveState: true,
         }
     );
+};
+
+const editReview = () => {
+    router.visit(route("review.edit"));
 };
 
 onUnmounted(() => {
@@ -59,18 +72,20 @@ onUnmounted(() => {
                             {{ review.review_heading }}
                         </div>
                     </div>
-                    <div class="text-black font-bold font-montserrat text-xs">
+                    <div
+                        class="text-black dark:text-white font-bold font-montserrat text-xs"
+                    >
                         Verified Purchase
                     </div>
-                    <div class="text-midgrey text-xs my-0.5">
+                    <div class="text-midgrey dark:text-white text-xs my-0.5">
                         Reviewed on {{ review.created_at }}
                     </div>
-                    <div class="font-roboto text-sm text-black">
+                    <div class="font-roboto text-sm text-black dark:text-white">
                         {{ review.review_text }}
                     </div>
                     <div
                         v-if="review.helpfulness > 0"
-                        class="mt-2 text-xs text-midgrey"
+                        class="mt-2 text-xs text-midgrey dark:text-white"
                     >
                         {{
                             review.helpfulness === 1
@@ -79,8 +94,18 @@ onUnmounted(() => {
                                   " people found this helpful"
                         }}
                     </div>
-
-                    <ReviewButton @banana="markAsHelpful(review.id)" />
+                    <div class="flex">
+                        <SecondaryButton
+                            v-if="review.user_id == userId"
+                            class="mt-3"
+                            @click="editReview"
+                            >Edit Review</SecondaryButton
+                        >
+                        <ReviewButton
+                            v-else
+                            @marked="markAsHelpful(review.id)"
+                        />
+                    </div>
                 </div>
                 <div class="ml-12">
                     <div>

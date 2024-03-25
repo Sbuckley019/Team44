@@ -12,18 +12,19 @@ class AdminCustomerController extends Controller
 {
     public function index()
     {
-        $customers = User::all();
+        $customers = User::with('orders')->get();
 
         $customers->transform(function ($customer) {
+            $totalSpent = $customer->orders->sum('total_price');
+
             return [
                 'id' => $customer->id,
                 'username' => $customer->username,
                 'email' => $customer->email,
-                'spent' => 1,
+                'spent' => $totalSpent,
                 'date' => $customer->created_at->toDateString(),
             ];
         });
-
 
         return Inertia::render('Admin/Customers', ['customers' => $customers]);
     }
