@@ -15,21 +15,21 @@ class AdminOrderController extends Controller
         $orders = Order::all();
 
 
-
-
-        $orders = Order::with(['user'])
+        $orders = Order::with(['user', 'orderItems'])
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function ($order) {
-                return [
-                    'id' => $order->id,
-                    'email' => $order->email,
-                    'total_price' => $order->total_price,
-                    'status' => $order->status,
-                    'date' => $order->created_at->toDateString(),
-                ];
-            });
+            ->get();
 
+
+        $orders->transform(function ($order) {
+            return [
+                'id' => $order->id,
+                'customer_name' => optional($order->user)->name,
+                'total_price' => $order->total_price,
+                'status' => $order->status,
+                'date' => $order->created_at->toDateString(),
+                'order_items_count' => $order->orderItems->count(),
+            ];
+        });
 
         return Inertia::render('Admin/Orders', ['orders' => $orders]);
     }
@@ -41,4 +41,5 @@ class AdminOrderController extends Controller
         $order->load('user', 'orderItems');
         return Inertia::render('Admin/DetailedOrder', ['order' => $order]);
     }
+
 }

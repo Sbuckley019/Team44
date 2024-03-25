@@ -128,7 +128,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/Admin/Orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/Admin/Orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+
+
     Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
     Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products');
 

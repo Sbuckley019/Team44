@@ -1,202 +1,121 @@
-<script setup>
+<template>
+    <AdminLayout>
+      <div class="font-roboto text-footer mx-auto p-4">
+        <Header>Order Management</Header>
+        <div class="flex justify-between items-center my-4">
+          <SecondaryButton @click="CreateOrder">
+            New Order
+          </SecondaryButton>
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              v-model="search"
+              placeholder="Search orders"
+              class="p-2 border-2 border-gray-300"
+            />
+            <select v-model="statusFilter" class="p-2 border-2 border-gray-300">
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div id="table" class="mt-4 w-full shadow-md">
+          <table class="border-collapse w-full">
+            <thead>
+              <tr class="hover:bg-footer">
+                <TableHeader> Order ID </TableHeader>
+                <TableHeader> Customer Name </TableHeader>
+                <TableHeader> Total Price </TableHeader>
+                <TableHeader> Status </TableHeader>
+                <TableHeader> Actions </TableHeader>
+                <TableHeader> Order Date </TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="order in filteredOrders" :key="order.id">
+                <TableCell>
+                  {{ order.id }}
+                </TableCell>
+                <TableCell>
+                  {{ order.customer_name }}
+                </TableCell>
+                <TableCell> £{{ order.total_price }} </TableCell>
+                <TableCell>
+                  {{ order.status }}
+                </TableCell>
+                <TableCell>
+                  <SecondaryButton @click="viewOrder(order.id)">
+                    View
+                  </SecondaryButton>
+                  <SecondaryButton
+                    @click="processOrder(order)"
+                    :disabled="order.status === 'Shipped'"
+                  >
+                    Process
+                  </SecondaryButton>
+                </TableCell>
+                <TableCell>
+                  {{ order.date }}
+                </TableCell>
+              </tr>
+              <tr v-if="filteredOrders.length === 0">
+                <TableCell colspan="6">No orders found</TableCell>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </AdminLayout>
+  </template>
+  
+  <script setup>
+import { ref, computed } from 'vue';
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Header from "@/Components/Header.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import TableHeader from "../../Components/TableHeader.vue";
-import TableCell from "../../Components/TableCell.vue";
-import { router } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
+import TableHeader from "@/Components/TableHeader.vue";
+import TableCell from "@/Components/TableCell.vue";
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-    orders: {
-        type: Array,
-    },
+  orders: Array
 });
 
-const sortField = ref(null);
-const sortOrder = ref(null);
-const searchTerm = ref("");
+const search = ref('');
+const statusFilter = ref('');
 
-const filteredAndSortedOrders = computed(() => {
-    const lowerSearchTerm = searchTerm.value.toLowerCase();
-
-    return sortedOrders.value
-        .filter((order) => {
-            return (
-                order.email.toLowerCase().includes(lowerSearchTerm) ||
-                order.id.toString().toLowerCase().includes(lowerSearchTerm)
-            );
-        })
-        .sort((a, b) => {
-            let valA = a[sortField.value];
-            let valB = b[sortField.value];
-
-            if (!isNaN(new Date(valA)) && !isNaN(new Date(valB))) {
-                valA = new Date(valA).getTime();
-                valB = new Date(valB).getTime();
-            } else if (!isNaN(parseFloat(valA)) && !isNaN(parseFloat(valB))) {
-                valA = parseFloat(valA);
-                valB = parseFloat(valB);
-            }
-
-            if (sortOrder.value === "asc") {
-                return valA > valB ? 1 : valA < valB ? -1 : 0;
-            } else {
-                return valA < valB ? 1 : valA > valB ? -1 : 0;
-            }
-        });
+const filteredOrders = computed(() => {
+  return props.orders.filter((order) => {
+    const matchesSearch = search.value.length === 0 || 
+                          order.customer_name.toLowerCase().includes(search.value.toLowerCase()) || 
+                          order.id.toString().includes(search.value);
+    const matchesStatus = statusFilter.value.length === 0 || 
+                          order.status.toLowerCase() === statusFilter.value;
+    return matchesSearch && matchesStatus;
+  });
 });
 
-const sortedOrders = computed(() => {
-    return [...props.orders].sort((a, b) => {
-        let valA = a[sortField.value];
-        let valB = b[sortField.value];
-
-        if (!isNaN(new Date(valA)) && !isNaN(new Date(valB))) {
-            valA = new Date(valA).getTime();
-            valB = new Date(valB).getTime();
-        } else if (!isNaN(parseFloat(valA)) && !isNaN(parseFloat(valB))) {
-            valA = parseFloat(valA);
-            valB = parseFloat(valB);
-        }
-
-        if (sortOrder.value === "asc") {
-            return valA > valB ? 1 : valA < valB ? -1 : 0;
-        } else {
-            return valA < valB ? 1 : valA > valB ? -1 : 0;
-        }
-    });
-});
-
-const sortOrders = (field) => {
-    if (sortField.value === field) {
-        sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
-    } else {
-        sortField.value = field;
-        sortOrder.value = "desc";
-    }
-
-    props.orders.sort((a, b) => {
-        let valA = a[sortField.value];
-        let valB = b[sortField.value];
-
-        if (sortOrder.value === "asc") {
-            return valA > valB ? 1 : -1;
-        } else {
-            return valA < valB ? 1 : -1;
-        }
-    });
+const createOrder = () => {
+    Inertia.visit('/Admin/Orders/Create');
 };
 
-const viewOrder = () => {
-    const url = `/Admin/Orders/${orderId}`;
-    console.log(`Attempting to navigate to order ${orderId}`);
-    router.visit(url);
+const viewOrder = (orderId) => {
+    Inertia.visit(`/Admin/Orders/${orderId}`);
 };
 
-const processOrder = (order) => {};
+const processOrder = (order) => {
+    // Define the logic for processing the order here
+    // For example, you could send a PUT request with Inertia or axios
+};
 </script>
 
-<style scoped>
-#table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-</style>
-
-<template>
-    <AdminLayout>
-        <div class="font-roboto text-footer dark:text-white mx-auto p-4">
-            <Header>Order Management</Header>
-            <div class="my-4 flex justify-center">
-                <input
-                    v-model="searchTerm"
-                    type="text"
-                    placeholder="Search orders..."
-                    class="p-2 border rounded w-80"
-                />
-            </div>
-            <div id="table" class="mt-4 w-full shadow-md">
-                <table class="border-collapse w-full">
-                    <thead>
-                        <tr class="hover:bg-footer">
-                            <TableHeader
-                                :sortField="sortField"
-                                :sortOrder="sortOrder"
-                                :header="'id'"
-                                @click="sortOrders('id')"
-                            >
-                                Order ID
-                            </TableHeader>
-                            <TableHeader
-                                :sortField="sortField"
-                                :sortOrder="sortOrder"
-                                :header="'email'"
-                                @click="sortOrders('email')"
-                            >
-                                Order Email
-                            </TableHeader>
-                            <TableHeader
-                                :sortField="sortField"
-                                :sortOrder="sortOrder"
-                                :header="'total_price'"
-                                @click="sortOrders('total_price')"
-                            >
-                                Total Price
-                            </TableHeader>
-                            <TableHeader
-                                :sortField="sortField"
-                                :sortOrder="sortOrder"
-                                :header="'status'"
-                                @click="sortOrders('status')"
-                            >
-                                Status
-                            </TableHeader>
-                            <TableHeader
-                                :sortField="sortField"
-                                :sortOrder="sortOrder"
-                                :header="'order_date'"
-                                @click="sortOrders('order_date')"
-                            >
-                                Order Date
-                            </TableHeader>
-                            <TableHeader> Actions </TableHeader>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="order in filteredAndSortedOrders"
-                            :key="order.id"
-                        >
-                            <TableCell>
-                                {{ order.id }}
-                            </TableCell>
-                            <TableCell>
-                                {{ order.email }}
-                            </TableCell>
-                            <TableCell> £{{ order.total_price }} </TableCell>
-                            <TableCell>
-                                {{ order.status }}
-                            </TableCell>
-                            <TableCell>
-                                {{ order.date }}
-                            </TableCell>
-                            <TableCell>
-                                <SecondaryButton
-                                    @click="viewOrder(order.id)"
-                                    class="me-3"
-                                >
-                                    View
-                                </SecondaryButton>
-                                <SecondaryButton
-                                    @click="processOrder(order.id)"
-                                >
-                                    Process
-                                </SecondaryButton>
-                            </TableCell>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </AdminLayout>
-</template>
+  
+  <style scoped>
+  #table tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+  </style>
+  
