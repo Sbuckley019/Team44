@@ -77,7 +77,7 @@ async function addToBasket(productId) {
                     >{{ product.rating }}
                 </div>
                 <div
-                    class="font-roboto text-sm font-normal text-dark dark:text-white capitalize"
+                    class="font-roboto text-sm font-normal text-dark dark:text-white max-w-52 capitalize"
                 >
                     {{ product.product_name }}
                 </div>
