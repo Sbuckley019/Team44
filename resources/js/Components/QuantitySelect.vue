@@ -70,7 +70,7 @@ function calculateDropdownPosition() {
     >
         <div :class="{ 'cursor-pointer': total > 1 }">
             <div
-                class="flex justify-between items-center w-full bg-white text-black px-4 rounded leading-tight"
+                class="flex justify-between items-center w-full bg-white dark:bg-black text-black dark:text-white px-4 rounded leading-tight"
             >
                 <span class="font-bold">Qty: {{ selectedQty }}</span>
                 <i
@@ -83,7 +83,7 @@ function calculateDropdownPosition() {
         <div
             v-show="dropdownOpen"
             :style="dropdownStyle"
-            class="w-20 bg-white border border-gray-200 rounded shadow absolute z-10"
+            class="w-20 bg-white dark:bg-black border border-gray-200 rounded shadow absolute z-10"
         >
             <ul class="list-reset">
                 <li

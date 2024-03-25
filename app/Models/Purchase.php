@@ -12,7 +12,6 @@ class Purchase extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        // Add other fillable columns if needed
     ];
 
     public function user()

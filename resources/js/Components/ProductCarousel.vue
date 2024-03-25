@@ -44,7 +44,7 @@ const scroll = (direction) => {
                 v-for="product in products"
                 :key="product.id"
                 :product="product"
-                :customClass="'w-80'"
+                :customWidth="'w-80'"
             />
         </div>
         <DirectionButton

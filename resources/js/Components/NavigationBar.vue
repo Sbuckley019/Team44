@@ -7,7 +7,10 @@ import TopBar from "@/Components/TopBar.vue";
 import Burger from "@/Components/Burger.vue";
 import BurgerMenu from "@/Components/BurgerMenu.vue";
 import SearchModal from "@/Components/SearchModal.vue";
-import { useBasketStore } from "@/stores/basket";
+import TextInput from "@/Components/TextInput.vue";
+import UserDropdown from "@/Components/UserDropdown.vue";
+import SearchBar from "@/Components/SearchBar.vue";
+import { useBasketStore } from "@/stores/basket.js";
 import { usePersistBasket } from "@/Composables/PersistBasket.js";
 
 usePersistBasket();
@@ -17,6 +20,7 @@ const store = useBasketStore();
 const { props } = usePage();
 
 const user = computed(() => props.auth.user).value;
+const isAdmin = computed(() => props.auth.isAdmin).value;
 
 const basket = computed(() => store.items);
 
@@ -36,17 +40,18 @@ const toggleSearch = () => {
 </script>
 <template>
     <div class="z-50 sticky top-0">
-        <TopBar :user="user" class="hidden md:block" />
-        <nav class="bg-white border-y border-greyt">
+        <TopBar :user="user" />
+
+        <nav class="bg-white dark:bg-black border-y border-white">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-20">
-                    <div class="flex w-full">
+                <div class="flex h-20">
+                    <div class="flex w-full justify-between">
                         <!-- Logo -->
                         <div class="flex items-center">
                             <Link :href="route('home')">
                                 <ApplicationLogo
-                                    class="block h-9 w-auto fill-current text-gray-800"
+                                    class="block h-9 w-auto fill-current dark:text-white text-gray-800"
                                 />
                             </Link>
                         </div>
@@ -68,47 +73,41 @@ const toggleSearch = () => {
                                 >
                                 <NavLink href="/products/5">Equipment</NavLink>
                             </div>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <button
+                                @click="toggleSearch"
+                                class="hover:border-b-2 hover:border-gray-300 px-2 sm:px-5 h-full"
+                            >
+                                <i class="bi bi-search text-lg"></i>
+                            </button>
+                            <NavLink
+                                v-if="isAdmin"
+                                href="/dashboard"
+                                class="px-2 sm:px-5 h-full"
+                            >
+                                <i class="bi bi-briefcase text-xl"></i>
+                            </NavLink>
+                            <UserDropdown :user="user" class="h-full" />
 
-                            <div class="flex flex-row justify-end">
-                                <div class="flex">
-                                    <button @click="toggleSearch" class="px-5">
-                                        <i class="bi bi-search text-lg"></i>
-                                    </button>
-                                    <div v-if="user" class="flex">
-                                        <NavLink href="/profile" class="px-5">
-                                            <i class="bi bi-person text-xl"></i
-                                        ></NavLink>
-                                        <div
-                                            class="hidden flex flex-col absolute bg-black min-w-40 shadow-lg z-10"
-                                        >
-                                            <NavLink href="/password/change"
-                                                >Change Password</NavLink
-                                            >
-                                            <a href="#" @click="logout"
-                                                >Log out</a
-                                            >
-                                        </div>
-                                    </div>
-
-                                    <div v-else class="flex">
-                                        <NavLink href="/login" class="px-5">
-                                            <i class="bi bi-person text-xl"></i
-                                        ></NavLink>
-                                    </div>
-                                    <NavLink href="/favourites" class="px-5">
-                                        <i class="bi bi-heart text-lg"></i>
-                                    </NavLink>
-                                    <NavLink href="/basket" class="px-5">
-                                        <i class="bi bi-bag text-lg"></i>
-                                        <div
-                                            v-if="basketSize"
-                                            class="flex absolute text-white bg-black rounded-full w-4 h-4 top-14 right-11 text-xxs justify-center items-center"
-                                        >
-                                            {{ basketSize }}
-                                        </div></NavLink
-                                    >
-                                </div>
-                            </div>
+                            <NavLink
+                                href="/favourites"
+                                class="px-2 sm:px-5 h-full"
+                            >
+                                <i class="bi bi-heart text-lg"></i>
+                            </NavLink>
+                            <NavLink
+                                href="/basket"
+                                class="px-2 sm:px-5 h-full relative"
+                            >
+                                <i class="bi bi-bag text-lg"></i>
+                                <div
+                                    v-if="basketSize"
+                                    class="flex absolute text-white bg-black rounded-full w-4 h-4 top-6 right-3 text-xxs justify-center items-center"
+                                >
+                                    {{ basketSize }}
+                                </div></NavLink
+                            >
                         </div>
                     </div>
 
@@ -124,5 +123,5 @@ const toggleSearch = () => {
             <BurgerMenu v-if="showingNavigationDropdown" :user="user" />
         </nav>
     </div>
-    <SearchModal :show="search" @close="toggleSearch">Hello</SearchModal>
+    <SearchModal :show="search" @close="toggleSearch" />
 </template>

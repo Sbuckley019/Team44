@@ -5,18 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ProductItemController extends Controller
 {
-    public function show($product_id = null)
+    public function show($product_name = null)
     {
-        if ($product_id) {
+        if ($product_name) {
             $productService = new ProductService();
-            $product = $productService->getProduct($product_id);
+            $product = $productService->getProduct($product_name);
 
             $reviewController = new ReviewController();
-            $reviews = $reviewController->index($product_id);
+            $reviews = $reviewController->index($product_name);
+
+            if (Auth::check()) {
+                $user = Auth::user();
+                $product = Product::where('product_name', $product_name)->first();
+
+                if (
+                    $product &&
+                    $user->purchases()->where('product_id', $product->id)->exists() &&
+                    !$user->reviews()->where('product_id', $product->id)->exists()
+                ) {
+                    $canReview = true;
+                }
+            }
+
+
 
 
             if ($product) {
@@ -28,6 +44,7 @@ class ProductItemController extends Controller
                     'reviews' => $reviews,
                     'mostPurchased' => $mostPurchased,
                     'alsoPurchased' => $alsoPurchased,
+                    'canReview' => $canReview ?? false,
                 ]);
             } else {
                 dd("uh oh spegghetios");

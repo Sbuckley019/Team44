@@ -6,8 +6,12 @@
                 :key="link.label"
                 v-html="link.label"
                 @click="handlePageChange(link.url)"
-                class="my-2 me-1 bg-gray-100 border border-gray-200 rounded-md shadow text-gray-900 inline-block font-sans text-base font-medium leading-5 py-1.5 px-4 transition-colors duration-200 ease-in-out"
-                :class="[link.url === null ? 'opacity-50' : 'opacity-100']"
+                class="my-2 me-1 bg-gray-100 border border-gray-200 rounded-md shadow dark:text-white text-gray-900 inline-block font-sans text-base font-medium leading-5 py-1.5 px-4 transition-colors duration-200 ease-in-out"
+                :class="[
+                    link.url === null
+                        ? 'cursor-default opacity-50'
+                        : 'cursor-pointer opacity-100',
+                ]"
             ></li>
         </ul>
     </nav>

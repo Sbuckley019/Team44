@@ -103,30 +103,27 @@ class BasketService
     }
 
 
-    public function emptyBasket($basket_id = null)
+    public function emptyBasket()
     {
-        if ($basket_id) {
-            BasketItem::where('basket_id', $basket_id)->delete();
+        if (Auth::check()) {
+            $user = Auth::user()->id;
+            Basket::where('user_id', $user)->delete();
         }
         session()->put('basket', []);
     }
-
-    public function guestToUser()
+    public function guestToUser($basket)
     {
-        $user = Auth::user()->id;
+        $user = Auth::id();
 
-        if (Basket::where('user_id', $user)) {
+        $basket = Basket::firstOrCreate(['user_id' => $user], ['user_id' => $user]);
+        $items = $basket->items()->select('product_id', 'quantity')->get()->toArray();
 
-            $basket = Basket::where('user_id', $user)->first();
-            $items = $basket->items()->select('product_id', 'quantity')->get()->toArray();
-
-            $this->mergeBaskets($items, $user);
-        }
+        $this->mergeBaskets($items, $user, $basket);
     }
 
-    public function mergeBaskets($userProducts, $user)
+    public function mergeBaskets($userProducts, $user, $basket)
     {
-        $basket = session()->get('basket', []);
+        $basket = $basket ?? [];
 
         foreach ($userProducts as $item) {
             $productId = $item['product_id'];
@@ -154,6 +151,7 @@ class BasketService
                 ];
             }
         }
+
         foreach ($basket as $productId => $productInfo) {
             $this->addUserProduct($productId, $user, $productInfo['quantity']);
         }

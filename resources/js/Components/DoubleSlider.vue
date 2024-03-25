@@ -78,14 +78,14 @@ const restoreInputValue = (event, type) => {
                     v-numeric-only
                     id="min"
                     type="text"
-                    class="w-24 h-12 rounded-md pt-4 pl-2 font-semibold font-montserrat"
+                    class="w-24 h-12 rounded-md pt-4 pl-2 dark:text-white dark:bg-dark font-semibold font-montserrat"
                     @focus="clearInputValue($event, 'min')"
                     @blur="restoreInputValue($event, 'min')"
                     @change="updateSlider()"
                     v-model="minInput"
                 />
                 <div
-                    class="absolute top-1 left-2 text-xs font-montserrat font-semibold text-midgrey"
+                    class="absolute top-1 left-2 text-xs font-montserrat font-semibold text-midgrey dark:text-white"
                 >
                     Min
                 </div>
@@ -95,14 +95,14 @@ const restoreInputValue = (event, type) => {
                     v-numeric-only
                     id="max"
                     type="text"
-                    class="w-24 h-12 rounded-md pt-4 pl-2 font-semibold font-montserrat"
+                    class="w-24 h-12 rounded-md pt-4 pl-2 font-semibold dark:bg-dark dark:text-white font-montserrat"
                     @focus="clearInputValue($event, 'max')"
                     @blur="restoreInputValue($event, 'max')"
                     @change="updateSlider()"
                     v-model="maxInput"
                 />
                 <div
-                    class="absolute top-1 left-2 text-xs font-montserrat font-semibold text-midgrey"
+                    class="absolute top-1 left-2 text-xs font-montserrat font-semibold text-midgrey dark:text-white"
                 >
                     Max
                 </div>
@@ -114,7 +114,7 @@ const restoreInputValue = (event, type) => {
             :min="sliderMin"
             :max="sliderMax"
             :duration="2"
-            :process-style="{ backgroundColor: 'black' }"
+            :process-style="{ backgroundColor: 'black dark:bg-white' }"
             tooltip="none"
             :dot-options="{
                 focusStyle: {

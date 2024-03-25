@@ -10,7 +10,9 @@ use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
+
 
 class ProductController extends Controller
 {
@@ -23,12 +25,28 @@ class ProductController extends Controller
 
         $category_id = $request->category_id;
         $category = $category_id ? $this->fetchCategoryById($category_id) : null;
-        $categories = $this->fetchCategories();
+        $searchTerm = $request->input("searchTerm") ?? null;
+
+        $categories = $category_id ? null : $this->fetchCategories();
 
         return Inertia::render('Products', [
             'products' => $products,
             'category' => $category,
+            'categories' => $categories,
+            'searchTerm' => $searchTerm,
         ]);
+    }
+
+    public function searchProducts(Request $request)
+    {
+        $searchTerm = $request->input("searchInput");
+
+        if ($searchTerm) {
+            $products = Product::where('product_name', 'LIKE', "%{$searchTerm}%")->take(6)->pluck('product_name');
+            return Response::json(['searchResult' => $products]);
+        }
+
+        return Response::json(['searchResult' => []]);
     }
 
     private function fetchCategories()

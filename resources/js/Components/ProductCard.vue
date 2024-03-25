@@ -6,7 +6,7 @@ const props = defineProps({
     product: {
         type: Object,
     },
-    customClass: {
+    customWidth: {
         type: String,
     },
 });
@@ -23,7 +23,6 @@ const isFavourite = (productId) => {
             {
                 preserveScroll: true,
                 onError: (errors) => {
-                    console.log(errors);
                     props.product.isFavourite = !props.product.isFavourite;
                 },
             }
@@ -46,11 +45,13 @@ async function addToBasket(productId) {
 
 <template>
     <Link
-        :href="route('product.show', { product_id: product.id })"
+        :href="route('product.show', { product_name: product.product_name })"
         class="group block w-full cursor-pointer"
         as="div"
     >
-        <div class="relative h-84 bg-white overflow-hidden w-full">
+        <div
+            class="relative h-84 bg-white dark:bg-black overflow-hidden w-full"
+        >
             <div class="relative">
                 <img
                     :src="product.image_url"
@@ -58,13 +59,13 @@ async function addToBasket(productId) {
                     class="w-full h-60"
                 />
                 <div
-                    class="hidden group-hover:flex h-12 absolute w-full bottom-0 bg-greyt justify-center items-center p-6 z-1 overflow-hidden bg-opacity-60"
+                    class="hidden group-hover:flex h-12 absolute w-full bottom-0 bg-white justify-center items-center p-6 z-1 overflow-hidden bg-opacity-60"
                 >
                     <button
-                        class="bg-white border-solid border-1 border-black rounded-md hover:bg-black hover:text-white"
+                        class="bg-white dark:bg-black border-solid border-1 border-black rounded-md hover:bg-black hover:text-white"
                         @click.stop="addToBasket(product.id)"
                     >
-                        <i class="bi bi-bag text-lg px-1.5"></i>
+                        <i class="bi bi-bag text-lg px-1.5 dark:text-white"></i>
                     </button>
                 </div>
             </div>
@@ -76,19 +77,24 @@ async function addToBasket(productId) {
                     >{{ product.rating }}
                 </div>
                 <div
-                    class="font-roboto text-sm font-normal text-dark capitalize"
+                    class="font-roboto text-sm font-normal text-dark dark:text-white max-w-52 capitalize"
                 >
                     {{ product.product_name }}
                 </div>
-                <div class="text-sm text-gray-600 mb-0.5" :class="customClass">
+                <div
+                    class="text-sm dark:text-white text-gray-600 dark:text-white mb-0.5"
+                    :class="customWidth"
+                >
                     {{ product.description }}
                 </div>
-                <div class="font-roboto text-sm font-bold text-dark capitalize">
+                <div
+                    class="font-roboto text-sm font-bold text-dark dark:text-white capitalize"
+                >
                     £{{ product.price }}
                 </div>
                 <div class="absolute top-2.5 right-2.5">
                     <button
-                        class="w-7 h-7 rounded-full bg-white text-black hover:text-black focus:outline-none flex items-center justify-center"
+                        class="w-7 h-7 rounded-full bg-white dark:bg-black text-black dark:text-white hover:text-black dark:text-white focus:outline-none flex items-center justify-center"
                         @click.stop="isFavourite(product.id)"
                     >
                         <i

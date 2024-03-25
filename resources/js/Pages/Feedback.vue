@@ -25,11 +25,11 @@ function submit() {
 }
 </script>
 <template>
-    <UserLayout :revolving-bar="true">
+    <UserLayout>
         <form
             v-if="!formSubmitted"
             @submit.prevent="submit"
-            class="w-full md:w-6/12 p-6 bg-white rounded-lg mx-auto my-4"
+            class="w-full md:w-6/12 p-6 bg-white dark:bg-black rounded-lg mx-auto my-4"
         >
             <Header class="mb-4">Feedback form</Header>
             <!-- Rating Section -->
@@ -48,7 +48,9 @@ function submit() {
                             <span v-if="form.rating >= star" class="text-yellow"
                                 >&#9733;</span
                             >
-                            <span v-else class="text-gray-300">&#9733;</span>
+                            <span v-else class="dark:text-white text-gray-300"
+                                >&#9733;</span
+                            >
                         </span>
                     </div>
                 </div>
@@ -62,7 +64,7 @@ function submit() {
                     v-model="form.name"
                     type="text"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 />
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
@@ -74,7 +76,7 @@ function submit() {
                     v-model="form.email"
                     type="email"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
@@ -90,7 +92,7 @@ function submit() {
                     id="feedback"
                     v-model="form.feedback"
                     required
-                    class="mt-1 font-roboto w-full px-3 py-2 min-h-32 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+                    class="mt-1 font-roboto w-full px-3 py-2 min-h-32 bg-white dark:bg-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black dark:ring-white focus:border-black"
                 ></textarea>
                 <InputError class="mt-2" :message="form.errors.feedback" />
             </div>
@@ -102,11 +104,5 @@ function submit() {
                 Submit
             </PrimaryButton>
         </form>
-        <div
-            v-else
-            class="w-full md:w-6/12 p-6 bg-white rounded-lg mx-auto my-4"
-        >
-            Yay
-        </div>
     </UserLayout>
 </template>

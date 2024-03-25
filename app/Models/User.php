@@ -53,22 +53,27 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favourites::class);
     }
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
     public function basketItems()
     {
         return $this->hasMany(BasketItem::class);
-<<<<<<< HEAD
-=======
     }
+
 
     public function admin()
     {
         return $this->hasOne(Admin::class, 'user_id', 'id');
->>>>>>> a942b5d06dfc3afce77d97d8c0011082330a57c0
     }
 }

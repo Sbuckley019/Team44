@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favourites;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +16,20 @@ class FavouritesController extends Controller
     {
 
         $user = Auth::user();
+
+        $categories = $this->fetchCategories();
+
         if ($user) {
             $productService = new ProductService();
             $favourites = $productService->getProducts($request, $user->id, true);
 
-            return Inertia::render('Products', ['products' => $favourites, 'mode' => 'favourites']);
+            if ($user->favourites()->count() > 0) {
+                return Inertia::render('Products', ['products' => $favourites, 'categories' => $categories, 'mode' => 'favourites']);
+            } else {
+                return Inertia::render('Favourites', ['loggedIn' => true]);
+            }
         }
-        return Inertia::render('Favourites');
+        return Inertia::render('Favourites', ['loggedIn' => false]);
     }
 
     public function favouriteOrNot(Request $request)
@@ -42,5 +50,10 @@ class FavouritesController extends Controller
         }
 
         Inertia::render('Products');
+    }
+
+    private function fetchCategories()
+    {
+        return ProductCategory::select('category_name', 'id')->get();
     }
 }

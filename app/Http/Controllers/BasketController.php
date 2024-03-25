@@ -51,15 +51,4 @@ class BasketController extends Controller
 
         return $basketService->removeProductsFromSession($productId);
     }
-    public function emptyBasket($basket_id)
-    {
-        $basketService = new BasketService();
-        $basketService->emptyBasket($basket_id);
-    }
-
-    public function guestToUser()
-    {
-        $basketService = new BasketService();
-        $basketService->guestToUser();
-    }
 }
